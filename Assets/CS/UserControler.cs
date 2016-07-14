@@ -29,13 +29,13 @@ public class UserControler : MonoBehaviour {
         Quaternion beforeLookAt = camera.transform.rotation;
 
         //카메라 시점 이동
-        //camera.transform.position = new Vector3(0, 2, 0);
-        //camera.transform.LookAt(new Vector3(-50, 1, 0));
+        camera.transform.position = new Vector3(0, 2, 0);
+        camera.transform.LookAt(new Vector3(-50, 1, 0));
 
         //탄환 생성
         GameObject bullet = (GameObject)Instantiate(
             bulletPrefab,
-            new Vector3(0, 0, 0),
+            camera.transform.position,
             Quaternion.identity);
         
         Ray ray;
@@ -78,7 +78,7 @@ public class UserControler : MonoBehaviour {
                         throwAngle = bullet.transform.forward * 50f;
                     }
 
-                    //throwAngle.y = 50f;
+                    throwAngle.y = 25f;
                     bullet.GetComponent<Rigidbody>().AddForce(throwAngle * throwPower);
 
                     //카메라 원위치
