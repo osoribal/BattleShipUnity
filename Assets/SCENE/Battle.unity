@@ -294,7 +294,7 @@ MonoBehaviour:
   gc: {fileID: 1140348409}
   camera: {fileID: 2079387183}
   bulletPrefab: {fileID: 102334, guid: 992ba4307fd000841a5cfc19f4ee5ce1, type: 2}
-  throwPower: 0
+  throwPower: 25
 --- !u!4 &1753867547
 Transform:
   m_ObjectHideFlags: 0
