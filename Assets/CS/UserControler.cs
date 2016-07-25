@@ -7,7 +7,7 @@ public class UserControler : MonoBehaviour {
     public Camera camera;
     public GameObject bulletPrefab;
     public float throwPower;
-
+    GameObject bullet;
     // Use this for initialization
     void Start () {
         this.turn = 0;
@@ -33,10 +33,7 @@ public class UserControler : MonoBehaviour {
         camera.transform.LookAt(new Vector3(-50, 1, 0));
 
         //탄환 생성
-        GameObject bullet = (GameObject)Instantiate(
-            bulletPrefab,
-            camera.transform.position,
-            Quaternion.identity);
+        
         
         Ray ray;
         RaycastHit rayHit;
@@ -47,6 +44,10 @@ public class UserControler : MonoBehaviour {
         {
             if (Input.GetButtonDown("Fire1"))
             {
+                 bullet = (GameObject)Instantiate(
+                     bulletPrefab,
+                        camera.transform.position,
+                       Quaternion.identity);
                 isButtonDown = true;
             }
             if (isButtonDown == true)
@@ -84,7 +85,7 @@ public class UserControler : MonoBehaviour {
                     //카메라 원위치
                     camera.transform.position = beforePosition;
                     camera.transform.rotation = beforeLookAt;
-                    gc.turn = 1;
+                    //gc.turn = 1;
                     break;
                 }
             }

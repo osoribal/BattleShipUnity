@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ship
   - RandomBox
+  - Bullet
+  - Stage
+  - AIController
+  - UserController
   layers:
   - Default
   - TransparentFX
