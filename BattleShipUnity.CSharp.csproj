@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\CS\AIControler.cs" />
     <Compile Include="Assets\CS\BulletDestroyer.cs" />
+    <Compile Include="Assets\CS\FinishGame.cs" />
     <Compile Include="Assets\CS\GameControler.cs" />
     <Compile Include="Assets\CS\RandomSelectButton.cs" />
     <Compile Include="Assets\CS\Ship.cs" />
