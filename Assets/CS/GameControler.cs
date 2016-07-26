@@ -56,5 +56,14 @@ public class GameControler : MonoBehaviour {
         }
 	
 	}
+
+    /*
+     * 유저 격자의 x, y 좌표의 Transform을 반환한다.
+     * 반환된 Transform을 탄환 발사 시 이용할 수 있다.
+     */
+    public Transform getTransformOfUserTile(int x, int y)
+    {
+        return userGrid[x, y].transform;
+    }
     
 }

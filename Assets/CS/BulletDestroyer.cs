@@ -40,6 +40,8 @@ public class BulletDestroyer : MonoBehaviour
     //destroy bullet
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Arrow")
+            Destroy(other.gameObject);
         if (other.gameObject.tag == "Bullet") Destroy(other.gameObject);
         OnNotify();
     }
