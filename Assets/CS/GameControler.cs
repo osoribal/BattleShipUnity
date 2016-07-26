@@ -31,6 +31,12 @@ public class GameControler : MonoBehaviour {
         
         
     }
+
+    //get turn
+    public int GetTurn()
+    {
+        return turn;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -39,7 +45,7 @@ public class GameControler : MonoBehaviour {
             case 0: //user turn
                 break;
             case 1: //ai turn
-                turn = 0;
+               // turn = 0;
                 break;
             case 2: //user win
                 break;

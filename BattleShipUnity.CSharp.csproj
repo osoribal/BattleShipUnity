@@ -64,9 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CS\AIControler.cs" />
-    <Compile Include="Assets\CS\BulletControler.cs" />
+    <Compile Include="Assets\CS\BulletDestroyer.cs" />
     <Compile Include="Assets\CS\GameControler.cs" />
     <Compile Include="Assets\CS\RandomSelectButton.cs" />
+    <Compile Include="Assets\CS\Ship.cs" />
     <Compile Include="Assets\CS\TitleController.cs" />
     <Compile Include="Assets\CS\UserControler.cs" />
   </ItemGroup>

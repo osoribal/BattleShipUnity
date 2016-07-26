@@ -8,7 +8,7 @@ public class UserControler : MonoBehaviour {
     public GameObject bulletPrefab;
     public GameObject arrowPrefab;  //맞을 지점을 표시할 프리팹
     public float throwPower;
-
+    GameObject bullet;
     // Use this for initialization
     void Start () {
         this.turn = 0;
@@ -30,8 +30,15 @@ public class UserControler : MonoBehaviour {
         Quaternion beforeLookAt = camera.transform.rotation;
 
         //카메라 시점 이동
+<<<<<<< HEAD
         //camera.transform.position = new Vector3(2, 2, 0);
         //camera.transform.LookAt(new Vector3(-50, 1, 0));
+=======
+        camera.transform.position = new Vector3(0, 2, 0);
+        camera.transform.LookAt(new Vector3(-50, 1, 0));
+
+        //탄환 생성
+>>>>>>> master
         
         
         Ray ray;
@@ -43,7 +50,14 @@ public class UserControler : MonoBehaviour {
         {
             if (Input.GetButtonDown("Fire1"))
             {
+<<<<<<< HEAD
                 //버튼을 누르고 있는 상태
+=======
+                 bullet = (GameObject)Instantiate(
+                     bulletPrefab,
+                        camera.transform.position,
+                       Quaternion.identity);
+>>>>>>> master
                 isButtonDown = true;
             }
             if (isButtonDown == true)
@@ -78,7 +92,7 @@ public class UserControler : MonoBehaviour {
                         //탄환 생성
                         GameObject bullet = (GameObject)Instantiate( bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
                         //탄환 코드에 변수값 전달
-                        BulletControler bc = bullet.GetComponent<BulletControler>();
+                        BulletDestroyer bc = bullet.GetComponent<BulletDestroyer>();
                         bc.from = bullet.transform;
                         bc.to = rayHit.transform.gameObject.transform;
                     }
@@ -86,7 +100,7 @@ public class UserControler : MonoBehaviour {
                     //카메라 원위치
                     camera.transform.position = beforePosition;
                     camera.transform.rotation = beforeLookAt;
-                    gc.turn = 1;
+                    //gc.turn = 1;
                     break;
                 }
             }
