@@ -80,7 +80,7 @@ public class AIControler : MonoBehaviour {
                     }
                     //맞을 지점의 좌표
                     Vector3 position = rayHit.transform.gameObject.transform.position;
-                    position.y = 0.5f;
+                    position.y = 2.0f;
                     //좌표에 오브젝트 생성
                     arrow = (GameObject)Instantiate(arrowPrefab, position, Quaternion.identity);
 
