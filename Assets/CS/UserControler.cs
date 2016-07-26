@@ -7,7 +7,6 @@ public class UserControler : MonoBehaviour {
     public Camera camera;
     public GameObject bulletPrefab;
     public GameObject arrowPrefab;  //맞을 지점을 표시할 프리팹
-    GameObject bullet;
 
     // Use this for initialization
     void Start () {
