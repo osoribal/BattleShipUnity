@@ -47,7 +47,14 @@ public class BulletDestroyer : MonoBehaviour
         if (other.gameObject.tag == "Arrow")
             Destroy(other.gameObject);
         if (other.gameObject.tag == "Tile")
+        {
+            //remove bullet
             Destroy(this.gameObject);
+            //test : remove fog
+            FogControler fg = other.GetComponent<FogControler>();
+            fg.fogOff();
+        }
+            
         //if (other.gameObject.tag == "Bullet") Destroy(other.gameObject);
         OnNotify();
     }
