@@ -6,6 +6,7 @@ public class UserControler : MonoBehaviour {
     public GameControler gc;
     public Camera camera;
     public GameObject bulletPrefab;
+    public GameObject arrowPrefab;  //맞을 지점을 표시할 프리팹
     public float throwPower;
     GameObject bullet;
     // Use this for initialization
@@ -29,58 +30,72 @@ public class UserControler : MonoBehaviour {
         Quaternion beforeLookAt = camera.transform.rotation;
 
         //카메라 시점 이동
+<<<<<<< HEAD
+        //camera.transform.position = new Vector3(2, 2, 0);
+        //camera.transform.LookAt(new Vector3(-50, 1, 0));
+=======
         camera.transform.position = new Vector3(0, 2, 0);
         camera.transform.LookAt(new Vector3(-50, 1, 0));
 
         //탄환 생성
+>>>>>>> master
         
         
         Ray ray;
         RaycastHit rayHit;
-        float rayLength = 500f;
-        int floorMask = LayerMask.GetMask("Floor");
+        float rayLength = 100f;
         bool isButtonDown = false;
+        GameObject arrow = null;    //맞을 지점을 표시할 오브젝트
         while (true)
         {
             if (Input.GetButtonDown("Fire1"))
             {
+<<<<<<< HEAD
+                //버튼을 누르고 있는 상태
+=======
                  bullet = (GameObject)Instantiate(
                      bulletPrefab,
                         camera.transform.position,
                        Quaternion.identity);
+>>>>>>> master
                 isButtonDown = true;
             }
             if (isButtonDown == true)
             {
-
+                
                 /******Aim******/
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out rayHit, rayLength, floorMask))
+                if (Physics.Raycast(ray, out rayHit, rayLength))
                 {
-                    Vector3 playerToMouse = rayHit.point - bullet.transform.position;
-
-                    Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-                    bullet.GetComponent<Rigidbody>().MoveRotation(newRotation);
+                    //맞을 지점 표시
+                    if (arrow != null)
+                    {
+                        //기존 지점의 오브젝트 삭제
+                        Destroy(arrow);
+                    }
+                    //맞을 지점의 좌표
+                    Vector3 position = rayHit.transform.gameObject.transform.position;
+                    position.y = 0.5f;
+                    //좌표에 오브젝트 생성
+                    arrow = (GameObject)Instantiate(arrowPrefab, position, Quaternion.identity);
+                    
                 }
 
                 /******Drop******/
                 if (Input.GetButtonUp("Fire1"))
                 {
                     isButtonDown = false;
-                    Vector3 throwAngle;
 
-                    if (Physics.Raycast(ray, out rayHit, rayLength, floorMask))
+                    if (Physics.Raycast(ray, out rayHit, rayLength))
                     {
-                        throwAngle = rayHit.point - bullet.transform.position;
+                        //탄환 생성
+                        GameObject bullet = (GameObject)Instantiate( bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
+                        //탄환 코드에 변수값 전달
+                        BulletDestroyer bc = bullet.GetComponent<BulletDestroyer>();
+                        bc.from = bullet.transform;
+                        bc.to = rayHit.transform.gameObject.transform;
                     }
-                    else
-                    {
-                        throwAngle = bullet.transform.forward * 50f;
-                    }
-
-                    throwAngle.y = 25f;
-                    bullet.GetComponent<Rigidbody>().AddForce(throwAngle * throwPower);
 
                     //카메라 원위치
                     camera.transform.position = beforePosition;

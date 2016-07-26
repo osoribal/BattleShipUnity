@@ -85,6 +85,8 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
+=======
 --- !u!1 &942538980
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +162,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+>>>>>>> master
 --- !u!1 &1138378036
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turn: 0
+  tilePrefab: {fileID: 114916, guid: 838b68325509bff4280ff360c93f720c, type: 2}
 --- !u!4 &1140348410
 Transform:
   m_ObjectHideFlags: 0
@@ -344,7 +348,8 @@ MonoBehaviour:
   gc: {fileID: 1140348409}
   camera: {fileID: 2079387183}
   bulletPrefab: {fileID: 102334, guid: 992ba4307fd000841a5cfc19f4ee5ce1, type: 2}
-  throwPower: 25
+  arrowPrefab: {fileID: 182016, guid: 51fa9f0584225af4eb19ae5dfa9e3310, type: 2}
+  throwPower: 28
 --- !u!4 &1753867547
 Transform:
   m_ObjectHideFlags: 0
@@ -356,7 +361,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1 &2070674658
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +410,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &2079387179
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +492,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2079387179}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 70, z: 0}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
