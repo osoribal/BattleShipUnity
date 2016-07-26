@@ -9,3 +9,11 @@ EditorBuildSettings:
     path: Assets/SCENE/Title.unity
   - enabled: 1
     path: Assets/SCENE/Battle.unity
+  - enabled: 1
+    path: Assets/SCENE/FinishGame.unity
+  - enabled: 1
+    path: Assets/SCENE/Option.unity
+  - enabled: 1
+    path: Assets/SCENE/Pause.unity
+  - enabled: 1
+    path: Assets/SCENE/RandomSelect.unity
