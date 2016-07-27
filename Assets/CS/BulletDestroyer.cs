@@ -12,13 +12,10 @@ public class BulletDestroyer : MonoBehaviour
 
     public const int USER_BLOCK = -1;
     public const int AI_BLOCK = -2;
-
-
-
+    
     // Use this for initialization
     void Start()
     {
-        
     }
 
     // Update is called once per frame

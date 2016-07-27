@@ -75,7 +75,7 @@ public class UserControler : MonoBehaviour {
                         //탄환 생성
                         GameObject bullet = (GameObject)Instantiate( bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
                         //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
-                        BulletDestroyer bc = bullet.GetComponent<BulletDestroyer>();
+                        Bullet bc = bullet.GetComponent<Bullet>();
                         bc.from = bullet.transform;
                         bc.to = rayHit.transform.gameObject.transform;
                     }
@@ -83,7 +83,7 @@ public class UserControler : MonoBehaviour {
                     //카메라 원위치
                     camera.transform.position = beforePosition;
                     camera.transform.rotation = beforeLookAt;
-                    //gc.turn = 1;
+                    
                     break;
                 }
             }

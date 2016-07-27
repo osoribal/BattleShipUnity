@@ -12,10 +12,11 @@ public class Bullet : MonoBehaviour {
     void Start () {
         startTime = Time.time;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        //탄환이 포물선을 그리며 이동
+
+    // Update is called once per frame
+    void Update()
+    {
+       //탄환이 포물선을 그리며 이동
         if (!transform.position.Equals(to))
         {
             Vector3 center = (from.position + to.position) * 0.5F;
@@ -25,8 +26,7 @@ public class Bullet : MonoBehaviour {
             float fracComplete = (Time.time - startTime) / value;
             transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
             transform.position += center;
-        }
-
+         }
     }
 
     //destroy bullet
@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour {
         if (other.gameObject.tag == "Tile")
         {
             //remove bullet
-            Destroy(this.gameObject);
+           // Destroy(this.gameObject);
             //test : remove fog
             FogControler fg = other.GetComponent<FogControler>();
             fg.fogOff();
