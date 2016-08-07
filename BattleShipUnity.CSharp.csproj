@@ -69,6 +69,8 @@
     <Compile Include="Assets\CS\GameControler.cs" />
     <Compile Include="Assets\CS\RandomSelectButton.cs" />
     <Compile Include="Assets\CS\Ship.cs" />
+    <Compile Include="Assets\CS\ShipListControl.cs" />
+    <Compile Include="Assets\CS\ShowShipList.cs" />
     <Compile Include="Assets\CS\TitleController.cs" />
     <Compile Include="Assets\CS\UserControler.cs" />
   </ItemGroup>

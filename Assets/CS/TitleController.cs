@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TitleController : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    
 
     public void OnStartButtonClicked()
     {
-        Application.LoadLevel("Battle");
+        SceneManager.LoadScene("ShipSelect");
+    }
+
+    public void OnManagementClicked()
+    {
+        SceneManager.LoadScene("Ship List");
+    }
+
+    public void OnRandomClicked()
+    {
+        SceneManager.LoadScene("RandomSelect");
     }
 }
