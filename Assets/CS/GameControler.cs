@@ -6,10 +6,16 @@ public class GameControler : MonoBehaviour {
     public GameObject tilePrefab;
     public GameObject[,] userGrid = new GameObject[10,10];
     public GameObject[,] aiGrid = new GameObject[10, 10];
+
+    //life
+    public int userLife;
+    public int aiLife;
     
     // Use this for initialization
     void Start () {
         turn = 0;
+        userLife = 10;
+        aiLife = 10;
 
         //격자 생성
         Vector3 userzero = new Vector3(1, 0, 5);
@@ -40,9 +46,33 @@ public class GameControler : MonoBehaviour {
     {
         return turn;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    //get user life
+    public int GetUserLife()
+    {
+        return userLife;
+    }
+
+    //get ai life
+    public int GetAILife()
+    {
+        return aiLife;
+    }
+
+    //decrease user life
+    public void minusUserLife()
+    {
+        userLife = userLife - 1;
+    }
+
+    //decrease ai life
+    public void minusAILife()
+    {
+        aiLife = aiLife - 1;
+    }
+
+    // Update is called once per frame
+    void Update () {
         switch(turn)
         {
             case 0: //user turn

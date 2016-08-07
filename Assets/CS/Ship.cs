@@ -4,9 +4,6 @@ using System.Collections;
 
 public class Ship : MonoBehaviour {
 
-    GameControler gameController;
-    GameObject ownerController;
-
     //turn flags
     public const int USER_TURN = 0;
     public const int AI_TURN = 1;
@@ -22,15 +19,15 @@ public class Ship : MonoBehaviour {
 	
 	}
 
-    //destroy bullet
+    
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bullet") Destroy(other.gameObject);
+        //if (other.gameObject.tag == "Bullet") Destroy(other.gameObject);
         //notify hit
-        OnNotify();
+        //OnNotify();
     }
 
-    void OnNotify()
+ /*   void OnNotify()
     {
         //notify to game controller
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
@@ -50,7 +47,7 @@ public class Ship : MonoBehaviour {
                 break;
                 
         }
-    }
+    }*/
 
 
 }
