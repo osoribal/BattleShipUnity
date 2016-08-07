@@ -8,14 +8,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SCENE/Title.unity
   - enabled: 1
+    path: Assets/SCENE/Ship List.unity
+  - enabled: 1
     path: Assets/SCENE/ShipSelect.unity
   - enabled: 1
     path: Assets/SCENE/Battle.unity
   - enabled: 1
-    path: Assets/SCENE/Ship List.unity
+    path: Assets/SCENE/Option.unity
+  - enabled: 1
+    path: Assets/SCENE/Pause.unity
+  - enabled: 1
+    path: Assets/SCENE/FinishGame.unity
   - enabled: 1
     path: Assets/SCENE/RandomSelect.unity
   - enabled: 0
-    path: Assets/SCENE/Grid List.unity
-  - enabled: 0
-    path: Assets/SCENE/Management.unity
+    path: Assets/SCENE/Ships.unity
