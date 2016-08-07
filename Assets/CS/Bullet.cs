@@ -48,11 +48,13 @@ public class Bullet : MonoBehaviour {
                 break;
 
             case "Tile":
-                //remove bullet
-                Destroy(this.gameObject);
+                //occpied 검사
+                //occpied > 0 -> occpied --; life--; 연기;
+                //occpied == 0  -> remove fog, turn change
+                
                 //test : remove fog
-                FogControler fg = other.GetComponent<FogControler>();
-                fg.fogOff();
+                //FogControler fg = other.GetComponent<FogControler>();
+                //fg.fogOff();
 
                 //no hit - change turn
                 ChangeTurn();
@@ -62,7 +64,7 @@ public class Bullet : MonoBehaviour {
             case "Ship":
                 //hit - not change turn, attack again
                 AttackAgain();
-                destroyBullet();
+                //destroyBullet();
                 break;
         }
     }
