@@ -4,6 +4,12 @@ using System.Collections;
 
 public class Ship : MonoBehaviour {
 
+    /*
+     * 고유번호, 위치 , 방향 , 저장
+     * switch 문 2개 구현
+     * 
+     */
+
     //turn flags
     public const int USER_TURN = 0;
     public const int AI_TURN = 1;

@@ -39,6 +39,18 @@ public class UserControler : MonoBehaviour {
         GameObject arrow = null;    //맞을 지점을 표시할 오브젝트
         while (true)
         {
+
+            /*
+             * 
+             * 
+             * 
+             * 터치 위치 제한
+             * 
+             * 
+             * 
+             * 
+             * 
+             */
             if (Input.GetButtonDown("Fire1"))
             {
                 isButtonDown = true;
