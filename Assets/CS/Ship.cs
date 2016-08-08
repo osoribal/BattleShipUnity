@@ -9,6 +9,8 @@ public class Ship : MonoBehaviour {
      * switch 문 2개 구현
      * 
      */
+    //ship number
+    int shipID;
 
     //turn flags
     public const int USER_TURN = 0;
@@ -18,7 +20,39 @@ public class Ship : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	}
+        //size
+        int size = shipID/10;
+        switch (size)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
+
+        //fuction
+        int func = shipID%10;
+        switch (func)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {

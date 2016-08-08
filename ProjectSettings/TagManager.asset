@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Ship
   - Fog
+  - RandomBox
+  - UserManager
   layers:
   - Default
   - TransparentFX

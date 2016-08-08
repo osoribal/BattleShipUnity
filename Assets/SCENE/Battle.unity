@@ -224,6 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turn: 0
   tilePrefab: {fileID: 114916, guid: 838b68325509bff4280ff360c93f720c, type: 2}
+  userLife: 0
+  aiLife: 0
 --- !u!4 &1189339795
 Transform:
   m_ObjectHideFlags: 0
@@ -264,10 +266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35391707342f3de409a6977c3bc5c8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 1189339794}
-  from: {fileID: 0}
-  to: {fileID: 0}
-  value: 10
 --- !u!65 &1279586870
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -372,8 +370,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699762682}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 15, z: 0}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5000001, w: 0.49999994}
+  m_LocalPosition: {x: -1, y: 22, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
