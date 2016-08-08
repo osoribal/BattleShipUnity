@@ -69,8 +69,10 @@
     <Compile Include="Assets\CS\FinishGame.cs" />
     <Compile Include="Assets\CS\GameControler.cs" />
     <Compile Include="Assets\CS\ListCtrl.cs" />
+    <Compile Include="Assets\CS\PlaceShipCtrl.cs" />
     <Compile Include="Assets\CS\RandomSelectButton.cs" />
     <Compile Include="Assets\CS\SeaControler.cs" />
+    <Compile Include="Assets\CS\SelectShipCtrl.cs" />
     <Compile Include="Assets\CS\Ship.cs" />
     <Compile Include="Assets\CS\TitleController.cs" />
     <Compile Include="Assets\CS\UserControler.cs" />

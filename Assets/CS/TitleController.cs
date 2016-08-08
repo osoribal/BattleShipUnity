@@ -16,7 +16,7 @@ public class TitleController : MonoBehaviour {
 
     public void OnStartButtonClicked()
     {
-        SceneManager.LoadScene("ShipSelect");
+        SceneManager.LoadScene("SelectShip");
     }
 
     public void OnManagementClicked()

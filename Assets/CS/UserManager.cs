@@ -12,6 +12,8 @@ public class UserManager : MonoBehaviour {
     string path;
     public static UserManager control;
     public static List<ShipInfo> list = new List<ShipInfo>();   //보유중인 배 list
+    public static int selectedShipCount = 0;    //배 선택 시 선택된 배의 개수
+    public static int[] selectedShipArr = new int[5];   //선택된 배의 고유번호 저장
 
 
     //씬이 변경될 때 UserManager가 유일하도록 유지
@@ -32,6 +34,19 @@ public class UserManager : MonoBehaviour {
     void Start()
     {
         path = Application.persistentDataPath + "/userdata.dat";
+
+        //test data
+        SaveShip(new ShipInfo(11));
+        SaveShip(new ShipInfo(21));
+        SaveShip(new ShipInfo(13));
+        SaveShip(new ShipInfo(31));
+        SaveShip(new ShipInfo(14));
+        SaveShip(new ShipInfo(41));
+        SaveShip(new ShipInfo(15));
+        SaveShip(new ShipInfo(51));
+        SaveShip(new ShipInfo(41));
+        SaveShip(new ShipInfo(15));
+        SaveShip(new ShipInfo(51));
 
         //데이터 불러오기
         this.Load();
@@ -104,6 +119,7 @@ public class ShipInfo : IComparable<ShipInfo>
     public ShipInfo(int n)
     {
         shipNum = n;
+        count = 1;
     }
 
     //sort 시 비교함수
