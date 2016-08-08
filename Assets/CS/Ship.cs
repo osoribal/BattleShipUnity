@@ -3,9 +3,11 @@ using System.Collections;
 
 
 public class Ship : MonoBehaviour {
+    public int shipNum; //배 고유번호
+    public int x, y;    //배 머리 위치
+    public int direction;   //배 방향
 
     /*
-     * 고유번호, 위치 , 방향 , 저장
      * switch 문 2개 구현
      * 
      */
