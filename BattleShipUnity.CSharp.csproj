@@ -65,16 +65,16 @@
   <ItemGroup>
     <Compile Include="Assets\CS\AIControler.cs" />
     <Compile Include="Assets\CS\Bullet.cs" />
-    <Compile Include="Assets\CS\BulletDestroyer.cs" />
+    <Compile Include="Assets\CS\ElemCtrl.cs" />
     <Compile Include="Assets\CS\FinishGame.cs" />
-    <Compile Include="Assets\CS\FogControler.cs" />
     <Compile Include="Assets\CS\GameControler.cs" />
+    <Compile Include="Assets\CS\ListCtrl.cs" />
     <Compile Include="Assets\CS\RandomSelectButton.cs" />
+    <Compile Include="Assets\CS\SeaControler.cs" />
     <Compile Include="Assets\CS\Ship.cs" />
-    <Compile Include="Assets\CS\ShipListControl.cs" />
-    <Compile Include="Assets\CS\ShowShipList.cs" />
     <Compile Include="Assets\CS\TitleController.cs" />
     <Compile Include="Assets\CS\UserControler.cs" />
+    <Compile Include="Assets\CS\UserManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

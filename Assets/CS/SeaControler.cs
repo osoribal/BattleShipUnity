@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FogControler : MonoBehaviour {
+public class SeaControler : MonoBehaviour {
     public GameObject fogPrefab;
     GameObject fog;
-
-	// Use this for initialization
-	void Start () {
+    public int occpied;
+    /*
+     * 
+     * 코드 이름 tile로 변경
+     * occpied 값은 gc가 주겠지
+     * 
+     */
+    void Start()
+    {
+        occpied = 0;
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void fogOn()
     {

@@ -6,6 +6,16 @@ public class GameControler : MonoBehaviour {
     public GameObject tilePrefab;
     public GameObject[,] userGrid = new GameObject[10,10];
     public GameObject[,] aiGrid = new GameObject[10, 10];
+    /*
+     * 
+     * 배 열 대의 정보 저장 필요... gameobject?
+     * ai 배 생성
+     *  0 ~ 4 : 유저 배 정보 ship list, life도 전달
+     *  5 ~ 9 : ai 배. 여기서 생성
+     * 배 배치
+     * 배 정보 -> ai, user controler 넘김
+     * 
+     */
 
     //life
     public int userLife;
@@ -28,7 +38,7 @@ public class GameControler : MonoBehaviour {
                 aiGrid[i, j] = (GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity);
 
                 //ai 격자 전체에 안개 씌우기
-                FogControler fg = aiGrid[i, j].GetComponent<FogControler>();
+                SeaControler fg = aiGrid[i, j].GetComponent<SeaControler>();
                 fg.fogOn();
 
                 userzero.z--;
@@ -81,6 +91,7 @@ public class GameControler : MonoBehaviour {
                // turn = 0;
                 break;
             case 2: //user win
+                //게임이 끝나면 골드 획득
                 break;
             case 3: //ai win
                 break;
