@@ -45,7 +45,7 @@ public class UserControler : MonoBehaviour {
              * 
              * 
              * 터치 위치 제한
-             * 
+             * 마우스 이벤트 -> 터치 이벤트로 변경
              * 
              * 
              * 

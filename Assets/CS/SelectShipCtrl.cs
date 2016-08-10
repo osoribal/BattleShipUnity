@@ -23,7 +23,11 @@ public class SelectShipCtrl : MonoBehaviour {
     void Start()
     {
         UserManager.selectedShipCount = 0;
-        UserManager.selectedShipArr.Initialize();
+        UserManager.selectedShipArr[0] = -1;
+        UserManager.selectedShipArr[1] = -1;
+        UserManager.selectedShipArr[2] = -1;
+        UserManager.selectedShipArr[3] = -1;
+        UserManager.selectedShipArr[4] = -1;
 
         //화면에 배들을 버튼으로 출력
         for (int i = 0; i < UserManager.list.Count; i++)
