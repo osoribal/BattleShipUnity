@@ -8,9 +8,18 @@ public class Ship : MonoBehaviour {
     public int direction;   //배 방향
 
     /*
-     * switch 문 2개 구현
+     * switch 문 2개 구현 : prefab, 특수능력
+     * prefab은 swith문 안만들어도..?
      * 
      */
+   /*
+   * 위치, 방향 채우기
+   * east = 0
+   * west = 1
+   * south = 2
+   * north = 3
+   * 
+   */
 
     //turn flags
     public const int USER_TURN = 0;

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SeaControler : MonoBehaviour {
     public GameObject fogPrefab;
+    public int x, y;
     GameObject fog;
     public int occpied; //현재 타일에 배가 있는지 검사할 때 이용
 

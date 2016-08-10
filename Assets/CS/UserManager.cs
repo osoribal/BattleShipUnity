@@ -14,7 +14,7 @@ public class UserManager : MonoBehaviour {
     public static List<ShipInfo> list = new List<ShipInfo>();   //보유중인 배 list
     public static int selectedShipCount = 0;    //배 선택 시 선택된 배의 개수
     public static int[] selectedShipArr = new int[5];   //선택된 배의 고유번호 저장
-
+    public static GameObject[] userShips = new GameObject[5];   //선택된 배의 오브젝트
 
     //씬이 변경될 때 UserManager가 유일하도록 유지
     void Awake()
