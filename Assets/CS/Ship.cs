@@ -68,8 +68,48 @@ public class Ship : MonoBehaviour {
 	void Update () {
 	
 	}
-
     
+    public IEnumerator move()
+    {
+        Ray ray;
+        RaycastHit rayHit;
+        float rayLength = 100f;
+        while (true)    //드래그 하는 동안
+        {
+            if (Input.GetButtonUp("Fire1")) //드래그 끝
+            {
+                break;
+            }
+
+            /******move******/
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out rayHit, rayLength))
+            {
+                Vector3 pos = rayHit.transform.position;
+                this.gameObject.transform.position = pos;
+                //x, y 설정
+                x = (int)pos.x;
+                y = -(int)pos.z;
+            }
+            yield return null;
+        }
+
+        //드래그 끝
+        /******Rotate******/
+        //if (Physics.Raycast(ray, out rayHit, rayLength))
+        //{
+        //    //탄환 생성
+        //    GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
+        //    //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
+        //    Bullet bc = bullet.GetComponent<Bullet>();
+        //    bc.from = bullet.transform;
+        //    bc.to = rayHit.transform.gameObject.transform;
+        //}
+        yield return null;
+    }
+
+
+
     void OnTriggerEnter(Collider other)
     {
         //if (other.gameObject.tag == "Bullet") Destroy(other.gameObject);

@@ -36,17 +36,17 @@ public class UserManager : MonoBehaviour {
         path = Application.persistentDataPath + "/userdata.dat";
 
         //test data
-        SaveShip(new ShipInfo(11));
-        SaveShip(new ShipInfo(21));
-        SaveShip(new ShipInfo(13));
-        SaveShip(new ShipInfo(31));
-        SaveShip(new ShipInfo(14));
-        SaveShip(new ShipInfo(41));
-        SaveShip(new ShipInfo(15));
-        SaveShip(new ShipInfo(51));
-        SaveShip(new ShipInfo(41));
-        SaveShip(new ShipInfo(15));
-        SaveShip(new ShipInfo(51));
+        Save(new ShipInfo(11));
+        Save(new ShipInfo(21));
+        Save(new ShipInfo(13));
+        Save(new ShipInfo(31));
+        Save(new ShipInfo(14));
+        Save(new ShipInfo(41));
+        Save(new ShipInfo(15));
+        Save(new ShipInfo(51));
+        Save(new ShipInfo(41));
+        Save(new ShipInfo(15));
+        Save(new ShipInfo(51));
 
         //데이터 불러오기
         this.Load();
@@ -66,7 +66,7 @@ public class UserManager : MonoBehaviour {
     }
 
     //새로운 배를 저장하는 함수
-    public void SaveShip(ShipInfo data)
+    public void Save(ShipInfo data)
     {
         //보유중인 배인지 Find 함수를 통해 알아낸다.
         ShipInfo findResult = list.Find(x => x.shipNum.Equals(data.shipNum));
@@ -82,16 +82,9 @@ public class UserManager : MonoBehaviour {
         }
 
         //파일로 저장
-        Save();
-    }
-
-    //현재 배 정보들을 파일에 저장하는 함수
-    void Save()
-    {
-        //파일로 저장
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(path);
-        
+
         bf.Serialize(file, list);
         file.Close();
     }

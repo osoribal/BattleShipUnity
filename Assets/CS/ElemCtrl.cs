@@ -59,7 +59,7 @@ public class ElemCtrl : MonoBehaviour {
             UserManager.selectedShipCount += 1;
             for (int i = 0; i < 5; i++)
             {
-                if (UserManager.selectedShipArr[i] <= 0)
+                if (UserManager.selectedShipArr[i] < 0)
                 {
                     selected(i);
                     UserManager.selectedShipArr[i] = info.shipNum;
