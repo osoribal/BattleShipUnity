@@ -53,6 +53,7 @@ public class PlaceShipCtrl : MonoBehaviour {
 
             //ship에 기본 위치 정보 저장
             Ship ctrl = UserManager.userShips[i].GetComponent<Ship>();
+            ctrl.shipID = UserManager.selectedShipArr[i];
             ctrl.x = 0;
             ctrl.y = i;
 

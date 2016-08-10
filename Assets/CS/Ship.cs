@@ -3,7 +3,8 @@ using System.Collections;
 
 
 public class Ship : MonoBehaviour {
-    public int x, y;    //배 머리 위치
+    public int shipID;      //ship number
+    public int x, y;        //배 머리 위치
     public int direction;   //배 방향
 
     /*
@@ -11,8 +12,7 @@ public class Ship : MonoBehaviour {
      * prefab은 swith문 안만들어도..?
      * 
      */
-    //ship number
-    int shipID;
+    
    /*
    * 위치, 방향 채우기
    * east = 0
