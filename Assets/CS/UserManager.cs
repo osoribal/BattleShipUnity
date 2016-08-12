@@ -13,6 +13,10 @@ public class UserManager : MonoBehaviour {
     public static UserManager control;
     public static List<ShipInfo> list = new List<ShipInfo>();   //보유중인 배 list
     public static ShipInfo[] userShips = new ShipInfo[5];   //선택된 배의 오브젝트
+    public static OptionInfo opInfo = new OptionInfo(); //option information
+    //option string
+    public const string EFFECT = "Effect";
+    public const string BACKGROUND = "Back";
 
     //씬이 변경될 때 UserManager가 유일하도록 유지
     void Awake()
@@ -77,6 +81,9 @@ public class UserManager : MonoBehaviour {
         userShips[4].x = 0;
         userShips[4].y = 4;
         userShips[4].direction = 0;
+
+        //option
+        opInfo.effect = "on";
     }
     
     //골드 획득/사용 시 호출
@@ -124,6 +131,22 @@ public class UserManager : MonoBehaviour {
             file.Close();
         }
     }
+
+    //set option information data
+    public void setOptionInfo(OptionInfo option)
+    {
+        PlayerPrefs.SetString(EFFECT, option.effect);
+        PlayerPrefs.SetString(BACKGROUND, option.back);
+    }
+
+    //get option information data
+    public OptionInfo getOptionInfo()
+    {
+        OptionInfo info = new OptionInfo();
+        info.effect = PlayerPrefs.GetString(EFFECT);
+        info.back = PlayerPrefs.GetString(BACKGROUND);
+        return info;
+    }
 	
 }
 
@@ -152,4 +175,12 @@ public class ShipInfo : IComparable<ShipInfo>
             return this.shipNum.CompareTo(comparePart.shipNum);
     }
 
+}
+
+//option info class
+public class OptionInfo
+{
+    //option values
+    public string effect;
+    public string back;
 }
