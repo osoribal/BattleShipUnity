@@ -6,13 +6,14 @@ public class Ship : MonoBehaviour {
     public int shipNum; //배 고유번호
     public int x, y;    //배 머리 위치
     public int direction;   //배 방향
+    public int occ;  //occupied number
 
     /*
      * switch 문 2개 구현
      * 
      */
     //ship number
-    int shipID;
+    public int shipID;
 
     //turn flags
     public const int USER_TURN = 0;

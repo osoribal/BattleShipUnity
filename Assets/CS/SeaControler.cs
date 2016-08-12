@@ -22,4 +22,12 @@ public class SeaControler : MonoBehaviour {
     {
         Destroy(fog);
     }
+
+    //get occupied value
+    public int getOcc()
+    { return occpied;  }
+
+    //set occupied value
+    public void setOcc(int occ)
+    { occpied = occ;  }
 }

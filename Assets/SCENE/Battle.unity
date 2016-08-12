@@ -177,12 +177,6 @@ MonoBehaviour:
   camera: {fileID: 1699762683}
   bulletPrefab: {fileID: 102334, guid: 992ba4307fd000841a5cfc19f4ee5ce1, type: 2}
   arrowPrefab: {fileID: 182016, guid: 51fa9f0584225af4eb19ae5dfa9e3310, type: 2}
-  shipPrefabs:
-  - {fileID: 113816, guid: 58460a4d1ebf526439cd2721942827b9, type: 2}
-  - {fileID: 141584, guid: 5ca3b99fb1d7a4f429de3d2564dcd704, type: 2}
-  - {fileID: 170982, guid: 25c4b833f9f6a224d90ebc8064a2c1f1, type: 2}
-  - {fileID: 172170, guid: 74f66ebae3c491f4c999353c5177b5e8, type: 2}
-  - {fileID: 160290, guid: 65bee189d20f7bb47ac3b84c0b7fac8e, type: 2}
 --- !u!4 &728480217
 Transform:
   m_ObjectHideFlags: 0
@@ -224,6 +218,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turn: 0
   tilePrefab: {fileID: 114916, guid: 838b68325509bff4280ff360c93f720c, type: 2}
+  shipPrefabs:
+  - {fileID: 113816, guid: 58460a4d1ebf526439cd2721942827b9, type: 2}
+  - {fileID: 141584, guid: 5ca3b99fb1d7a4f429de3d2564dcd704, type: 2}
+  - {fileID: 170982, guid: 25c4b833f9f6a224d90ebc8064a2c1f1, type: 2}
+  - {fileID: 172170, guid: 74f66ebae3c491f4c999353c5177b5e8, type: 2}
+  - {fileID: 160290, guid: 65bee189d20f7bb47ac3b84c0b7fac8e, type: 2}
+  shipNumber: 
   userLife: 0
   aiLife: 0
 --- !u!4 &1189339795
