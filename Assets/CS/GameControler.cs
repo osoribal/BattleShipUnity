@@ -61,7 +61,7 @@ public class GameControler : MonoBehaviour {
 
         //select ship number
         int[] shipID = new int[10];
-        shipID[5] = 13;
+        shipID[5] = 33;
         shipID[6] = 21;
         shipID[7] = 31;
         shipID[8] = 41;
@@ -135,10 +135,12 @@ public class GameControler : MonoBehaviour {
         ship.x = Gx;
         ship.y = Gy;
         ship.direction = direction;
+        Debug.Log(" randomselecLoc " + ship.shipID + ":" + Gx + " " + Gy + " " + direction);
     }
 
     bool checkOccpied(Ship ship)
     {
+
         return true;
     }
 
@@ -147,49 +149,51 @@ public class GameControler : MonoBehaviour {
         //get size and func from ship number
         int size = ship.shipID/10;
         int dir = ship.direction;
-        int x = ship.x;
-        int z = ship.y;
-        //select prefab with size, func
-        //change the rotate
-        /*
-         * east = 0 : z++
-         * west = 1 : z--
-         * south = 2 : x++
-         * north = 3 : x--
-         */
+        int x = ship.y;
+        int z = ship.x;
+
+        //prefab location
         Vector3 pos = new Vector3(0,0,0);
         Vector3 rot = new Vector3(0,0,0);
+
         float s = (float)0.5* (size-1);
+
+        //get sea location
+        Transform seaPos = getTransformOfAITile(x, z);
+        float realX = seaPos.position.x;
+        float realZ = seaPos.position.z;
+
         switch (dir)
         {
             case EAST:
                 //rotate +90, move z + s
                 rot.y = 90;
-                pos.x = x;
-                pos.z = z + s;
+                pos.x = realX;
+                pos.z = realZ + s;
                 break;
             case WEST:
                 //rotate -90, move z - s 
                 rot.y = -90;
-                pos.x = x;
-                pos.z = z - s;
+                pos.x = realX;
+                pos.z = realZ - s;
                 break;
             case SOUTH:
                 //rotate 180, move x + s 
                 rot.y = 180;
-                pos.x = x + s;
-                pos.z = z;
+                pos.x = realX + s;
+                pos.z = realZ;
                 break;
             case NORTH:
                 //rotate 0, move x - s 
                 rot.y = 0;
-                pos.x = x - s;
-                pos.z = z;
+                pos.x = realX - s;
+                pos.z = realZ;
                 break;
         }
 
         //locate at x, 0, z
         GameObject newShip = (GameObject)Instantiate(shipPrefabs[size-1], pos, Quaternion.Euler(rot));
+        Debug.Log(" create " + ship.shipID + ":" + pos.x + " " + pos.z + " " + dir);
     }
 
     //set ship with direction  - occupied
