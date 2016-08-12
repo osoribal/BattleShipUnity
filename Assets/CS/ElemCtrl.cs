@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ElemCtrl : MonoBehaviour {
     public ShipInfo info;   //배의 정보
+    public SelectShipCtrl selectCtrl;
     bool isSelected; //이 버튼이 선택되었는지 여부 저장
     int index;       //이 배가 몇 번 째로 선택되었는지 저장
 
@@ -45,24 +46,26 @@ public class ElemCtrl : MonoBehaviour {
         {
             //배가 선택되어 있을 때는 선택을 해제
             unSelected();
-            UserManager.selectedShipArr[index] = -1;
-            UserManager.selectedShipCount += -1;
+            selectCtrl.selectedShipArr[index] = 0;
+            selectCtrl.selectedShipCount += -1;
+            selectCtrl.userLife += -(info.shipNum / 10);
         }
         else
         {
             //배 선택 개수 제한
-            if (UserManager.selectedShipCount == 5)
+            if (selectCtrl.selectedShipCount == 5)
             {
                 return;
             }
             //배가 선택되어 있지 않으므로 선택
-            UserManager.selectedShipCount += 1;
+            selectCtrl.selectedShipCount += 1;
             for (int i = 0; i < 5; i++)
             {
-                if (UserManager.selectedShipArr[i] < 0)
+                if (selectCtrl.selectedShipArr[i] == 0)
                 {
                     selected(i);
-                    UserManager.selectedShipArr[i] = info.shipNum;
+                    selectCtrl.selectedShipArr[i] = info.shipNum;
+                    selectCtrl.userLife += info.shipNum / 10;
                     return;
                 }
             }
