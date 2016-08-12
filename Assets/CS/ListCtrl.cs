@@ -20,7 +20,7 @@ public class ListCtrl : MonoBehaviour {
         for (int i = 0; i < list.Count; i++)
         {
             GameObject elem = (GameObject)Instantiate(elemPrefab) as GameObject;
-            elem.GetComponent<ElemCtrl>().info = list[i];
+            Destroy(elem.GetComponent<ElemCtrl>());/* elem.GetComponent<ElemCtrl>().info = list[i];*/
             elem.transform.SetParent(content.transform, false);
         }
     }

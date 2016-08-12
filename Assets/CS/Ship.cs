@@ -5,9 +5,16 @@ using UnityEngine.UI;
 
 public class Ship : MonoBehaviour
 {
+    //direction info
+    private const int EAST = 0;
+    private const int WEST = 1;
+    private const int SOUTH = 2;
+    private const int NORTH = 3;
+
     public int shipID;      //ship number
     public int x, y;        //배 머리 위치
     public int direction;   //배 방향
+    public PlaceShipCtrl placeCtrl;
     public GameObject rotateButPrefab;
     GameObject rotateBut;
     public int occ;  //occupied number
@@ -69,6 +76,8 @@ public class Ship : MonoBehaviour
 
     public IEnumerator move()
     {
+        placeCtrl.setOccupied(shipID / 10, direction, x, y, 0);
+        int beforeX = x, beforeY = y, beforeDir = direction;
         Ray ray;
         RaycastHit rayHit;
         float rayLength = 100f;
@@ -89,20 +98,33 @@ public class Ship : MonoBehaviour
                 x = (int)pos.x;
                 y = (int)pos.z;
                 this.gameObject.transform.position = pos;
-
             }
             yield return null;
         }
 
         //드래그 끝
-        /******Rotate******/
-        pos = transform.position;
-        pos.y = 1;
-        rotateBut = (GameObject)Instantiate(rotateButPrefab,
-            pos,
-            Quaternion.AngleAxis(90.0f, new Vector3(1, 0, 0)));
-        Button but = rotateBut.GetComponentInChildren<Button>();
-        but.onClick.AddListener(() => rotate());
+        //옮겨진 자리의 occupied 확인
+        if (placeCtrl.isOccupied(shipID/10, direction, x, y))
+        {
+            //occupied = 1
+            //원래 자리로 복귀
+            x = beforeX;
+            y = beforeY;
+            this.gameObject.transform.position = new Vector3(x, 0, y);
+        }
+        else
+        {
+            //occupied = 0
+            /******Rotate******/
+            pos = transform.position;
+            pos.y = 1;
+            rotateBut = (GameObject)Instantiate(rotateButPrefab,
+                pos,
+                Quaternion.AngleAxis(90.0f, new Vector3(1, 0, 0)));
+            Button but = rotateBut.GetComponentInChildren<Button>();
+            but.onClick.AddListener(() => rotate());
+        }
+        
     }
 
     void rotate()

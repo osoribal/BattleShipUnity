@@ -27,7 +27,7 @@ public class RandomSelectButton : MonoBehaviour {
             gold = gold - 1000;
             //save gold
             //save the new ship
-            userManager.SaveShip(newShipInfo);
+            userManager.Save(newShipInfo);
 
             //alert message
             //the new ship saving is success
