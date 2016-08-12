@@ -23,12 +23,14 @@ public class SelectShipCtrl : MonoBehaviour {
             return;
         if (userLife < 10  || userLife > 20)
             return;
+
         PlayerPrefs.SetInt("userLife", userLife);
-        PlayerPrefs.SetInt("ship0", selectedShipArr[0]);
-        PlayerPrefs.SetInt("ship1", selectedShipArr[1]);
-        PlayerPrefs.SetInt("ship2", selectedShipArr[2]);
-        PlayerPrefs.SetInt("ship3", selectedShipArr[3]);
-        PlayerPrefs.SetInt("ship4", selectedShipArr[4]);
+        
+        for (int i = 0; i < 5; i++)
+        {
+            UserManager.userShips[i].shipNum = selectedShipArr[i];
+        }
+        
         SceneManager.LoadScene("PlaceShip");
     }
 
