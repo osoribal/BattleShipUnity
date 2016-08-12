@@ -61,6 +61,28 @@ public class GameControler : MonoBehaviour {
 
         //select ship number
         int[] shipID = new int[10];
+
+        //get user ships
+        for (int i = 0; i < 5; i++)
+        {
+            //get gameobject ship from user manager
+            ShipInfo userShip = new ShipInfo(0);
+            userShip = UserManager.userShips[i];
+            
+            ships[i] = new Ship();
+            //set id
+            ships[i].shipID = userShip.shipNum;
+            //set occpied value
+            ships[i].occ = 1;
+            //set position
+            ships[i].x = userShip.x;
+            ships[i].y = userShip.y;
+            ships[i].direction = userShip.direction;
+            //create ship
+            createUserShip(ships[i]);
+        }
+
+        //select ai ships
         shipID[5] = 33;
         shipID[6] = 21;
         shipID[7] = 31;
@@ -95,7 +117,7 @@ public class GameControler : MonoBehaviour {
         setOccupied(ship);
 
         //create ship at the location
-        createShip(ship);
+        createAIShip(ship);
     }
 
     void selectRandomLocation(Ship ship)
@@ -180,7 +202,7 @@ public class GameControler : MonoBehaviour {
         return true;
     }
 
-    void createShip(Ship ship)
+    void createAIShip(Ship ship)
     {
         //get size and func from ship number
         int size = ship.shipID/10;
@@ -229,6 +251,58 @@ public class GameControler : MonoBehaviour {
 
         //locate at x, 0, z
         GameObject newShip = (GameObject)Instantiate(shipPrefabs[size-1], pos, Quaternion.Euler(rot));
+        Debug.Log(" create " + ship.shipID + ":" + pos.x + " " + pos.z + " " + dir);
+    }
+
+    void createUserShip(Ship ship)
+    {
+        //get size and func from ship number
+        int size = ship.shipID / 10;
+        int dir = ship.direction;
+        int x = ship.y;
+        int z = ship.x;
+
+        //prefab location
+        Vector3 pos = new Vector3(0, 0, 0);
+        Vector3 rot = new Vector3(0, 0, 0);
+
+        float s = (float)0.5 * (size - 1);
+
+        //get sea location
+        Transform seaPos = getTransformOfUserTile(x, z);
+        float realX = seaPos.position.x;
+        float realZ = seaPos.position.z;
+
+        switch (dir)
+        {
+            case EAST:
+                //rotate +90, move z + s
+                rot.y = 90;
+                pos.x = realX;
+                pos.z = realZ + s;
+                break;
+            case WEST:
+                //rotate -90, move z - s 
+                rot.y = -90;
+                pos.x = realX;
+                pos.z = realZ - s;
+                break;
+            case SOUTH:
+                //rotate 180, move x + s 
+                rot.y = 180;
+                pos.x = realX + s;
+                pos.z = realZ;
+                break;
+            case NORTH:
+                //rotate 0, move x - s 
+                rot.y = 0;
+                pos.x = realX - s;
+                pos.z = realZ;
+                break;
+        }
+
+        //locate at x, 0, z
+        GameObject newShip = (GameObject)Instantiate(shipPrefabs[size - 1], pos, Quaternion.Euler(rot));
         Debug.Log(" create " + ship.shipID + ":" + pos.x + " " + pos.z + " " + dir);
     }
 

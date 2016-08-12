@@ -12,7 +12,7 @@ public class UserManager : MonoBehaviour {
     string path;
     public static UserManager control;
     public static List<ShipInfo> list = new List<ShipInfo>();   //보유중인 배 list
-    public static GameObject[] userShips = new GameObject[5];   //선택된 배의 오브젝트
+    public static ShipInfo[] userShips = new ShipInfo[5];   //선택된 배의 오브젝트
 
     //씬이 변경될 때 UserManager가 유일하도록 유지
     void Awake()
@@ -51,6 +51,32 @@ public class UserManager : MonoBehaviour {
 
         //PlayerPrefs 초기화
         //PlayerPrefs.DeleteAll();
+
+        //shipInfo test data
+        userShips[0] = new ShipInfo(11);
+        userShips[0].x = 0;
+        userShips[0].y = 0;
+        userShips[0].direction = 0;
+
+        userShips[1] = new ShipInfo(22);
+        userShips[1].x = 0;
+        userShips[1].y = 1;
+        userShips[1].direction = 0;
+
+        userShips[2] = new ShipInfo(33);
+        userShips[2].x = 0;
+        userShips[2].y = 2;
+        userShips[2].direction = 0;
+
+        userShips[3] = new ShipInfo(44);
+        userShips[3].x = 0;
+        userShips[3].y = 3;
+        userShips[3].direction = 0;
+
+        userShips[4] = new ShipInfo(55);
+        userShips[4].x = 0;
+        userShips[4].y = 4;
+        userShips[4].direction = 0;
     }
     
     //골드 획득/사용 시 호출
@@ -106,6 +132,8 @@ public class ShipInfo : IComparable<ShipInfo>
 {
     public int shipNum; //고유번호
     public int count;   //보유개수
+    public int x, y;        //배 머리 위치
+    public int direction;   //배 방향
 
     public ShipInfo(int n)
     {

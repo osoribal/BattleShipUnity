@@ -46,19 +46,19 @@ public class PlaceShipCtrl : MonoBehaviour {
             position.x += 0.5f * (shipLength - 1);  //배의 머리가 해당 타일에 위치하도록 배를 이동
 
             //배 오브젝트 생성
-            UserManager.userShips[i] = (GameObject)Instantiate(
-                        shipPrefab[shipLength - 1],
-                        position,
-                        Quaternion.identity);
+            //UserManager.userShips[i] = (GameObject)Instantiate(
+            //            shipPrefab[shipLength - 1],
+            //            position,
+            //            Quaternion.identity);
 
             //ship에 기본 위치 정보 저장
-            Ship ctrl = UserManager.userShips[i].GetComponent<Ship>();
-            ctrl.shipID = PlayerPrefs.GetInt("ship" + i);
-            ctrl.x = 0;
-            ctrl.y = i;
+            //Ship ctrl = UserManager.userShips[i].GetComponent<Ship>();
+           // ctrl.shipID = PlayerPrefs.GetInt("ship" + i);
+           // ctrl.x = 0;
+            //ctrl.y = i;
 
             //ship에 기본 방향 정보 저장
-            ctrl.direction = 0;
+           // ctrl.direction = 0;
         }
     }
 
