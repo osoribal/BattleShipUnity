@@ -140,7 +140,43 @@ public class GameControler : MonoBehaviour {
 
     bool checkOccpied(Ship ship)
     {
+        //get ship info
+        int size = ship.shipID / 10;
+        int dir = ship.direction;
+        int x = ship.x;
+        int z = ship.y;
 
+        //check occupied according to direction
+        int chk = 0;
+        switch (dir) {
+            case EAST:
+                for (chk = 0; chk < size; chk++) {
+                    if (getAIOcc(x+chk, z) != 0)
+                        return false;
+                }
+                break;
+            case WEST:
+                for (chk = 0; chk < size; chk++)
+                {
+                    if (getAIOcc(x-chk, z) != 0)
+                        return false;
+                }
+                break;
+            case SOUTH:
+                for (chk = 0; chk < size; chk++)
+                {
+                    if (getAIOcc(x, z+chk) != 0)
+                        return false;
+                }
+                break;
+            case NORTH:
+                for (chk = 0; chk < size; chk++)
+                {
+                    if (getAIOcc(x, z-chk) != 0)
+                        return false;
+                }
+                break;
+        }
         return true;
     }
 
@@ -204,32 +240,47 @@ public class GameControler : MonoBehaviour {
         int direction = ship.direction;
         int GridX = ship.x;
         int GridY = ship.y;
-        int d = 0;
 
+        int chk = 0;
+        Debug.Log(" setOcc " + ship.shipID + ":" + GridX + " " + GridY + " " + direction);
         switch (direction)
         {
             case EAST:
                 //increase x
-                for (d = GridX; d < GridX+size; d++)
-                { setAIOcc(d, GridY, ship.occ); }
+                for (chk = 0; chk < size; chk++)
+                {
+                    Debug.Log(" east " + ship.shipID + ":" + (GridX+chk) + " " + GridY + " " + direction);
+                    setAIOcc(GridX + chk, GridY, ship.occ);
+                }
                 break;
 
             case WEST:
                 //decrease x
-                for (d = GridX; d > GridX - size; d--)
-                { setAIOcc(d, GridY, ship.occ); }
+                for (chk = 0; chk < size; chk++)
+                {
+                    Debug.Log(" WEST " + ship.shipID + ":" + (GridX-chk) + " " + GridY + " " + direction);
+                    setAIOcc(GridX - chk, GridY, ship.occ);
+                }
                 break;
 
             case SOUTH:
                 //increase y
-                for (d = GridY; d < GridY + size; d++)
-                { setAIOcc(GridX, d, ship.occ); }
+                for (chk = 0; chk < size; chk++)
+                {
+                    Debug.Log(" SOUTH " + ship.shipID + ":" + GridX + " " + (GridY+chk) + " " + direction);
+                    setAIOcc(GridX, GridY + chk, ship.occ);
+                       
+                }
                 break;
 
             case NORTH:
                 //decrease y
-                for (d = GridY; d > GridY - size; d--)
-                { setAIOcc(GridX, d, ship.occ); }
+                for (chk = 0; chk < size; chk++)
+                {
+                    Debug.Log(" NORTH " + ship.shipID + ":" + GridX + " " + (GridY-chk) + " " + direction);
+                    setAIOcc(GridX, GridY - chk, ship.occ);
+                        
+                }
                 break;
         }
 
@@ -307,6 +358,7 @@ public class GameControler : MonoBehaviour {
     public int getAIOcc(int x, int y)
     {
         SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
+        Debug.Log("get : " + x + "," + y);
         return sea.getOcc();
     }
 
@@ -314,6 +366,7 @@ public class GameControler : MonoBehaviour {
     public void setAIOcc(int x, int y, int occ)
     {
         SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
+        Debug.Log("set : " + x + "," + y);
         sea.setOcc(occ);
     }
 
