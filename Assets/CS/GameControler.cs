@@ -28,8 +28,8 @@ public class GameControler : MonoBehaviour {
         aiLife = 10;
 
         //격자 생성
-        Vector3 userzero = new Vector3(1, 0, 5);
-        Vector3 aizero = new Vector3(-11, 0, 5);
+        Vector3 userzero = new Vector3(1, 0, -5);
+        Vector3 aizero = new Vector3(-11, 0, -5);
         for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < 10; j++)
@@ -41,11 +41,11 @@ public class GameControler : MonoBehaviour {
                 SeaControler fg = aiGrid[i, j].GetComponent<SeaControler>();
                 fg.fogOn();
 
-                userzero.z--;
-                aizero.z--;
+                userzero.z++;
+                aizero.z++;
             }
-            userzero.z = 5;
-            aizero.z = 5;
+            userzero.z = -5;
+            aizero.z = -5;
             userzero.x++;
             aizero.x++;
         }
