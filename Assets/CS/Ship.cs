@@ -1,26 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 public class Ship : MonoBehaviour {
     public int shipID;      //ship number
     public int x, y;        //배 머리 위치
     public int direction;   //배 방향
+    public GameObject rotateButPrefab;
+    GameObject rotateBut;
 
     /*
      * switch 문 2개 구현 : prefab, 특수능력
      * prefab은 swith문 안만들어도..?
      * 
      */
-    
-   /*
-   * 위치, 방향 채우기
-   * east = 0
-   * west = 1
-   * south = 2
-   * north = 3
-   * 
-   */
 
     //turn flags
     public const int USER_TURN = 0;
@@ -74,6 +68,7 @@ public class Ship : MonoBehaviour {
         Ray ray;
         RaycastHit rayHit;
         float rayLength = 100f;
+        Vector3 pos;
         while (true)    //드래그 하는 동안
         {
             if (Input.GetButtonUp("Fire1")) //드래그 끝
@@ -85,29 +80,33 @@ public class Ship : MonoBehaviour {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out rayHit, rayLength))
             {
-                Vector3 pos = rayHit.transform.position;
-                this.gameObject.transform.position = pos;
+                pos = rayHit.transform.position;
                 //x, y 설정
                 x = (int)pos.x;
-                y = -(int)pos.z;
+                y = (int)pos.z;
+                this.gameObject.transform.position = pos;
+                
             }
             yield return null;
         }
 
         //드래그 끝
         /******Rotate******/
-        //if (Physics.Raycast(ray, out rayHit, rayLength))
-        //{
-        //    //탄환 생성
-        //    GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
-        //    //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
-        //    Bullet bc = bullet.GetComponent<Bullet>();
-        //    bc.from = bullet.transform;
-        //    bc.to = rayHit.transform.gameObject.transform;
-        //}
-        yield return null;
+        pos = transform.position;
+        pos.y = 1;
+        rotateBut = (GameObject)Instantiate(rotateButPrefab,
+            pos,
+            Quaternion.AngleAxis(90.0f, new Vector3(1, 0, 0)));
+        Button but = rotateBut.GetComponentInChildren<Button>();
+        but.onClick.AddListener(() => rotate());
     }
 
+    void rotate()
+    {
+        direction = (++direction)%4;
+        transform.rotation = Quaternion.AngleAxis(direction * 90.0f, Vector3.up);
+        Destroy(rotateBut);
+    }
 
 
     void OnTriggerEnter(Collider other)

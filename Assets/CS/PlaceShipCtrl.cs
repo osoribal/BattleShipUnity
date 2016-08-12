@@ -28,7 +28,7 @@ public class PlaceShipCtrl : MonoBehaviour {
                 userGrid[i, j] = (GameObject)Instantiate(tilePrefab, userzero, Quaternion.identity);
                 userGrid[i, j].GetComponent<SeaControler>().x = i;
                 userGrid[i, j].GetComponent<SeaControler>().y = j;
-                userzero.z--;
+                userzero.z++;
             }
             userzero.z = 0;
             userzero.x++;
@@ -83,28 +83,5 @@ public class PlaceShipCtrl : MonoBehaviour {
         }
 
         /**** touch event : http://mrhook.co.kr/208 *****/
-        // 현재 터치되어 있는 카운트 가져오기 
-        //int cnt = Input.touchCount;
-
-        //for (int i = 0; i < cnt; ++i)
-        //{
-        //    // i 번째로 터치된 값 이라고 보면 된다.  
-        //    Touch touch = Input.GetTouch(i);
-        //    Ray ray;
-        //    RaycastHit rayHit;
-        //    float rayLength = 100f;
-
-        //    //어디를 터치했느냐
-        //    ray = Camera.main.ScreenPointToRay(touch.position);
-        //    Physics.Raycast(ray, out rayHit, rayLength);
-
-        //    //배를 터치했다면
-        //    if (rayHit.transform.gameObject.tag == "Ship")
-        //    {
-        //        //배의 위치 이동 및 회전을 담당하는 코루틴 호출
-        //        rayHit.transform.gameObject.GetComponent<Ship>().move(touch);
-        //    }
-
-        //}
     }
 }

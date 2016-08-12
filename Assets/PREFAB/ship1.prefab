@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -87,6 +88,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c4b37411fee9642918356d5ebe8905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipID: 0
+  x: 0
+  y: 0
+  direction: 0
+  rotateButPrefab: {fileID: 112608, guid: 07b3e1625e709704fb3e08fb45bf1fa2, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
