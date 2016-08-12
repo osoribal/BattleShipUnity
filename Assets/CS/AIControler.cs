@@ -17,20 +17,10 @@ public class AIControler : MonoBehaviour {
     public const int USER_TURN = 0;
     public const int AI_BLOCK = -2;
 
-    //my ships
-    public GameObject[] shipPrefabs;
-
     // Use this for initialization
     void Start () {
         //my turn
         this.turn = AI_TURN;
-
-        //create ai ships
-        GameObject Aship1 = (GameObject)Instantiate(shipPrefabs[0], new Vector3(-10, 0, -4), Quaternion.identity);
-        GameObject Aship2 = (GameObject)Instantiate(shipPrefabs[1], new Vector3(-10, 0, -2), Quaternion.identity);
-        GameObject Aship3 = (GameObject)Instantiate(shipPrefabs[2], new Vector3(-10, 0, 0), Quaternion.identity);
-        GameObject Aship4 = (GameObject)Instantiate(shipPrefabs[3], new Vector3(-10, 0, 2), Quaternion.identity);
-        GameObject Aship5 = (GameObject)Instantiate(shipPrefabs[4], new Vector3(-10, 0, 4), Quaternion.identity);
     }
 	
 	// Update is called once per frame
