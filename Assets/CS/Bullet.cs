@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour {
     public Transform to;
     public float value = 10.0F;
     private float startTime;
-    public GameControler gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
+    GameControler gameController;    //여기가 아니라 start에서 초기화해야 한다.
 
     //turn
     public const int USER_TURN = 0;
@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         startTime = Time.time;
     }
 
