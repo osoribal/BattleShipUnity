@@ -40,32 +40,41 @@ public class Bullet : MonoBehaviour {
     //destroy bullet
     void OnTriggerEnter(Collider other)
     {
-
         switch (other.gameObject.tag)
         {
             case "Arrow":
                 Destroy(other.gameObject);
                 break;
-
             case "Tile":
-                //occpied 검사
-                //occpied > 0 -> occpied --; life--; 연기;
-                //occpied == 0  -> remove fog, turn change
+                //check occpied
+                SeaControler sea = other.GetComponent<SeaControler>();
+                int isOcc = sea.getOcc();
+
+                if (isOcc == 0)
+                {
+                    //no hit
+                    //occpied == 0  -> remove fog, turn change
+                    sea.fogOff();
+                }
+                else
+                 {//occpied > 0 -> occpied --; life--; 연기, AttackAgain()
+                 }
                 
-                //test : remove fog
-                //FogControler fg = other.GetComponent<FogControler>();
-                //fg.fogOff();
+                
+
+
+
 
                 //no hit - change turn
                 ChangeTurn();
                 destroyBullet();
                 break;
 
-            case "Ship":
-                //hit - not change turn, attack again
-                AttackAgain();
-                //destroyBullet();
-                break;
+            //case "Ship":
+            //    hit - not change turn, attack again
+            //    AttackAgain();
+            //    destroyBullet();
+            //    break;
         }
     }
 
