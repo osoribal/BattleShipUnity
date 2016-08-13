@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class Ship : MonoBehaviour
 {
     //direction info
-    private const int EAST = 0;
-    private const int WEST = 1;
+    private const int EAST = 1;
+    private const int WEST = 3;
     private const int SOUTH = 2;
-    private const int NORTH = 3;
+    private const int NORTH = 0;
 
     public int shipID;      //ship number
     public int x, y;        //배 머리 위치
     public int direction;   //배 방향
     public PlaceShipCtrl placeCtrl;
     public GameObject rotateButPrefab;
-    GameObject rotateBut;
+    GameObject butCanvas;
     public int occ;  //occupied number
     /*
      * switch 문 2개 구현 : prefab, 특수능력
@@ -76,64 +76,79 @@ public class Ship : MonoBehaviour
 
     public IEnumerator move()
     {
+        //reset occupied
         placeCtrl.setOccupied(shipID / 10, direction, x, y, 0);
-        int beforeX = x, beforeY = y, beforeDir = direction;
-        Ray ray;
-        RaycastHit rayHit;
-        float rayLength = 100f;
-        Vector3 pos;
-        while (true)    //드래그 하는 동안
+
+        //드래그 중
+        Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z));
+        while (Input.GetMouseButton(0))
         {
-            if (Input.GetButtonUp("Fire1")) //드래그 끝
+            /*****move*****/
+            Vector3 curScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z);
+            Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenSpace) + offset;
+
+            //curPosition에서 배가 격자를 벗어나지 않는지 검사
+            if (placeCtrl.inGrid(shipID / 10, direction, (int)curPosition.x, (int)curPosition.z))
             {
-                break;
+                //배의 위치가 중복되지 않도록 occupied 검사
+                if (!placeCtrl.isOccupied(shipID / 10, direction, (int)curPosition.x, (int)curPosition.z))
+                {
+                    //배의 위치 변경. occupied 변경 
+                    x = (int)curPosition.x;
+                    y = (int)curPosition.z;
+                    transform.position = placeCtrl.place(shipID / 10, direction, (int)curPosition.x, (int)curPosition.z);
+                }
+
             }
 
-            /******move******/
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out rayHit, rayLength))
-            {
-                pos = rayHit.transform.position;
-                //x, y 설정
-                x = (int)pos.x;
-                y = (int)pos.z;
-                this.gameObject.transform.position = pos;
-            }
             yield return null;
         }
 
         //드래그 끝
-        //옮겨진 자리의 occupied 확인
-        if (placeCtrl.isOccupied(shipID/10, direction, x, y))
-        {
-            //occupied = 1
-            //원래 자리로 복귀
-            x = beforeX;
-            y = beforeY;
-            this.gameObject.transform.position = new Vector3(x, 0, y);
-        }
-        else
-        {
-            //occupied = 0
-            /******Rotate******/
-            pos = transform.position;
-            pos.y = 1;
-            rotateBut = (GameObject)Instantiate(rotateButPrefab,
-                pos,
-                Quaternion.AngleAxis(90.0f, new Vector3(1, 0, 0)));
-            Button but = rotateBut.GetComponentInChildren<Button>();
-            but.onClick.AddListener(() => rotate());
-        }
-        
+        //set occupied
+        placeCtrl.setOccupied(shipID / 10, direction, x, y, 1);
+
+        //Rotate 버튼 생성
+        butCanvas = (GameObject)Instantiate(rotateButPrefab,
+            new Vector3(transform.position.x, 1, transform.position.z),
+            Quaternion.AngleAxis(90.0f, new Vector3(1, 0, 0)));
+        //리스너 장착
+        Button[] buts = butCanvas.GetComponentsInChildren<Button>();
+        buts[0].onClick.AddListener(() => rotate());
+        buts[1].onClick.AddListener(() => cancle());
     }
 
+    //rotate 버튼 리스너
     void rotate()
     {
-        direction = (++direction) % 4;
-        transform.rotation = Quaternion.AngleAxis(direction * 90.0f, Vector3.up);
-        Destroy(rotateBut);
+        //reset occupied
+        placeCtrl.setOccupied(shipID / 10, direction, x, y, 0);
+        
+        //curPosition에서 배가 격자를 벗어나지 않는지 검사
+        if (placeCtrl.inGrid(shipID / 10, (direction + 1) % 4, x, y))
+        {
+            //배의 위치가 중복되지 않도록 occupied 검사
+            if (!placeCtrl.isOccupied(shipID / 10, (direction + 1) % 4, x, y))
+            {
+                //방향 변수 변경
+                direction = (direction + 1) % 4;
+                //회전
+                transform.rotation = Quaternion.AngleAxis(direction * 90.0f, Vector3.up);
+                //배의 위치 변경
+                transform.position = placeCtrl.place(shipID / 10, direction, x, y);
+            }
+
+        }
+        //set occupied
+        placeCtrl.setOccupied(shipID / 10, direction, x, y, 1);
+
     }
 
+    public void cancle()
+    {
+        Destroy(butCanvas);
+    }
 
     void OnTriggerEnter(Collider other)
     {

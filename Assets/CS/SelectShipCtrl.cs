@@ -49,7 +49,7 @@ public class SelectShipCtrl : MonoBehaviour {
             for (int j = 1; j <= UserManager.list[i].count; j++)
             {
                 //오브젝트 생성
-                GameObject elem = (GameObject)Instantiate(elemPrefab) as GameObject;
+                GameObject elem = Instantiate(elemPrefab) as GameObject;
                 //배의 정보를 항목에 전달
                 elem.GetComponent<ElemCtrl>().info = UserManager.list[i];
                 elem.GetComponent<ElemCtrl>().selectCtrl = this;
