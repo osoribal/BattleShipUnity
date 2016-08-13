@@ -4,8 +4,8 @@ using System.Collections;
 public class GameControler : MonoBehaviour {
     public int turn;
     public GameObject tilePrefab;
-    public GameObject[,] userGrid = new GameObject[10,10];
-    public GameObject[,] aiGrid = new GameObject[10, 10];
+    public SeaControler[,] userGrid = new SeaControler[10,10];
+    public SeaControler[,] aiGrid = new SeaControler[10, 10];
 
     public GameObject[] shipPrefabs;
     Ship[] ships = new Ship[10];
@@ -33,8 +33,8 @@ public class GameControler : MonoBehaviour {
     // Use this for initialization
     void Start () {
         turn = 0;
-        userLife = 10;
-        aiLife = 10;
+        userLife = 0;
+        aiLife = 0;
 
         //격자 생성
         Vector3 userzero = new Vector3(1, 0, -5);
@@ -43,13 +43,15 @@ public class GameControler : MonoBehaviour {
         {
             for (int j = 0; j < 10; j++)
             {
-                userGrid[i, j] = (GameObject)Instantiate( tilePrefab, userzero, Quaternion.identity);
-                aiGrid[i, j] = (GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity);
+                //userGrid[i, j] = (GameObject)Instantiate( tilePrefab, userzero, Quaternion.identity);
+                //aiGrid[i, j] = (GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity);
+                GameObject tile = (GameObject)Instantiate(tilePrefab, userzero, Quaternion.identity);
+                userGrid[i, j] = tile.GetComponent<SeaControler>();
+                aiGrid[i, j] = tile.GetComponent<SeaControler>();
 
-                
                 //ai 격자 전체에 안개 씌우기
                 SeaControler fg = aiGrid[i, j].GetComponent<SeaControler>();
-               // fg.fogOn();
+                fg.fogOn();
 
                 userzero.z++;
                 aizero.z++;
@@ -73,6 +75,9 @@ public class GameControler : MonoBehaviour {
             ships[i] = new Ship();
             //set id
             ships[i].shipID = userShip.shipNum;
+            //get size - set life
+            //userLife += ships[i].shipID / 10;
+            userLife = 1;
             //set occpied value
             ships[i].occ = 1;
             //set position
@@ -96,6 +101,8 @@ public class GameControler : MonoBehaviour {
             ships[s] = new Ship();
             //set id
             ships[s].shipID = shipID[s];
+            //get size - set life
+            aiLife += ships[s].shipID / 10;
             //set occpied value
             ships[s].occ = 1;
             //select random ai ships location
@@ -174,28 +181,28 @@ public class GameControler : MonoBehaviour {
         switch (dir) {
             case EAST:
                 for (chk = 0; chk < size; chk++) {
-                    if (getAIOcc(x+chk, z) != 0)
+                    if (getGridOcc(x + chk, z) != 0)
                         return false;
                 }
                 break;
             case WEST:
                 for (chk = 0; chk < size; chk++)
                 {
-                    if (getAIOcc(x-chk, z) != 0)
+                    if (getGridOcc(x-chk, z) != 0)
                         return false;
                 }
                 break;
             case SOUTH:
                 for (chk = 0; chk < size; chk++)
                 {
-                    if (getAIOcc(x, z+chk) != 0)
+                    if (getGridOcc(x, z+chk) != 0)
                         return false;
                 }
                 break;
             case NORTH:
                 for (chk = 0; chk < size; chk++)
                 {
-                    if (getAIOcc(x, z-chk) != 0)
+                    if (getGridOcc(x, z-chk) != 0)
                         return false;
                 }
                 break;
@@ -252,7 +259,6 @@ public class GameControler : MonoBehaviour {
 
         //locate at x, 0, z
         GameObject newShip = (GameObject)Instantiate(shipPrefabs[size-1], pos, Quaternion.Euler(rot));
-        Debug.Log(" create " + ship.shipID + ":" + pos.x + " " + pos.z + " " + dir);
     }
 
     void createUserShip(Ship ship)
@@ -304,7 +310,6 @@ public class GameControler : MonoBehaviour {
 
         //locate at x, 0, z
         GameObject newShip = (GameObject)Instantiate(shipPrefabs[size - 1], pos, Quaternion.Euler(rot));
-        Debug.Log(" create " + ship.shipID + ":" + pos.x + " " + pos.z + " " + dir);
     }
 
     //set ship with direction  - occupied
@@ -324,7 +329,6 @@ public class GameControler : MonoBehaviour {
                 //increase x
                 for (chk = 0; chk < size; chk++)
                 {
-                    Debug.Log(" east " + ship.shipID + ":" + (GridX+chk) + " " + GridY + " " + direction);
                     setAIOcc(GridX + chk, GridY, ship.occ);
                 }
                 break;
@@ -333,7 +337,6 @@ public class GameControler : MonoBehaviour {
                 //decrease x
                 for (chk = 0; chk < size; chk++)
                 {
-                    Debug.Log(" WEST " + ship.shipID + ":" + (GridX-chk) + " " + GridY + " " + direction);
                     setAIOcc(GridX - chk, GridY, ship.occ);
                 }
                 break;
@@ -342,9 +345,7 @@ public class GameControler : MonoBehaviour {
                 //increase y
                 for (chk = 0; chk < size; chk++)
                 {
-                    Debug.Log(" SOUTH " + ship.shipID + ":" + GridX + " " + (GridY+chk) + " " + direction);
                     setAIOcc(GridX, GridY + chk, ship.occ);
-                       
                 }
                 break;
 
@@ -352,13 +353,10 @@ public class GameControler : MonoBehaviour {
                 //decrease y
                 for (chk = 0; chk < size; chk++)
                 {
-                    Debug.Log(" NORTH " + ship.shipID + ":" + GridX + " " + (GridY-chk) + " " + direction);
                     setAIOcc(GridX, GridY - chk, ship.occ);
-                        
                 }
                 break;
         }
-
     }
 
 
@@ -409,7 +407,6 @@ public class GameControler : MonoBehaviour {
             default:
                 break;
         }
-	
 	}
 
     /*
@@ -429,11 +426,11 @@ public class GameControler : MonoBehaviour {
         return aiGrid[x, y].transform;
     }
 
-    //return occupied of ai grid
-    public int getAIOcc(int x, int y)
+    //return occupied of grid
+    public int getGridOcc(int x, int y)
     {
         SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
-        Debug.Log("get : " + x + "," + y);
+        Debug.Log("getGridOcc : " + x + "," + y + " " + sea.getOcc());
         return sea.getOcc();
     }
 
