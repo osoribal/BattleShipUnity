@@ -51,7 +51,7 @@ public class PlaceShipCtrl : MonoBehaviour {
         for (int i = 0; i < 5; i++)
         {
             //배의 고유 번호로부터 배 길이 추출
-            int shipLength = PlayerPrefs.GetInt("ship" + i) / 10;   //UserManager.userShips[i]
+            int shipLength = UserManager.userShips[i].shipNum / 10;   //UserManager.userShips[i]
 
             //배의 기본 위치 설정
             Vector3 position = new Vector3(0, 0, i) ;
@@ -60,19 +60,19 @@ public class PlaceShipCtrl : MonoBehaviour {
 
             //배 오브젝트 생성
 
-            //UserManager.userShips[i] = (GameObject)Instantiate(
-            //            shipPrefab[shipLength - 1],
-            //            position,
-            //            Quaternion.identity);
+            ships[i] = (GameObject)Instantiate(
+                        shipPrefab[shipLength - 1],
+                        position,
+                        Quaternion.identity);
 
             //ship에 기본 위치 정보 저장
-            //Ship ctrl = UserManager.userShips[i].GetComponent<Ship>();
-           // ctrl.shipID = PlayerPrefs.GetInt("ship" + i);
-           // ctrl.x = 0;
-            //ctrl.y = i;
+            Ship ctrl = ships[i].GetComponent<Ship>();
+            ctrl.shipID = UserManager.userShips[i].shipNum;
+            ctrl.x = 0;
+            ctrl.y = i;
 
             //ship에 기본 방향 정보 저장
-           // ctrl.direction = 0;
+            ctrl.direction = SOUTH;
 
         }
     }

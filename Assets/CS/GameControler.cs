@@ -4,8 +4,11 @@ using System.Collections;
 public class GameControler : MonoBehaviour {
     public int turn;
     public GameObject tilePrefab;
-    public SeaControler[,] userGrid = new SeaControler[10,10];
-    public SeaControler[,] aiGrid = new SeaControler[10, 10];
+    
+    //public GameObject[,] userGrid = new GameObject[10, 10];
+    //public GameObject[,] aiGrid = new GameObject[10, 10];
+    public SeaControler[,] userGridCtrl = new SeaControler[10, 10];
+    public SeaControler[,] aiGridCtrl = new SeaControler[10, 10];
 
     public GameObject[] shipPrefabs;
     Ship[] ships = new Ship[10];
@@ -32,10 +35,11 @@ public class GameControler : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
+
         turn = 0;
         userLife = 0;
         aiLife = 0;
-
+        
         //격자 생성
         Vector3 userzero = new Vector3(1, 0, -5);
         Vector3 aizero = new Vector3(-11, 0, -5);
@@ -43,15 +47,15 @@ public class GameControler : MonoBehaviour {
         {
             for (int j = 0; j < 10; j++)
             {
-                //userGrid[i, j] = (GameObject)Instantiate( tilePrefab, userzero, Quaternion.identity);
+                //userGrid[i, j] = (GameObject)Instantiate(tilePrefab, userzero, Quaternion.identity);
                 //aiGrid[i, j] = (GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity);
-                GameObject tile = (GameObject)Instantiate(tilePrefab, userzero, Quaternion.identity);
-                userGrid[i, j] = tile.GetComponent<SeaControler>();
-                aiGrid[i, j] = tile.GetComponent<SeaControler>();
+
+                userGridCtrl[i, j] = ((GameObject)Instantiate(tilePrefab, userzero, Quaternion.identity)).GetComponent<SeaControler>();
+                aiGridCtrl[i, j] = ((GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity)).GetComponent<SeaControler>();
 
                 //ai 격자 전체에 안개 씌우기
-                SeaControler fg = aiGrid[i, j].GetComponent<SeaControler>();
-                fg.fogOn();
+                //SeaControler fg = aiGrid[i, j].GetComponent<SeaControler>();
+                //fg.fogOn();
 
                 userzero.z++;
                 aizero.z++;
@@ -430,7 +434,8 @@ public class GameControler : MonoBehaviour {
      */
     public Transform getTransformOfUserTile(int x, int y)
     {
-        return userGrid[x, y].transform;
+        //return userGrid[x, y].transform;
+        return userGridCtrl[x, y].gameObject.transform;
     }
 
     /*
@@ -438,23 +443,25 @@ public class GameControler : MonoBehaviour {
      */
     public Transform getTransformOfAITile(int x, int y)
     {
-        return aiGrid[x, y].transform;
+        //return aiGrid[x, y].transform;
+        return aiGridCtrl[x, y].gameObject.transform;
     }
 
     //return occupied of grid
     public int getGridOcc(int x, int y)
     {
-        SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
-
-        return sea.getOcc();
+        //SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
+        return aiGridCtrl[x, y].getOcc();
+        //return sea.getOcc();
     }
 
     //setting occupied of ai grid
     public void setAIOcc(int x, int y, int occ)
     {
-        SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
-        Debug.Log("set : " + x + "," + y);
-        sea.setOcc(occ);
+        //SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
+        //Debug.Log("set : " + x + "," + y);
+        //sea.setOcc(occ);
+        aiGridCtrl[x, y].setOcc(occ);
     }
 
 }
