@@ -47,7 +47,8 @@ public class UserControler : MonoBehaviour {
              * 터치 위치 제한
              * 마우스 이벤트 -> 터치 이벤트로 변경
              * 
-             * 
+             * ray가 배에 맞으면 원하는 타일 위가 아닌 배 위에 arrow가 생긴다. 버그...
+             * 고치자...
              * 
              * 
              */

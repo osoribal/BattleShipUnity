@@ -3,16 +3,16 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class PlaceShipCtrl : MonoBehaviour {
-    GameObject[,] userGrid = new GameObject[10, 10];
+    int[,] occupied = new int[10, 10];
     GameObject[] ships = new GameObject[5];
     public GameObject tilePrefab;
     public GameObject[] shipPrefab; //배의 프리팹 5종 저장
 
     //direction info
-    private const int EAST = 0;
-    private const int WEST = 1;
+    private const int EAST = 1;
+    private const int WEST = 3;
     private const int SOUTH = 2;
-    private const int NORTH = 3;
+    private const int NORTH = 0;
 
     public void OnBackClicked()
     {
@@ -39,9 +39,7 @@ public class PlaceShipCtrl : MonoBehaviour {
         {
             for (int j = 0; j < 10; j++)
             {
-                userGrid[i, j] = (GameObject)Instantiate(tilePrefab, userzero, Quaternion.identity);
-                userGrid[i, j].GetComponent<SeaControler>().x = i;
-                userGrid[i, j].GetComponent<SeaControler>().y = j;
+                GameObject tile = (GameObject)Instantiate(tilePrefab, userzero, Quaternion.identity);
                 userzero.z++;
             }
             userzero.z = 0;
@@ -53,10 +51,10 @@ public class PlaceShipCtrl : MonoBehaviour {
         for (int i = 0; i < 5; i++)
         {
             //배의 고유 번호로부터 배 길이 추출
-            int shipLength = PlayerPrefs.GetInt("ship" + i) / 10;
+            int shipLength = PlayerPrefs.GetInt("ship" + i) / 10;   //UserManager.userShips[i]
 
             //배의 기본 위치 설정
-            Vector3 position = userGrid[0, i].transform.position;
+            Vector3 position = new Vector3(0, 0, i) ;
             position.x += 0.5f * (shipLength - 1);  //배의 머리가 해당 타일에 위치하도록 배를 이동
             setOccupied(shipLength, SOUTH, 0, i, 1);
 
@@ -69,10 +67,10 @@ public class PlaceShipCtrl : MonoBehaviour {
             //ship에 기본 위치 정보 저장
             Ship ctrl = ships[i].GetComponent<Ship>();
             ctrl.placeCtrl = this;
-            ctrl.shipID = PlayerPrefs.GetInt("ship" + i);
+            ctrl.shipID = PlayerPrefs.GetInt("ship" + i);   //UserManager.userShips[i]
             ctrl.x = 0;
             ctrl.y = i;
-            ctrl.direction = 2;
+            ctrl.direction = SOUTH;
         }
     }
 
@@ -91,6 +89,11 @@ public class PlaceShipCtrl : MonoBehaviour {
                 //배를 터치했다면
                 if (rayHit.transform.gameObject.tag == "Ship")
                 {
+                    //잉여 회전 버튼 제거
+                    for(int i = 0; i < 5; i++)
+                    {
+                        ships[i].GetComponent<Ship>().cancle();
+                    }
                     //배의 위치 이동 및 회전을 담당하는 코루틴 호출
                     StartCoroutine(rayHit.transform.gameObject.GetComponent<Ship>().move());
                 }
@@ -101,36 +104,79 @@ public class PlaceShipCtrl : MonoBehaviour {
         /**** touch event : http://mrhook.co.kr/208 *****/
     }
 
+    //x, y에 배 머리가 오도록 배치할 좌표 반환
+    public Vector3 place(int length, int dir, int x, int y)
+    {
+        float dot5 = 0.5f * (length - 1);
+        switch (dir)
+        {
+            case EAST:  //y+
+                return new Vector3(x, 0, y + dot5);
+            case WEST:  //y-
+                return new Vector3(x, 0, y - dot5);
+            case SOUTH: //x+
+                return new Vector3(x + dot5, 0, y);
+            case NORTH: //x-
+                return new Vector3(x - dot5, 0, y);
+        }
+        return new Vector3(0, 0, 0);
+    }
+
+    //x, y 위치에 길이가 length이고 방향이 dir인 배를 놓을 때
+    //배가 격자 내에 들어오면 true.
+    public bool inGrid(int length, int dir, int x, int y)
+    {
+        switch(dir)
+        {
+            case EAST:  //y+
+                if (y >= 0 && y <= 10 - length && x >=0 && x <= 9)
+                    return true;
+            break;
+            case WEST:  //y-
+                if (y >= length - 1 && y < 10 && x >= 0 && x <= 9)
+                    return true;
+            break;
+            case SOUTH: //x+
+                if (x >= 0 && x <= 10 - length && y >= 0 && y <= 9)
+                    return true;
+            break;
+            case NORTH: //x-
+                if (x >= length - 1 && x < 10 && y >= 0 && y <= 9)
+                    return true;
+            break;
+        }
+        return false;
+    }
+
     public bool isOccupied(int length, int dir, int x, int y)
     {
         switch (dir)
         {
-            case EAST:
+            case EAST:  //y+
                 for (int i = y; i < y + length; i++)
                 {
-                    if (userGrid[x, i].GetComponent<SeaControler>().occpied == 1)
+                    if (occupied[x, i] == 1)
                         return true;
                 }
                 break;
-            case WEST:
+            case WEST:  //y-
                 for (int i = y; i > y - length; i--)
                 {
-                    if (userGrid[x, i].GetComponent<SeaControler>().occpied == 1)
+                    if (occupied[x, i] == 1)
                         return true;
                 }
                 break;
-            case SOUTH:
+            case SOUTH: //x+
                 for (int i = x; i < x + length; i++)
                 {
-                    print(i + " , " + y + " : " + userGrid[i, y].GetComponent<SeaControler>().occpied);
-                    if (userGrid[i, y].GetComponent<SeaControler>().occpied == 1)
+                    if (occupied[i, y] == 1)
                         return true;
                 }
                 break;
-            case NORTH:
+            case NORTH: //x-
                 for (int i = x; i > x - length; i--)
                 {
-                    if (userGrid[i, y].GetComponent<SeaControler>().occpied == 1)
+                    if (occupied[i, y] == 1)
                         return true;
                 }
                 break;
@@ -142,29 +188,28 @@ public class PlaceShipCtrl : MonoBehaviour {
     {
         switch (dir)
         {
-            case EAST:
+            case EAST:  //y+
                 for (int i = y; i < y + length; i++)
                 {
-                    userGrid[x, i].GetComponent<SeaControler>().occpied = value;
+                    occupied[x, i] = value;
                 }
                 break;
-            case WEST:
+            case WEST:  //y-
                 for (int i = y; i > y - length; i--)
                 {
-                    userGrid[x, i].GetComponent<SeaControler>().occpied = value;
+                    occupied[x, i] = value;
                 }
                 break;
-            case SOUTH:
+            case SOUTH: //x+
                 for (int i = x; i < x + length; i++)
                 {
-                    userGrid[i, y].GetComponent<SeaControler>().occpied = value;
-                    print(i + " , " + y + " : " + userGrid[i, y].GetComponent<SeaControler>().occpied);
+                    occupied[i, y] = value;
                 }
                 break;
-            case NORTH:
+            case NORTH: //x-
                 for (int i = x; i > x - length; i--)
                 {
-                    userGrid[i, y].GetComponent<SeaControler>().occpied = value;
+                    occupied[i, y] = value;
                 }
                 break;
         }

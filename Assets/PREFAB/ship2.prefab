@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.79}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -93,7 +93,7 @@ MonoBehaviour:
   y: 0
   direction: 0
   placeCtrl: {fileID: 0}
-  rotateButPrefab: {fileID: 112608, guid: 07b3e1625e709704fb3e08fb45bf1fa2, type: 2}
+  rotateButPrefab: {fileID: 105424, guid: 07b3e1625e709704fb3e08fb45bf1fa2, type: 2}
   occ: 0
 --- !u!1001 &100100000
 Prefab:

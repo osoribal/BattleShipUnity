@@ -11,10 +11,10 @@ public class GameControler : MonoBehaviour {
     Ship[] ships = new Ship[10];
 
     //direction info
-    private const int EAST = 0;
-    private const int WEST = 1;
+    private const int EAST = 1;
+    private const int WEST = 3;
     private const int SOUTH = 2;
-    private const int NORTH = 3;
+    private const int NORTH = 0;
     /*
      * 
      * 배 열 대의 정보 저장 필요... gameobject?
