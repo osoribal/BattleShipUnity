@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour {
     public Transform to;
     public float value = 10.0F;
     private float startTime;
-    public GameControler gameController;
+    public GameControler gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
 
     //turn
     public const int USER_TURN = 0;
@@ -40,32 +40,68 @@ public class Bullet : MonoBehaviour {
     //destroy bullet
     void OnTriggerEnter(Collider other)
     {
-
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         switch (other.gameObject.tag)
         {
             case "Arrow":
+                Debug.Log("arrow hit");
                 Destroy(other.gameObject);
                 break;
-
             case "Tile":
-                //occpied 검사
-                //occpied > 0 -> occpied --; life--; 연기;
-                //occpied == 0  -> remove fog, turn change
-                
-                //test : remove fog
-                //FogControler fg = other.GetComponent<FogControler>();
-                //fg.fogOff();
+                Debug.Log("tile hit");
+                //check occpied
+                SeaControler sea = other.GetComponent<SeaControler>();
+                //get occupied value
+                int isOcc = sea.getOccupiedWithXY(sea.transform.position.x, sea.transform.position.z);
+                Debug.Log("sea point"  + sea.transform.position.x + " " + sea.transform.position.z + " " + isOcc);
+                if (isOcc == 0)
+                {
+                    //no hit
+                    //remove fog
+                    sea.fogOff();
+                    //change turn
+                    ChangeTurn();
+                }
+                else
+                {//occpied > 0 -> occpied --; life--; 연기, AttackAgain()
+                    //decrease occupied value
+                    sea.decOcc();
+                    //decrease life
+                    
+                    switch (whoseTurn()) {
+                        case USER_BLOCK:
+                            //minus ai life
+                            gameController.minusAILife();
+                            //check life is 0
+                            if (gameController.GetAILife() == 0) {
+                                Debug.Log("user win");
+                            }
+                            break;
+                        case AI_BLOCK:
+                            //minus user life
+                            gameController.minusUserLife();
+                            //check life is 0
+                            if (gameController.GetUserLife() == 0)
+                            {
+                                Debug.Log("ai win");
+                            }
+                            break;
+                    }
+                    //smog on
+                    //attack again - no change turn
+                    AttackAgain();
 
-                //no hit - change turn
-                ChangeTurn();
+                }
+                //remove bullet
                 destroyBullet();
+
                 break;
 
-            case "Ship":
-                //hit - not change turn, attack again
-                AttackAgain();
-                //destroyBullet();
-                break;
+            //case "Ship":
+            //    hit - not change turn, attack again
+            //    AttackAgain();
+            //    destroyBullet();
+            //    break;
         }
     }
 
@@ -78,12 +114,8 @@ public class Bullet : MonoBehaviour {
     //no hit - change turn
     void ChangeTurn()
     {
-        //get game controller's turn
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
-        int whoseTurn = gameController.GetTurn();
-
         //change turn each case
-        switch (whoseTurn)
+        switch (whoseTurn())
         {
             case USER_BLOCK:
                 gameController.turn = AI_TURN;
@@ -94,15 +126,19 @@ public class Bullet : MonoBehaviour {
         }
     }
 
+    //get turn from game controller
+    public int whoseTurn()
+    {
+        //get game controller's turn
+        int whoseTurn = gameController.GetTurn();
+        return whoseTurn;
+    }
+
     //hit - not change turn, attack again
     void AttackAgain()
     {
-        //get game controller's turn
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
-        int whoseTurn = gameController.GetTurn();
-
         //change turn each case
-        switch (whoseTurn)
+        switch (whoseTurn())
         {
             case USER_BLOCK:
                 gameController.turn = USER_TURN;
