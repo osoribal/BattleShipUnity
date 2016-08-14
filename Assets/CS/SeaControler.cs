@@ -3,7 +3,9 @@ using System.Collections;
 
 public class SeaControler : MonoBehaviour {
     public GameObject fogPrefab;
+    public GameObject firePrefab;
     GameObject fog;
+    GameObject fire;
     
     public int occpied; //현재 타일에 배가 있는지 검사할 때 이용
     GameControler gameController;   //여기가 아니라 start에서 초기화해야 한다.
@@ -25,6 +27,14 @@ public class SeaControler : MonoBehaviour {
     {
         Destroy(fog);
     }
+
+    //fire particle
+    public void fireOn()
+    {
+        fire= (GameObject)Instantiate(firePrefab, transform.position, Quaternion.Euler(-90, 0, 0));
+    }
+    
+
 
     //get occupied value
     public int getOcc()

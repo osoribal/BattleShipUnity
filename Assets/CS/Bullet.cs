@@ -27,17 +27,20 @@ public class Bullet : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-       //탄환이 포물선을 그리며 이동
-        if (!transform.position.Equals(to))
-        {
-            Vector3 center = (from.position + to.position) * 0.5F;
-            center -= new Vector3(0, 1, 0);
-            Vector3 riseRelCenter = from.position - center;
-            Vector3 setRelCenter = to.position - center;
-            float fracComplete = (Time.time - startTime) / value;
-            transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
-            transform.position += center;
-         }
+        if(transform != null) {
+            //탄환이 포물선을 그리며 이동
+            if (!transform.position.Equals(to))
+            {
+                Vector3 center = (from.position + to.position) * 0.5F;
+                center -= new Vector3(0, 1, 0);
+                Vector3 riseRelCenter = from.position - center;
+                Vector3 setRelCenter = to.position - center;
+                float fracComplete = (Time.time - startTime) / value;
+                transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
+                transform.position += center;
+            }
+        }
+
     }
 
     //destroy bullet
@@ -61,15 +64,18 @@ public class Bullet : MonoBehaviour {
                 if (isOcc == 0)
                 {
                     //no hit
-                    //remove fog
-                    sea.fogOn();
+               
+                    //remove fog - user turn - remove ai fog
+                    //if(whoseTurn() == USER_BLOCK)
+                   // { sea.fogOff(); }
+                    
                     //change turn
                     ChangeTurn();
                 }
                 else
                 {//occpied > 0 -> occpied --; life--; 연기, AttackAgain()
                     //decrease occupied value
-                    sea.decOcc();
+                    
                     //decrease life
                     
                     switch (whoseTurn()) {
@@ -91,7 +97,8 @@ public class Bullet : MonoBehaviour {
                             }
                             break;
                     }
-                    //smog on
+                    //fire on
+                    sea.fireOn();
                     //attack again - no change turn
                     AttackAgain();
 
@@ -169,9 +176,9 @@ public class Bullet : MonoBehaviour {
              */
             gridX = (int)y + 5;
             gridY = (int)x - 1;
-            Debug.Log("USER, getOccFromMap : " + gridX + " " + gridY + " " + occ);
-            occ = gameController.setOccFromUserMap(gridX, gridY);
             
+            occ = gameController.getOccFromUserMap(gridX, gridY);
+            Debug.Log("USER, getOccFromMap : " + gridX + " " + gridY + " " + occ);
             return occ;
 
         }
@@ -183,9 +190,9 @@ public class Bullet : MonoBehaviour {
              */
             gridX = (int)y + 5;
             gridY = (int)x + 11;
-            Debug.Log("aI, getOccFromMap : " + x  + " " +  y + " " + gridX + " " + gridY + " " + occ);
-            occ = gameController.setOccFromAIMap(gridX, gridY);
-            
+
+            occ = gameController.getOccFromAIMap(gridX, gridY);
+            Debug.Log("aI, getOccFromMap : " + x + " " + y + " " + gridX + " " + gridY + " " + occ);
             return occ;
 
         }

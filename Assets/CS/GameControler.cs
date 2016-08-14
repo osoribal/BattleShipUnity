@@ -58,7 +58,7 @@ public class GameControler : MonoBehaviour {
                 aiGridCtrl[i, j] = ((GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity)).GetComponent<SeaControler>();
 
                 //ai 격자 전체에 안개 씌우기
-                //SeaControler fg = aiGrid[i, j].GetComponent<SeaControler>();
+                SeaControler fg = aiGridCtrl[i, j].GetComponent<SeaControler>();
                 //fg.fogOn();
 
                 userzero.z++;
@@ -536,13 +536,19 @@ public class GameControler : MonoBehaviour {
     //}
 
 
-    public int setOccFromUserMap(int x, int y)
+    public int getOccFromUserMap(int x, int y)
     {
         return userMap[x, y] ;
     }
 
-    public int setOccFromAIMap(int x, int y)
+    public int getOccFromAIMap(int x, int y)
     {
         return aiMap[x, y];
     }
+
+    public void decOccAtUserMap(int x, int y)
+    {
+        
+    }
+   
 }
