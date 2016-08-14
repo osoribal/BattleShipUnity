@@ -49,6 +49,9 @@ public class AIControler : MonoBehaviour {
         //target point x y - in user grid
         int userGridX, userGridY;
 
+        //init
+        userGridX = 0;
+        userGridY = 0;
         if (prevR == -1 && hit == false)
         {
             //first shoot - random
@@ -57,16 +60,21 @@ public class AIControler : MonoBehaviour {
             Debug.Log(userGridX + " real " + userGridY);
         }
         else if(prevR != -1 && hit == false){
-            //
+            userGridX = Random.Range(0, 10);
+            userGridY = Random.Range(0, 10);
         }
+
+        prevX = userGridX;
+        prevY = userGridY;
     }
 
     public void shot(int Gx, int Gy)
     {
         //Gx, Gy -> real x z
-        float realX = 1;
-        float realZ = 4;
-        
+        //Gx : 0 -> 1
+        //Gy : 0 -> -5
+        float realX = Gy + 1;
+        float realZ = Gx - 5;
 
         //카메라 정보 저장
         Vector3 beforePosition = camera.transform.position;
@@ -84,10 +92,9 @@ public class AIControler : MonoBehaviour {
         //bullet target transform
         var newTrans = new GameObject().transform;
         Vector3 targetVec = new Vector3(realX, 0, realZ);
-        Debug.Log(realX + " real " + realZ);
+        Debug.Log("input : " + Gx + " " + Gy + " real : " + realX + " " + realZ);
         newTrans.position = targetVec;
         bc.to = newTrans;
-        
         
         //카메라 원위치
         camera.transform.position = beforePosition;
