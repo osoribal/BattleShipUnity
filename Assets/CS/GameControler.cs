@@ -32,7 +32,11 @@ public class GameControler : MonoBehaviour {
     //life
     public int userLife;
     public int aiLife;
-    
+
+    //occupied map
+    public static int[,] userMap = new int[10, 10];
+    public static int[,] aiMap = new int[10, 10];
+
     // Use this for initialization
     void Start () {
 
@@ -113,9 +117,44 @@ public class GameControler : MonoBehaviour {
             //select random ai ships location
             location(ships[s]);
         }
-        
+
+        //set map
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (getGridOcc(i, j) == 1)
+                {
+                    aiMap[i, j] = 1;
+                }
+                else
+                {
+                    aiMap[i, j] = 0;
+                }
+
+                if (getUserGridOcc(i, j) == 1)
+                {
+                    userMap[i, j] = 1;
+                }
+                else
+                {
+                    userMap[i, j] = 0;
+                }
+            }
+        }
+
+
+
     }
 
+    public void show()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                Debug.Log(i + "," + j + ":" + aiMap[i, j]);
+            }
+        }
+    }
 
     void location(Ship ship)
     {
@@ -170,7 +209,6 @@ public class GameControler : MonoBehaviour {
         ship.x = Gx;
         ship.y = Gy;
         ship.direction = direction;
-        Debug.Log(" randomselecLoc " + ship.shipID + ":" + Gx + " " + Gy + " " + direction);
     }
 
     bool checkOccpied(Ship ship)
@@ -272,7 +310,6 @@ public class GameControler : MonoBehaviour {
 
         //locate at x, 0, z
         GameObject newShip = (GameObject)Instantiate(shipPrefabs[size-1], pos, Quaternion.Euler(rot));
-        Debug.Log(" create " + ship.shipID + ":" + pos.x + " " + pos.z + " " + dir);
     }
 
     void createUserShip(Ship ship)
@@ -336,14 +373,12 @@ public class GameControler : MonoBehaviour {
         int GridY = ship.y;
 
         int chk = 0;
-        Debug.Log(" setOcc " + ship.shipID + ":" + GridX + " " + GridY + " " + direction);
         switch (direction)
         {
             case EAST:
                 //increase x
                 for (chk = 0; chk < size; chk++)
                 {
-
                     setAIOcc(GridX + chk, GridY, ship.occ);
                 }
                 break;
@@ -352,7 +387,6 @@ public class GameControler : MonoBehaviour {
                 //decrease x
                 for (chk = 0; chk < size; chk++)
                 {
-
                     setAIOcc(GridX - chk, GridY, ship.occ);
                 }
                 break;
@@ -361,7 +395,6 @@ public class GameControler : MonoBehaviour {
                 //increase y
                 for (chk = 0; chk < size; chk++)
                 {
-
                     setAIOcc(GridX, GridY + chk, ship.occ);
 
                 }
@@ -372,7 +405,6 @@ public class GameControler : MonoBehaviour {
                 for (chk = 0; chk < size; chk++)
                 {
                     setAIOcc(GridX, GridY - chk, ship.occ);
-
                 }
                 break;
         }
@@ -447,11 +479,19 @@ public class GameControler : MonoBehaviour {
         return aiGridCtrl[x, y].gameObject.transform;
     }
 
-    //return occupied of grid
+    //return occupied of ai grid
     public int getGridOcc(int x, int y)
     {
         //SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
         return aiGridCtrl[x, y].getOcc();
+        //return sea.getOcc();
+    }
+
+    //return occupied of user grid
+    public int getUserGridOcc(int x, int y)
+    {
+        //SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
+        return userGridCtrl[x, y].getOcc();
         //return sea.getOcc();
     }
 
@@ -464,4 +504,45 @@ public class GameControler : MonoBehaviour {
         aiGridCtrl[x, y].setOcc(occ);
     }
 
+    //get occupied value from each map
+    //public int getOccFromMap(float x, float y)
+    //{
+    //    int gridX, gridY;
+    //    //change to grid x y
+    //    if (x > 0)//user grid
+    //    {
+    //        /*
+    //         * x : 1~10
+    //         * z : -5~4
+    //         */
+    //        gridX = (int)x - 1;
+    //        gridY = (int)y + 5;
+    //        Debug.Log("USER, getOccFromMap : " + gridX + " " + gridY + " " + userMap[gridX, gridY]);
+    //        return userMap[gridX, gridY];
+            
+    //    }
+    //    else //ai grid
+    //    {
+    //        /*
+    //         * x : -11~-2
+    //         * z : -5~4
+    //         */
+    //        gridX = (int)x + 11;
+    //        gridY = (int)y + 5;
+    //        Debug.Log("aI, getOccFromMap : " + gridX + " " + gridY + " " + aiMap[gridX, gridY]);
+    //        return aiMap[gridX, gridY];
+
+    //    }
+    //}
+
+
+    public int setOccFromUserMap(int x, int y)
+    {
+        return userMap[x, y] ;
+    }
+
+    public int setOccFromAIMap(int x, int y)
+    {
+        return aiMap[x, y];
+    }
 }

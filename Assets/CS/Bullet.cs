@@ -7,8 +7,8 @@ public class Bullet : MonoBehaviour {
     public Transform to;
     public float value = 10.0F;
     private float startTime;
-    GameControler gameController;    //여기가 아니라 start에서 초기화해야 한다.
-
+    public GameControler gameController;    //여기가 아니라 start에서 초기화해야 한다.
+    SeaControler sea;
     //turn
     public const int USER_TURN = 0;
     public const int AI_TURN = 1;
@@ -20,6 +20,8 @@ public class Bullet : MonoBehaviour {
     void Start () {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         startTime = Time.time;
+
+       // gameController.show();
     }
 
     // Update is called once per frame
@@ -41,7 +43,7 @@ public class Bullet : MonoBehaviour {
     //destroy bullet
     void OnTriggerEnter(Collider other)
     {
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
+        //gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         switch (other.gameObject.tag)
         {
             case "Arrow":
@@ -51,15 +53,16 @@ public class Bullet : MonoBehaviour {
             case "Tile":
                 Debug.Log("tile hit");
                 //check occpied
-                SeaControler sea = other.GetComponent<SeaControler>();
+                sea = other.GetComponent<SeaControler>();
                 //get occupied value
-                int isOcc = sea.getOccupiedWithXY(sea.transform.position.x, sea.transform.position.z);
+                //int isOcc = sea.getOccupiedWithXY(sea.transform.position.x, sea.transform.position.z);
+                int isOcc = getOccFromMap(sea.transform.position.x, sea.transform.position.z);
                 Debug.Log("sea point"  + sea.transform.position.x + " " + sea.transform.position.z + " " + isOcc);
                 if (isOcc == 0)
                 {
                     //no hit
                     //remove fog
-                    sea.fogOff();
+                    sea.fogOn();
                     //change turn
                     ChangeTurn();
                 }
@@ -147,6 +150,44 @@ public class Bullet : MonoBehaviour {
             case AI_BLOCK:
                 gameController.turn = AI_TURN;
                 break;
+        }
+    }
+
+    //get occupied value from each map
+    //input : location of sea - in real point
+    public int getOccFromMap(float x, float y)
+    {
+        //in grid point
+        int gridX, gridY;
+        int occ = 0;
+        //change to grid x y
+        if (x > 0)//user grid
+        {
+            /*
+             * x : 1~10
+             * z : -5~4
+             */
+            gridX = (int)y + 5;
+            gridY = (int)x - 1;
+            Debug.Log("USER, getOccFromMap : " + gridX + " " + gridY + " " + occ);
+            occ = gameController.setOccFromUserMap(gridX, gridY);
+            
+            return occ;
+
+        }
+        else //ai grid
+        {
+            /*
+             * x : -11~-2
+             * z : -5~4
+             */
+            gridX = (int)y + 5;
+            gridY = (int)x + 11;
+            Debug.Log("aI, getOccFromMap : " + x  + " " +  y + " " + gridX + " " + gridY + " " + occ);
+            occ = gameController.setOccFromAIMap(gridX, gridY);
+            
+            return occ;
+
         }
     }
 

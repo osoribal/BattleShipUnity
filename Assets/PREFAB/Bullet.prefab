@@ -94,6 +94,7 @@ MonoBehaviour:
   from: {fileID: 0}
   to: {fileID: 0}
   value: 10
+  gameController: {fileID: 0}
 --- !u!135 &13564212
 SphereCollider:
   m_ObjectHideFlags: 1
