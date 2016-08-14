@@ -17,10 +17,21 @@ public class AIControler : MonoBehaviour {
     public const int USER_TURN = 0;
     public const int AI_BLOCK = -2;
 
+    //previous target point
+    int prevX, prevY, prevR;
+    bool hit;
+
     // Use this for initialization
     void Start () {
         //my turn
         this.turn = AI_TURN;
+
+        //prev point init
+        prevX = -1;
+        prevY = -1;
+        prevR = -1;
+
+        hit = false;
     }
 	
 	// Update is called once per frame
@@ -28,12 +39,42 @@ public class AIControler : MonoBehaviour {
         if (gc.turn == AI_TURN)
         {
             gc.turn = AI_BLOCK;    //block turn
-            StartCoroutine("shot");
+            selectTargetPoint();
+            shot(prevX, prevY);
         }
 	}
 
-    public IEnumerator shot()
+    void selectTargetPoint()
     {
+        //target point x y - in user grid
+        int userGridX, userGridY;
+
+        //init
+        userGridX = 0;
+        userGridY = 0;
+        if (prevR == -1 && hit == false)
+        {
+            //first shoot - random
+            userGridX = Random.Range(0,10);
+            userGridY = Random.Range(0, 10);
+            Debug.Log(userGridX + " real " + userGridY);
+        }
+        else if(prevR != -1 && hit == false){
+            userGridX = Random.Range(0, 10);
+            userGridY = Random.Range(0, 10);
+        }
+
+        prevX = userGridX;
+        prevY = userGridY;
+    }
+
+    public void shot(int Gx, int Gy)
+    {
+        //Gx, Gy -> real x z
+        //Gx : 0 -> 1
+        //Gy : 0 -> -5
+        float realX = Gy + 1;
+        float realZ = Gx - 5;
 
         //카메라 정보 저장
         Vector3 beforePosition = camera.transform.position;
@@ -43,131 +84,22 @@ public class AIControler : MonoBehaviour {
         //camera.transform.position = new Vector3(2, 2, 0);
         //camera.transform.LookAt(new Vector3(-50, 1, 0));
 
-        Ray ray;
-        RaycastHit rayHit;
-        float rayLength = 100f;
-        bool isButtonDown = false;
-        GameObject arrow = null;    //맞을 지점을 표시할 오브젝트
-        while (true)
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                isButtonDown = true;
-            }
-            if (isButtonDown == true)
-            {
-
-                /******Aim******/
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out rayHit, rayLength))
-                {
-                    //맞을 지점 표시
-                    if (arrow != null)
-                    {
-                        //기존 지점의 오브젝트 삭제
-                        Destroy(arrow);
-                    }
-                    //맞을 지점의 좌표
-                    Vector3 position = rayHit.transform.gameObject.transform.position;
-                    position.y = 2.0f;
-                    //좌표에 오브젝트 생성
-                    arrow = (GameObject)Instantiate(arrowPrefab, position, Quaternion.identity);
-
-                }
-
-                /******Drop******/
-                if (Input.GetButtonUp("Fire1"))
-                {
-                    isButtonDown = false;
-
-                    if (Physics.Raycast(ray, out rayHit, rayLength))
-                    {
-                        //탄환 생성
-                        GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
-                        //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
-                        Bullet bc = bullet.GetComponent<Bullet>();
-                        bc.from = bullet.transform;
-                        bc.to = rayHit.transform.gameObject.transform;
-                    }
-
-                    //카메라 원위치
-                    camera.transform.position = beforePosition;
-                    camera.transform.rotation = beforeLookAt;
+        //탄환 생성
+        GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(-11, 1, 0), Quaternion.identity);
+        //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
+        Bullet bc = bullet.GetComponent<Bullet>();
+        bc.from = bullet.transform;
+        //bullet target transform
+        var newTrans = new GameObject().transform;
+        Vector3 targetVec = new Vector3(realX, 0, realZ);
+        Debug.Log("input : " + Gx + " " + Gy + " real : " + realX + " " + realZ);
+        newTrans.position = targetVec;
+        bc.to = newTrans;
+        
+        //카메라 원위치
+        camera.transform.position = beforePosition;
+        camera.transform.rotation = beforeLookAt;
                     
-                    break;
-                }
-            }
-
-            yield return null;
-        }
-
-        /*
-        //카메라 정보 저장
-        Vector3 beforePosition = camera.transform.position;
-        Quaternion beforeLookAt = camera.transform.rotation;
-
-        //카메라 시점 이동
-        camera.transform.position = new Vector3(0, 2, 0);
-        camera.transform.LookAt(new Vector3(50, 1, 0));
-
-
-
-        Ray ray;
-        RaycastHit rayHit;
-        float rayLength = 500f;
-        int floorMask = LayerMask.GetMask("Floor");
-        bool isButtonDown = false;
-        while (true)
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                //탄환 생성
-                bullet = (GameObject)Instantiate(
-                   bulletPrefab,
-                   camera.transform.position,
-                   Quaternion.identity);
-                isButtonDown = true;
-            }
-            if (isButtonDown == true)
-            {
-            
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out rayHit, rayLength, floorMask))
-                {
-                    Vector3 playerToMouse = rayHit.point - bullet.transform.position;
-
-                    Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-                    bullet.GetComponent<Rigidbody>().MoveRotation(newRotation);
-                }
-                
-                if (Input.GetButtonUp("Fire1"))
-                {
-                    isButtonDown = false;
-                    Vector3 throwAngle;
-
-                    if (Physics.Raycast(ray, out rayHit, rayLength, floorMask))
-                    {
-                        throwAngle = rayHit.point - bullet.transform.position;
-                    }
-                    else
-                    {
-                        throwAngle = bullet.transform.forward * 50f;
-                    }
-
-                    throwAngle.y = 25f;
-                    bullet.GetComponent<Rigidbody>().AddForce(throwAngle * throwPower);
-
-                    //카메라 원위치
-                    camera.transform.position = beforePosition;
-                    camera.transform.rotation = beforeLookAt;
-                    break;
-                }
-            }
-
-            yield return null;
-        }
-        */
+     
     }
 }
