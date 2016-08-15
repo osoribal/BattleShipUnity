@@ -11,6 +11,7 @@ TagManager:
   - Fog
   - RandomBox
   - UserManager
+  - Fire
   layers:
   - Default
   - TransparentFX

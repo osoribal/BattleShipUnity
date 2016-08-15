@@ -3,9 +3,11 @@ using System.Collections;
 
 public class SeaControler : MonoBehaviour {
     public GameObject fogPrefab;
+    public GameObject firePrefab;
     GameObject fog;
+    GameObject fire;
     
-    int occpied; //현재 타일에 배가 있는지 검사할 때 이용
+    public int occpied; //현재 타일에 배가 있는지 검사할 때 이용
     GameControler gameController;   //여기가 아니라 start에서 초기화해야 한다.
 
     void Start()
@@ -26,6 +28,14 @@ public class SeaControler : MonoBehaviour {
         Destroy(fog);
     }
 
+    //fire particle
+    public void fireOn()
+    {
+        fire= (GameObject)Instantiate(firePrefab, transform.position, Quaternion.Euler(-90, 0, 0));
+    }
+    
+
+
     //get occupied value
     public int getOcc()
     { return occpied;  }
@@ -42,6 +52,7 @@ public class SeaControler : MonoBehaviour {
     public int getOccupiedWithXY(float x, float y)
     {
         int gridX, gridY;
+        int occ = 0;
         //change to grid x y
         if (x > 0)//user grid
         {
@@ -51,7 +62,8 @@ public class SeaControler : MonoBehaviour {
              */
             gridX = (int)x-1;
             gridY = (int)y + 5;
-            Debug.Log("SEA CON USER, getOccupiedWithXY): " + x + " " + y);
+            
+            Debug.Log("USER, getOccupiedWithXY): " + x + " " + y);
         }
         else //ai grid
         {
@@ -59,13 +71,12 @@ public class SeaControler : MonoBehaviour {
              * x : -11~-2
              * z : -5~4
              */
-            Debug.Log("SEA CON AI, getOccupiedWithXY): " + x + " " + y);
+            Debug.Log("AI, getOccupiedWithXY): " + x + " " + y);
             gridX = (int)x +11;
             gridY = (int)y + 5;
+            
         }
 
-        
-        int occ = gameController.getGridOcc(gridY, gridX);
         Debug.Log("SEA CON, getOccupiedWithXY): " + gridY + " " + gridX + " occ : " + occ);
         return occ;
     }

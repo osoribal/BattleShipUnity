@@ -7,8 +7,8 @@ public class Bullet : MonoBehaviour {
     public Transform to;
     public float value = 10.0F;
     private float startTime;
-    GameControler gameController;    //여기가 아니라 start에서 초기화해야 한다.
-
+    public GameControler gameController;    //여기가 아니라 start에서 초기화해야 한다.
+    SeaControler sea;
     //turn
     public const int USER_TURN = 0;
     public const int AI_TURN = 1;
@@ -20,28 +20,33 @@ public class Bullet : MonoBehaviour {
     void Start () {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         startTime = Time.time;
+
+       // gameController.show();
     }
 
     // Update is called once per frame
     void Update()
     {
-       //탄환이 포물선을 그리며 이동
-        if (!transform.position.Equals(to))
-        {
-            Vector3 center = (from.position + to.position) * 0.5F;
-            center -= new Vector3(0, 1, 0);
-            Vector3 riseRelCenter = from.position - center;
-            Vector3 setRelCenter = to.position - center;
-            float fracComplete = (Time.time - startTime) / value;
-            transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
-            transform.position += center;
-         }
+        if(transform != null) {
+            //탄환이 포물선을 그리며 이동
+            if (!transform.position.Equals(to))
+            {
+                Vector3 center = (from.position + to.position) * 0.5F;
+                center -= new Vector3(0, 1, 0);
+                Vector3 riseRelCenter = from.position - center;
+                Vector3 setRelCenter = to.position - center;
+                float fracComplete = (Time.time - startTime) / value;
+                transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
+                transform.position += center;
+            }
+        }
+
     }
 
     //destroy bullet
     void OnTriggerEnter(Collider other)
     {
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
+        //gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         switch (other.gameObject.tag)
         {
             case "Arrow":
@@ -51,22 +56,26 @@ public class Bullet : MonoBehaviour {
             case "Tile":
                 Debug.Log("tile hit");
                 //check occpied
-                SeaControler sea = other.GetComponent<SeaControler>();
+                sea = other.GetComponent<SeaControler>();
                 //get occupied value
-                int isOcc = sea.getOccupiedWithXY(sea.transform.position.x, sea.transform.position.z);
+                //int isOcc = sea.getOccupiedWithXY(sea.transform.position.x, sea.transform.position.z);
+                int isOcc = getOccFromMap(sea.transform.position.x, sea.transform.position.z);
                 Debug.Log("sea point"  + sea.transform.position.x + " " + sea.transform.position.z + " " + isOcc);
                 if (isOcc == 0)
                 {
                     //no hit
-                    //remove fog
-                    sea.fogOff();
+               
+                    //remove fog - user turn - remove ai fog
+                    //if(whoseTurn() == USER_BLOCK)
+                   // { sea.fogOff(); }
+                    
                     //change turn
                     ChangeTurn();
                 }
                 else
                 {//occpied > 0 -> occpied --; life--; 연기, AttackAgain()
                     //decrease occupied value
-                    sea.decOcc();
+                    
                     //decrease life
                     
                     switch (whoseTurn()) {
@@ -88,7 +97,8 @@ public class Bullet : MonoBehaviour {
                             }
                             break;
                     }
-                    //smog on
+                    //fire on
+                    sea.fireOn();
                     //attack again - no change turn
                     AttackAgain();
 
@@ -147,6 +157,44 @@ public class Bullet : MonoBehaviour {
             case AI_BLOCK:
                 gameController.turn = AI_TURN;
                 break;
+        }
+    }
+
+    //get occupied value from each map
+    //input : location of sea - in real point
+    public int getOccFromMap(float x, float y)
+    {
+        //in grid point
+        int gridX, gridY;
+        int occ = 0;
+        //change to grid x y
+        if (x > 0)//user grid
+        {
+            /*
+             * x : 1~10
+             * z : -5~4
+             */
+            gridX = (int)y + 5;
+            gridY = (int)x - 1;
+            
+            occ = gameController.getOccFromUserMap(gridX, gridY);
+            Debug.Log("USER, getOccFromMap : " + gridX + " " + gridY + " " + occ);
+            return occ;
+
+        }
+        else //ai grid
+        {
+            /*
+             * x : -11~-2
+             * z : -5~4
+             */
+            gridX = (int)y + 5;
+            gridY = (int)x + 11;
+
+            occ = gameController.getOccFromAIMap(gridX, gridY);
+            Debug.Log("aI, getOccFromMap : " + x + " " + y + " " + gridX + " " + gridY + " " + occ);
+            return occ;
+
         }
     }
 

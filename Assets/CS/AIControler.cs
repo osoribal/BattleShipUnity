@@ -3,9 +3,7 @@ using System.Collections;
 
 public class AIControler : MonoBehaviour {
 
-    //turn
-    int turn;
-
+   
     //shot bullet
     public GameControler gc;
     public Camera camera;
@@ -23,8 +21,6 @@ public class AIControler : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //my turn
-        this.turn = AI_TURN;
 
         //prev point init
         prevX = -1;
