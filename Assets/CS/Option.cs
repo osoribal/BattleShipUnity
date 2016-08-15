@@ -13,6 +13,7 @@ public class Option : MonoBehaviour {
     string effect;
     string back;
 
+	// back button, go to titleScene
 	public void OkayBtnListener(){
 		SceneManager.LoadScene ("Title");
 	}
