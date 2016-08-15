@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Option : MonoBehaviour {
@@ -11,6 +12,10 @@ public class Option : MonoBehaviour {
     //option state
     string effect;
     string back;
+
+	public void OkayBtnListener(){
+		SceneManager.LoadScene ("Title");
+	}
 
     // Use this for initialization
     void Start () {
