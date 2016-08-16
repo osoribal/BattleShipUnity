@@ -46,10 +46,8 @@ public class UserManager : MonoBehaviour {
         Save(new ShipInfo(31));
         Save(new ShipInfo(14));
         Save(new ShipInfo(41));
-        Save(new ShipInfo(15));
         Save(new ShipInfo(51));
         Save(new ShipInfo(41));
-        Save(new ShipInfo(15));
         Save(new ShipInfo(51));
 
         //데이터 불러오기
@@ -70,27 +68,27 @@ public class UserManager : MonoBehaviour {
         userShips[0] = new ShipInfo(11);
         userShips[0].x = 0;
         userShips[0].y = 0;
-        userShips[0].direction = 0;
+        userShips[0].direction = 2;
 
         userShips[1] = new ShipInfo(22);
         userShips[1].x = 0;
         userShips[1].y = 1;
-        userShips[1].direction = 0;
+        userShips[1].direction = 2;
 
         userShips[2] = new ShipInfo(33);
         userShips[2].x = 0;
         userShips[2].y = 2;
-        userShips[2].direction = 0;
+        userShips[2].direction = 2;
 
         userShips[3] = new ShipInfo(44);
         userShips[3].x = 0;
         userShips[3].y = 3;
-        userShips[3].direction = 0;
+        userShips[3].direction = 2;
 
         userShips[4] = new ShipInfo(55);
         userShips[4].x = 0;
         userShips[4].y = 4;
-        userShips[4].direction = 0;
+        userShips[4].direction = 2;
 
         //option
         opInfo.effect = "on";

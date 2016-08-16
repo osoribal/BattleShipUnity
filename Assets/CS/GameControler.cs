@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameControler : MonoBehaviour {
     public int turn;
@@ -32,7 +33,12 @@ public class GameControler : MonoBehaviour {
     //life
     public int userLife;
     public int aiLife;
-    
+
+    public void OnBackClicked()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
     // Use this for initialization
     void Start () {
 
@@ -280,8 +286,8 @@ public class GameControler : MonoBehaviour {
         //get size and func from ship number
         int size = ship.shipID / 10;
         int dir = ship.direction;
-        int x = ship.y;
-        int z = ship.x;
+        int x = ship.x;
+        int z = ship.y;
 
         //prefab location
         Vector3 pos = new Vector3(0, 0, 0);

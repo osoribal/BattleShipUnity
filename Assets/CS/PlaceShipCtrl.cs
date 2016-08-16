@@ -65,13 +65,12 @@ public class PlaceShipCtrl : MonoBehaviour {
                         position,
                         Quaternion.identity);
 
-            //ship에 기본 위치 정보 저장
+            //ship에 기본 정보 저장
             Ship ctrl = ships[i].GetComponent<Ship>();
+            ctrl.placeCtrl = this;
             ctrl.shipID = UserManager.userShips[i].shipNum;
             ctrl.x = 0;
             ctrl.y = i;
-
-            //ship에 기본 방향 정보 저장
             ctrl.direction = SOUTH;
 
         }
@@ -93,7 +92,7 @@ public class PlaceShipCtrl : MonoBehaviour {
                 if (rayHit.transform.gameObject.tag == "Ship")
                 {
                     //잉여 회전 버튼 제거
-                    for(int i = 0; i < 5; i++)
+                    for (int i = 0; i < 5; i++)
                     {
                         ships[i].GetComponent<Ship>().cancle();
                     }
@@ -129,7 +128,7 @@ public class PlaceShipCtrl : MonoBehaviour {
     //배가 격자 내에 들어오면 true.
     public bool inGrid(int length, int dir, int x, int y)
     {
-        switch(dir)
+        switch (dir)
         {
             case EAST:  //y+
                 if (y >= 0 && y <= 10 - length && x >=0 && x <= 9)
