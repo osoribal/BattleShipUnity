@@ -7,13 +7,27 @@ public class ElemCtrl : MonoBehaviour {
     public SelectShipCtrl selectCtrl;
     bool isSelected; //이 버튼이 선택되었는지 여부 저장
     int index;       //이 배가 몇 번 째로 선택되었는지 저장
+    string str;
 
-	// Use this for initialization
-	void Start () {
-        this.GetComponentInChildren<Text>().text = 
-            "ship number : " + info.shipNum + 
-            "\ncount : " + info.count +
-            "\nunselected";
+    // Use this for initialization
+    void Start () {
+        str = "ship length : " + info.shipNum / 10;
+        switch (info.shipNum % 10)
+        {
+            case 1:
+                str = str + "\nskill : 칸 당 hp 2";
+                break;
+            case 2:
+                str = str + "\nskill : 대응 좌표점 같이 폭발";
+                break;
+            case 3:
+                str = str + "\nskill : 두 발 쏘기";
+                break;
+            case 4:
+                str = str + "\nskill : 보상 up";
+                break;
+        }
+        this.GetComponentInChildren<Text>().text = str + "\nunselected";
         isSelected = false;
         this.gameObject.GetComponent<Button>().onClick.AddListener(() => elemOnClick());
     }
@@ -21,10 +35,7 @@ public class ElemCtrl : MonoBehaviour {
     //이 배가 선택 되었을 때 
     void selected(int i)
     {
-        this.GetComponentInChildren<Text>().text =
-            "ship number : " + info.shipNum +
-            "\ncount : " + info.count +
-            "\nselected";
+        this.GetComponentInChildren<Text>().text = str + "\nselected";
         isSelected = true;
         index = i;
     }
@@ -32,10 +43,7 @@ public class ElemCtrl : MonoBehaviour {
     //이 배가 선택 해제 될 때
     void unSelected()
     {
-        this.GetComponentInChildren<Text>().text =
-            "ship number : " + info.shipNum +
-            "\ncount : " + info.count +
-            "\nunselected";
+        this.GetComponentInChildren<Text>().text = str + "\nunselected";
         isSelected = false;
     }
 

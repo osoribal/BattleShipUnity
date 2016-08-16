@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ListCtrl : MonoBehaviour {
     public GameObject content;
@@ -20,7 +21,28 @@ public class ListCtrl : MonoBehaviour {
         for (int i = 0; i < list.Count; i++)
         {
             GameObject elem = (GameObject)Instantiate(elemPrefab) as GameObject;
-            Destroy(elem.GetComponent<ElemCtrl>());/* elem.GetComponent<ElemCtrl>().info = list[i];*/
+            //배의 정보를 string으로 만들기
+            string str = "ship length : " + list[i].shipNum / 10
+                + "\ncount : " + list[i].count;
+            switch(list[i].shipNum % 10)
+            {
+                case 1:
+                    str = str + "\nskill : 칸 당 hp 2";
+                    break;
+                case 2:
+                    str = str + "\nskill : 대응 좌표점 같이 폭발";
+                    break;
+                case 3:
+                    str = str + "\nskill : 두 발 쏘기";
+                    break;
+                case 4:
+                    str = str + "\nskill : 보상 up";
+                    break;
+            }
+            elem.GetComponentInChildren<Text>().text = str;
+            //필요없는 ElemCtrl 삭제
+            Destroy(elem.GetComponent<ElemCtrl>());
+            //배치
             elem.transform.SetParent(content.transform, false);
         }
     }
