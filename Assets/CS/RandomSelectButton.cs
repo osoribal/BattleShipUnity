@@ -35,7 +35,7 @@ public class RandomSelectButton : MonoBehaviour {
             //the new ship saving is success
 
 			//gold decrease save
-			PlayerPrefs.SetInt("gold");
+			PlayerPrefs.SetInt("gold", gold);
         }
         else {
             //alert message - you can't buy a ship.
