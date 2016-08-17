@@ -17,6 +17,7 @@ public class RandomSelectButton : MonoBehaviour {
 	public void OnStartButtonClicked()
     {
         //get current money
+		gold = PlayerPrefs.GetInt("gold");
 
         //check current money - equal or greater than 1000 Gold
         if (gold >= 1000)
@@ -36,9 +37,6 @@ public class RandomSelectButton : MonoBehaviour {
         else {
             //alert message - you can't buy a ship.
         }
-
-
-        
     }
 
     public GameObject SelectShip()
@@ -51,7 +49,7 @@ public class RandomSelectButton : MonoBehaviour {
 
         //save new ship info
         //////////change!!!!! - index -> prefabs.shipID
-        newShipInfo = new ShipInfo(index);
+		newShipInfo = new ShipInfo(index);
 
         return prefab;
     }
@@ -75,10 +73,15 @@ public class RandomSelectButton : MonoBehaviour {
 
     }
 
+	void Start()
+	{
+		
+	}
+
     void Update()
     {
        //freeze position
-       Rigidbody rigidShip = ship.GetComponent<Rigidbody>();
-       Destroy(rigidShip);
+       //Rigidbody rigidShip = ship.GetComponent<Rigidbody>();
+       //Destroy(rigidShip);
     }
 }
