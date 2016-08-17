@@ -97,7 +97,6 @@ public class Ship : MonoBehaviour
                     //배의 위치 변경. occupied 변경 
                     x = (int)curPosition.x;
                     y = (int)curPosition.z;
-                    print(x + " " + y);
                     transform.position = placeCtrl.place(shipID / 10, direction, (int)curPosition.x, (int)curPosition.z);
                 }
 
