@@ -5,7 +5,6 @@ public class Bullet : MonoBehaviour {
 
     public Transform from;
     public Transform to;
-    public float value = 10.0F;
     private float startTime;
     public GameControler gameController;    //여기가 아니라 start에서 초기화해야 한다.
     SeaControler sea;
@@ -28,17 +27,13 @@ public class Bullet : MonoBehaviour {
     void Update()
     {
         if(transform != null) {
-            //탄환이 포물선을 그리며 이동
-            if (!transform.position.Equals(to))
-            {
-                Vector3 center = (from.position + to.position) * 0.5F;
-                center -= new Vector3(0, 1, 0);
-                Vector3 riseRelCenter = from.position - center;
-                Vector3 setRelCenter = to.position - center;
-                float fracComplete = (Time.time - startTime) / value;
-                transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
-                transform.position += center;
-            }
+            Vector3 center = (from.position + to.position) * 0.5F;
+            center -= new Vector3(0, 2, 0);
+            Vector3 riseRelCenter = from.position - center;
+            Vector3 setRelCenter = to.position - center;
+            float fracComplete = (Time.time - startTime);
+            transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
+            transform.position += center;
         }
 
     }

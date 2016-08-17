@@ -10,7 +10,7 @@ public class GameControler : MonoBehaviour {
     //public GameObject[,] aiGrid = new GameObject[10, 10];
     public SeaControler[,] userGridCtrl = new SeaControler[10, 10];
     public SeaControler[,] aiGridCtrl = new SeaControler[10, 10];
-
+    
     public GameObject[] shipPrefabs;
     Ship[] ships = new Ship[10];
 
@@ -65,7 +65,7 @@ public class GameControler : MonoBehaviour {
 
                 //ai 격자 전체에 안개 씌우기
                 SeaControler fg = aiGridCtrl[i, j].GetComponent<SeaControler>();
-                //fg.fogOn();
+                fg.fogOn();
 
                 userzero.z++;
                 aizero.z++;
