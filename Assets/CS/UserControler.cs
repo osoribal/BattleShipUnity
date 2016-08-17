@@ -3,106 +3,86 @@ using System.Collections;
 
 public class UserControler : MonoBehaviour {
     int turn;
-    public GameControler gc;
-    public Camera camera;
+    Vector3 beforePosition;
+    Quaternion beforeLookAt;
+    GameControler gc;
     public GameObject bulletPrefab;
     public GameObject arrowPrefab;  //맞을 지점을 표시할 프리팹
+    public GameObject from;
 
     // Use this for initialization
     void Start () {
-        this.turn = 0;
+        turn = 0;
+        gc = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (gc.turn == 0)
         {
+            //카메라 정보 저장
+            beforePosition = Camera.main.transform.position;
+            beforeLookAt = Camera.main.transform.rotation;
+
+            //카메라 시점 이동
+            //Camera.main.transform.position = new Vector3(11, 10, 0);
+            //Camera.main.transform.LookAt(new Vector3(-11, -5, 0));
+
             gc.turn = -1;   //block
+            
+        }
+
+        //aim
+        if (gc.turn == -1 && Input.GetButtonDown("Fire1"))
+        {
             StartCoroutine("shot");
         }
-	}
-
+    }
+    
     public IEnumerator shot()
     {
-        //카메라 정보 저장
-        Vector3 beforePosition = camera.transform.position;
-        Quaternion beforeLookAt = camera.transform.rotation;
-
-        //카메라 시점 이동
-        //camera.transform.position = new Vector3(2, 2, 0);
-        //camera.transform.LookAt(new Vector3(-50, 1, 0));
-        
-        Ray ray;
-        RaycastHit rayHit;
-        float rayLength = 100f;
-        bool isButtonDown = false;
+        //드래그 중
         GameObject arrow = null;    //맞을 지점을 표시할 오브젝트
-        while (true)
+        Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);
+        while (Input.GetMouseButton(0))
         {
-
-            /*
-             * 
-             * 
-             * 
-             * 터치 위치 제한
-             * 마우스 이벤트 -> 터치 이벤트로 변경
-             * 
-             * ray가 배에 맞으면 원하는 타일 위가 아닌 배 위에 arrow가 생긴다. 버그...
-             * 고치자...
-             * 
-             * 
-             */
-            if (Input.GetButtonDown("Fire1"))
+            /******Aim******/
+            Vector3 curScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z);
+            Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenSpace);
+            //맞을 지점의 좌표
+            Vector3 position = new Vector3((int)curPosition.x, 2.0f, (int)curPosition.z);
+            //ai 격자 내에만 가능하도록 범위 제한
+            if ( position.x >= -11 && position.x < -1 && position.z >= -5 && position.z < 5)
             {
-                isButtonDown = true;
-            }
-            if (isButtonDown == true)
-            {
-                
-                /******Aim******/
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out rayHit, rayLength))
+                if(arrow != null)
                 {
-                    //맞을 지점 표시
-                    if (arrow != null)
-                    {
-                        //기존 지점의 오브젝트 삭제
-                        Destroy(arrow);
-                    }
-                    //맞을 지점의 좌표
-                    Vector3 position = rayHit.transform.gameObject.transform.position;
-                    position.y = 2.0f;
-                    //좌표에 오브젝트 생성
-                    arrow = (GameObject)Instantiate(arrowPrefab, position, Quaternion.identity);
-                    
+                    //기존 지점의 오브젝트 삭제
+                    Destroy(arrow);
                 }
-
-                /******Drop******/
-                if (Input.GetButtonUp("Fire1"))
-                {
-                    isButtonDown = false;
-
-                    if (Physics.Raycast(ray, out rayHit, rayLength))
-                    {
-                        //탄환 생성
-                        GameObject bullet = (GameObject)Instantiate( bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
-                        //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
-                        Bullet bc = bullet.GetComponent<Bullet>();
-                        bc.from = bullet.transform;
-                        bc.to = rayHit.transform.gameObject.transform;
-                    }
-
-                    //카메라 원위치
-                    camera.transform.position = beforePosition;
-                    camera.transform.rotation = beforeLookAt;
-                    
-                    break;
-                }
+                //좌표에 arrow 오브젝트 생성
+                arrow = (GameObject)Instantiate(arrowPrefab, position, Quaternion.identity);
             }
 
             yield return null;
+
         }
+
+        if (arrow != null)
+        {
+            //탄환 생성
+            GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
+            //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
+            Bullet bc = bullet.GetComponent<Bullet>();
+            //print(gc.ships[turn].gameObject.transform.position);
+            //bc.from = gc.ships[turn].transform;
+            bc.from = from.transform;
+            bc.to = arrow.transform;
+            turn = (turn + 1) % 5;
+        }
+
+        //카메라 원위치
+        Camera.main.transform.position = beforePosition;
+        Camera.main.transform.rotation = beforeLookAt;
 
     }
 }
