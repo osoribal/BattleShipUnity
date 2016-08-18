@@ -13,11 +13,7 @@ public class PlaceShipCtrl : MonoBehaviour {
     private const int WEST = 3;
     private const int SOUTH = 2;
     private const int NORTH = 0;
-
-    public void OnBackClicked()
-    {
-        SceneManager.LoadScene("SelectShip");
-    }
+    
     public void OnNextClicked()
     {
         for(int i = 0; i < 5; i++)
@@ -78,6 +74,11 @@ public class PlaceShipCtrl : MonoBehaviour {
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //Escape button codes
+            SceneManager.LoadScene("SelectShip");
+        }
         if (Input.GetButtonDown("Fire1"))
         {
             Ray ray;

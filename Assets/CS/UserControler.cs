@@ -8,7 +8,6 @@ public class UserControler : MonoBehaviour {
     GameControler gc;
     public GameObject bulletPrefab;
     public GameObject arrowPrefab;  //맞을 지점을 표시할 프리팹
-    public GameObject from;
 
     // Use this for initialization
     void Start () {
@@ -73,16 +72,19 @@ public class UserControler : MonoBehaviour {
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
             //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
             Bullet bc = bullet.GetComponent<Bullet>();
-            //print(gc.ships[turn].gameObject.transform.position);
-            //bc.from = gc.ships[turn].transform;
-            bc.from = from.transform;
+            bc.from = gc.userShipObjs[turn].transform;
             bc.to = arrow.transform;
-            turn = (turn + 1) % 5;
+            
         }
 
         //카메라 원위치
         Camera.main.transform.position = beforePosition;
         Camera.main.transform.rotation = beforeLookAt;
 
+    }
+
+    public void changeTurn()
+    {
+        turn = (turn + 1) % 5;
     }
 }
