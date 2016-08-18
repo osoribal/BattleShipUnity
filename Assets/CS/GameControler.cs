@@ -62,7 +62,7 @@ public class GameControler : MonoBehaviour {
 
                 //ai 격자 전체에 안개 씌우기
                 SeaControler fg = aiGridCtrl[i, j].GetComponent<SeaControler>();
-                fg.fogOn();
+                //fg.fogOn();
 
                 userzero.z++;
                 aizero.z++;
@@ -324,7 +324,7 @@ public class GameControler : MonoBehaviour {
         int z = ship.y;
 
         //prefab location
-        Vector3 pos = new Vector3(0, 1, 0);
+        Vector3 pos = new Vector3(0, 0.5f, 0);
         Vector3 rot = new Vector3(0, 0, 0);
 
         float s = (float)0.5 * (size - 1);
