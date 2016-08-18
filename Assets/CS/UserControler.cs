@@ -72,9 +72,11 @@ public class UserControler : MonoBehaviour {
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(2, 1, 0), Quaternion.identity);
             //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
             Bullet bc = bullet.GetComponent<Bullet>();
-            bc.from = gc.userShipObjs[turn].transform;
-            bc.to = arrow.transform;
-            
+            Vector3 buf = gc.shipObjs[turn].transform.position;
+            buf.y += 1;
+            bc.from = buf;
+            bc.to = arrow.transform.position;
+
         }
 
         //카메라 원위치
