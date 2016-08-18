@@ -29,6 +29,11 @@ public class TitleController : MonoBehaviour {
         SceneManager.LoadScene("RandomSelect");
     }
 
+	public void OnOptionClicked()
+	{
+		SceneManager.LoadScene("Option");
+	}
+
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class RandomSelectButton : MonoBehaviour {
@@ -86,5 +87,10 @@ public class RandomSelectButton : MonoBehaviour {
        //freeze position
        //Rigidbody rigidShip = ship.GetComponent<Rigidbody>();
        //Destroy(rigidShip);
+		if (Input.GetKey(KeyCode.Escape))
+		{
+			//Escape button codes
+			SceneManager.LoadScene("Title");
+		}
     }
 }
