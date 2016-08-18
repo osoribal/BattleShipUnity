@@ -26,7 +26,11 @@ public class Option : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Input.GetKey(KeyCode.Escape))
+		{
+			//Escape button codes
+			SceneManager.LoadScene("Title");
+		}
 	}
 
     //toggle button event listener
