@@ -12,6 +12,7 @@ public class GameControler : MonoBehaviour {
     public SeaControler[,] aiGridCtrl = new SeaControler[10, 10];
     
     public GameObject[] shipPrefabs;
+    public GameObject[] userShipObjs = new GameObject[5];
     Ship[] ships = new Ship[10];
 
     //direction info
@@ -37,11 +38,7 @@ public class GameControler : MonoBehaviour {
     //occupied map
     public static int[,] userMap = new int[10, 10];
     public static int[,] aiMap = new int[10, 10];
-
-    public void OnBackClicked()
-    {
-        SceneManager.LoadScene("Title");
-    }
+    
 
     // Use this for initialization
     void Start () {
@@ -100,7 +97,7 @@ public class GameControler : MonoBehaviour {
             ships[i].y = userShip.y;
             ships[i].direction = userShip.direction;
             //create ship
-            createUserShip(ships[i]);
+            createUserShip(ships[i], i);
         }
 
         //select ai ships
@@ -318,7 +315,7 @@ public class GameControler : MonoBehaviour {
         GameObject newShip = (GameObject)Instantiate(shipPrefabs[size-1], pos, Quaternion.Euler(rot));
     }
 
-    void createUserShip(Ship ship)
+    void createUserShip(Ship ship, int index)
     {
         //get size and func from ship number
         int size = ship.shipID / 10;
@@ -327,7 +324,7 @@ public class GameControler : MonoBehaviour {
         int z = ship.y;
 
         //prefab location
-        Vector3 pos = new Vector3(0, 0, 0);
+        Vector3 pos = new Vector3(0, 1, 0);
         Vector3 rot = new Vector3(0, 0, 0);
 
         float s = (float)0.5 * (size - 1);
@@ -366,7 +363,7 @@ public class GameControler : MonoBehaviour {
         }
 
         //locate at x, 0, z
-        GameObject newShip = (GameObject)Instantiate(shipPrefabs[size - 1], pos, Quaternion.Euler(rot));
+        userShipObjs[index] = (GameObject)Instantiate(shipPrefabs[size - 1], pos, Quaternion.Euler(rot));
     }
 
     //set ship with direction  - occupied
@@ -449,7 +446,13 @@ public class GameControler : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        switch(turn)
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //Escape button codes
+            SceneManager.LoadScene("Title");
+        }
+
+        switch (turn)
         {
             case 0: //user turn
                 break;

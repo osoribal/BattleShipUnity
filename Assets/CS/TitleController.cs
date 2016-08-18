@@ -28,4 +28,14 @@ public class TitleController : MonoBehaviour {
     {
         SceneManager.LoadScene("RandomSelect");
     }
+
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //Escape button codes
+            Application.Quit();
+        }
+
+    }
 }

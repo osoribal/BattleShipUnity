@@ -12,11 +12,7 @@ public class SelectShipCtrl : MonoBehaviour {
     public int userLife; //최소 10칸 최대 20칸
     public int selectedShipCount;    //배 선택 시 선택된 배의 개수
     public int[] selectedShipArr;   //선택된 배의 고유번호 저장
-
-    public void OnBackClicked()
-    {
-        SceneManager.LoadScene("Title");
-    }
+    
     public void OnNextClicked()
     {
         if (selectedShipCount != 5)
@@ -63,6 +59,11 @@ public class SelectShipCtrl : MonoBehaviour {
     //선택된 배의 개수 변화를 ui에 반영
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //Escape button codes
+            SceneManager.LoadScene("Title");
+        }
         this.GetComponentsInChildren<Text>()[1].text = 
             "배 수 : " + selectedShipCount + " / 5\n" +
             "칸 수 : " + userLife + " 칸";
