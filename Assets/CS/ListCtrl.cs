@@ -8,12 +8,15 @@ public class ListCtrl : MonoBehaviour {
     public GameObject content;
     public GameObject elemPrefab;
     List<ShipInfo> list = UserManager.list;
-    
-    public void OnBackClicked()
-    {
-        SceneManager.LoadScene("Title");
-    }
 
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //Escape button codes
+            SceneManager.LoadScene("Title");
+        }
+    }
 
     // Use this for initialization
     void Start () {

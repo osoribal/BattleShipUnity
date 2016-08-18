@@ -6,8 +6,10 @@ public class FinishGame : MonoBehaviour {
     int gold;
 	// Use this for initialization
 	void Start () {
+		//set gold using PlayerPref
+		//get current money
+		gold = PlayerPrefs.GetInt("gold");
         gold = 1001;
-	
 	}
 	
 	// Update is called once per frame
