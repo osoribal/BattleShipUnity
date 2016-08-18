@@ -74,12 +74,17 @@ public class UserControler : MonoBehaviour {
             Bullet bc = bullet.GetComponent<Bullet>();
             bc.from = gc.userShipObjs[turn].transform;
             bc.to = arrow.transform;
-            turn = (turn + 1) % 5;
+            
         }
 
         //카메라 원위치
         Camera.main.transform.position = beforePosition;
         Camera.main.transform.rotation = beforeLookAt;
 
+    }
+
+    public void changeTurn()
+    {
+        turn = (turn + 1) % 5;
     }
 }
