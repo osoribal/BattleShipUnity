@@ -53,7 +53,7 @@ public class AIControler : MonoBehaviour {
             //first shoot - random
             userGridX = Random.Range(0,10);
             userGridY = Random.Range(0, 10);
-            Debug.Log(userGridX + " real " + userGridY);
+            //Debug.Log(userGridX + " real " + userGridY);
         }
         else if(prevR != -1 && hit == false){
             userGridX = Random.Range(0, 10);
@@ -69,8 +69,8 @@ public class AIControler : MonoBehaviour {
         //Gx, Gy -> real x z
         //Gx : 0 -> 1
         //Gy : 0 -> -5
-        float realX = Gy + 1;
-        float realZ = Gx - 5;
+        float realX = Gx + 1;
+        float realZ = Gy - 5;
 
         //카메라 정보 저장
         Vector3 beforePosition = camera.transform.position;
@@ -84,14 +84,15 @@ public class AIControler : MonoBehaviour {
         GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(-11, 1, 0), Quaternion.identity);
         //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
         Bullet bc = bullet.GetComponent<Bullet>();
-        bc.from = bullet.transform;
+        bc.from = new Vector3(-12, 2, 0);
         //bullet target transform
-        var newTrans = new GameObject().transform;
-        Vector3 targetVec = new Vector3(realX, 0, realZ);
-        Debug.Log("input : " + Gx + " " + Gy + " real : " + realX + " " + realZ);
-        newTrans.position = targetVec;
-        bc.to = newTrans;
-        
+        //var newTrans = new GameObject().transform;
+        //Vector3 targetVec = new Vector3(realX, 0, realZ);
+        //Debug.Log("input : " + Gx + " " + Gy + " real : " + realX + " " + realZ);
+        //newTrans.position = targetVec;
+        bc.to = new Vector3(realX, 0, realZ);
+        //print(realX + " " + realZ);
+
         //카메라 원위치
         camera.transform.position = beforePosition;
         camera.transform.rotation = beforeLookAt;
