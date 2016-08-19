@@ -8,11 +8,13 @@ public class UserControler : MonoBehaviour {
     GameControler gc;
     public GameObject bulletPrefab;
     public GameObject arrowPrefab;  //맞을 지점을 표시할 프리팹
+    bool firstHit;
 
     // Use this for initialization
     void Start () {
         turn = 0;
         gc = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
+        firstHit = true;
     }
 	
 	// Update is called once per frame
@@ -76,7 +78,26 @@ public class UserControler : MonoBehaviour {
             buf.y += 1;
             bc.from = buf;
             bc.to = arrow.transform.position;
-
+            //두 발 쏘는 특수기능 처리
+            if (gc.ships[turn].shipID % 10 == 3)   //두 발 쏘기
+            {
+                if (firstHit == true)
+                {
+                    firstHit = false;
+                    bc.turnChange = false;
+                }
+                else
+                {
+                    firstHit = true;
+                    bc.turnChange = true;
+                    changeTurn();
+                }
+            }
+            else
+            {
+                bc.turnChange = true;
+                changeTurn();
+            }
         }
 
         //카메라 원위치
@@ -85,7 +106,7 @@ public class UserControler : MonoBehaviour {
 
     }
 
-    public void changeTurn()
+    void changeTurn()
     {
         turn = (turn + 1) % 5;
     }
