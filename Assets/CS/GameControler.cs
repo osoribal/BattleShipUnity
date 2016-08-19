@@ -64,7 +64,7 @@ public class GameControler : MonoBehaviour {
                 //ai 격자 전체에 안개 씌우기
                 //SeaControler fg = aiGridCtrl[i, j].GetComponent<SeaControler>();
                 //fg.fogOn();
-                aiGridCtrl[i, j].fogOn();
+                //aiGridCtrl[i, j].fogOn();
 
                 userzero.z++;
                 aizero.z++;
@@ -93,7 +93,14 @@ public class GameControler : MonoBehaviour {
             //userLife += ships[i].shipID / 10;
             userLife = PlayerPrefs.GetInt("userLife");
             //set occpied value
-            ships[i].occ = 1;
+            if (ships[i].shipID % 10 == 1)
+            {
+                ships[i].occ = 2;   //두 번 맞는 애
+            }
+            else
+            {
+                ships[i].occ = 1;
+            }
             //set position
             ships[i].x = userShip.x;
             ships[i].y = userShip.y;
@@ -117,9 +124,24 @@ public class GameControler : MonoBehaviour {
             //set id
             ships[s].shipID = shipID[s];
             //get size - set life
-            aiLife += ships[s].shipID / 10;
+            if (ships[s].shipID % 10 == 1)
+            {
+                aiLife += (ships[s].shipID / 10);
+                aiLife += (ships[s].shipID / 10);
+            }
+            else
+            {
+                aiLife += (ships[s].shipID / 10);
+            }
             //set occpied value
-            ships[s].occ = 1;
+            if (ships[s].shipID % 10 == 1)
+            {
+                ships[s].occ = 2;   //두 번 맞는 애
+            }
+            else
+            {
+                ships[s].occ = 1;
+            }
             //select random ai ships location
             location(ships[s]);
         }
