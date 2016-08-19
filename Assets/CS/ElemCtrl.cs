@@ -56,7 +56,16 @@ public class ElemCtrl : MonoBehaviour {
             unSelected();
             selectCtrl.selectedShipArr[index] = 0;
             selectCtrl.selectedShipCount += -1;
-            selectCtrl.userLife += -(info.shipNum / 10);
+            //두 번 맞아야 죽는 애인지 검사
+            if (info.shipNum % 10 == 1)
+            {
+                selectCtrl.userLife += -(info.shipNum / 10);
+                selectCtrl.userLife += -(info.shipNum / 10);
+            }
+            else
+            {
+                selectCtrl.userLife += -(info.shipNum / 10);
+            }
         }
         else
         {
@@ -73,7 +82,16 @@ public class ElemCtrl : MonoBehaviour {
                 {
                     selected(i);
                     selectCtrl.selectedShipArr[i] = info.shipNum;
-                    selectCtrl.userLife += info.shipNum / 10;
+                    //두 번 맞아야 죽는 애인지 검사
+                    if (info.shipNum % 10 == 1)
+                    {
+                        selectCtrl.userLife += (info.shipNum / 10);
+                        selectCtrl.userLife += (info.shipNum / 10);
+                    }
+                    else
+                    {
+                        selectCtrl.userLife += (info.shipNum / 10);
+                    }
                     return;
                 }
             }

@@ -4,6 +4,7 @@ using System.Collections;
 public class SeaControler : MonoBehaviour {
     public GameObject fogPrefab;
     public GameObject firePrefab;
+    public GameObject smokePrefab;
     GameObject fog;
     GameObject fire;
     
@@ -29,9 +30,19 @@ public class SeaControler : MonoBehaviour {
     }
 
     //fire particle
-    public void fireOn()
+    public void fireOn(int occ)
     {
-        fire= (GameObject)Instantiate(firePrefab, transform.position, Quaternion.Euler(-90, 0, 0));
+        if (occ == 1)
+        {
+            //두 번 맞는 애는 처음엔 흰 연기 -> 붉은 연기
+            fire = (GameObject)Instantiate(smokePrefab, transform.position, Quaternion.Euler(-90, 0, 0));
+        }
+        else
+        {
+            Destroy(fire);
+            fire = (GameObject)Instantiate(firePrefab, transform.position, Quaternion.Euler(-90, 0, 0));
+        }
+        
     }
     
 
