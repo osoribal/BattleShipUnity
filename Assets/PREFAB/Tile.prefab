@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -89,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogPrefab: {fileID: 120242, guid: c5ce68d6c07a5494cb3785cb35bd6d99, type: 2}
   firePrefab: {fileID: 192156, guid: e5a5690c437e09746a06d0dd32fdf3cf, type: 2}
+  smokePrefab: {fileID: 140950, guid: 08364d399d7df8343ab8fd624390903a, type: 2}
   occpied: 0
 --- !u!1001 &100100000
 Prefab:

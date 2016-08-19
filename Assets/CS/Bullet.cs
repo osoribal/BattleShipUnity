@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
-    
+    public bool turnChange; //발사 후 턴을 바꿀 지 다시 쏠지 결정하는 변수
+
     public Vector3 from;
     public Vector3 to;
     private float startTime;
@@ -24,7 +25,7 @@ public class Bullet : MonoBehaviour {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         startTime = Time.time;
         hit = false;
-       // gameController.show();
+                             // gameController.show();
     }
 
     // Update is called once per frame
@@ -91,8 +92,17 @@ public class Bullet : MonoBehaviour {
                         sea.fogOff();
                     }
 
-                    //change turn
-                    ChangeTurn();
+                    //두 발 쏘는 특수능력 처리
+                    if (turnChange == false)
+                    {
+                        print("attack again");
+                        AttackAgain();
+                    }
+                    else
+                    {
+                        //change turn
+                        ChangeTurn();
+                    }
                 }
                 else
                 {//occpied > 0 -> occpied --; life--; 연기, AttackAgain()
@@ -148,6 +158,7 @@ public class Bullet : MonoBehaviour {
 
     void destroyBullet()
     {
+        print("destroyed");
         //destroy bullet game object
         Destroy(this.gameObject);
     }
