@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class AIControler : MonoBehaviour {
+    int turn;
+    bool firstHit;
 
-   
     //shot bullet
     public GameControler gc;
     public Camera camera;
@@ -21,6 +22,9 @@ public class AIControler : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        turn = 5;
+        gc = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
+        firstHit = true;
 
         //prev point init
         prevX = -1;
@@ -93,10 +97,44 @@ public class AIControler : MonoBehaviour {
         bc.to = new Vector3(realX, 0, realZ);
         //print(realX + " " + realZ);
 
+        print(gc.ships[turn].shipID);
+        //두 발 쏘는 특수기능 처리
+        if (gc.ships[turn].shipID % 10 == 3)   //두 발 쏘기
+        {
+            //두 발 중 첫 발
+            if (firstHit == true)   
+            {
+                print("firstHit");
+                firstHit = false;
+                bc.turnChange = false;
+            }
+            else
+            {
+                print("secondHit");
+                //두 발 중 두번째 발
+                firstHit = true;
+                bc.turnChange = true;
+                changeTurn();
+            }
+        }
+        else
+        {
+            //한 발 쏘기
+            bc.turnChange = true;
+            changeTurn();
+        }
+
         //카메라 원위치
         camera.transform.position = beforePosition;
         camera.transform.rotation = beforeLookAt;
                     
      
+    }
+
+    void changeTurn()
+    {
+        turn++;
+        if (turn > 9)
+            turn = 5;
     }
 }

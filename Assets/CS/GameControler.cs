@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class GameControler : MonoBehaviour {
+    public bool firstHit;
     public int turn;
     public GameObject tilePrefab;
     
@@ -14,7 +15,7 @@ public class GameControler : MonoBehaviour {
     public GameObject[] shipPrefabs;
     public GameObject[] shipObjs = new GameObject[10];
     int shipCount;
-    Ship[] ships = new Ship[10];
+    public Ship[] ships = new Ship[10];
 
     //direction info
     private const int EAST = 1;
@@ -43,6 +44,7 @@ public class GameControler : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        firstHit = true;
         shipCount = 0;
         turn = 0;
         userLife = 0;
