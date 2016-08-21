@@ -12,6 +12,7 @@ TagManager:
   - RandomBox
   - UserManager
   - Fire
+  - Throw
   layers:
   - Default
   - TransparentFX

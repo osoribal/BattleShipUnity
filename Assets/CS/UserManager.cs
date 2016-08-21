@@ -99,9 +99,12 @@ public class UserManager : MonoBehaviour {
     //파라미터 : 골드 획득/사용 시 변동 값
     public void updateGold(int g)
     {
+        
         int gold = PlayerPrefs.GetInt("gold");
         gold += g;
+        print("gold : " + gold + " g: " + g);
         PlayerPrefs.SetInt("gold", gold);   //gold 값 파일로 저장
+        print("gold : " + gold);
         //다른 씬에서는 PlayerPrefs.GetInt("gold")를 통해 gold 값을 불러올 수 있다.
     }
 
