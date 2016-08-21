@@ -22,6 +22,7 @@ public class GameControler : MonoBehaviour {
     private const int WEST = 3;
     private const int SOUTH = 2;
     private const int NORTH = 0;
+
     /*
      * 
      * 배 열 대의 정보 저장 필요... gameobject?
@@ -35,7 +36,9 @@ public class GameControler : MonoBehaviour {
 
     //life
     public int userLife;
+    public int startUserLife;
     public int aiLife;
+    
     
     //occupied map
     public static int[,] userMap = new int[10, 10];
@@ -64,9 +67,9 @@ public class GameControler : MonoBehaviour {
                 aiGridCtrl[i, j] = ((GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity)).GetComponent<SeaControler>();
 
                 //ai 격자 전체에 안개 씌우기
-                //SeaControler fg = aiGridCtrl[i, j].GetComponent<SeaControler>();
-                //fg.fogOn();
-                //aiGridCtrl[i, j].fogOn();
+                SeaControler fg = aiGridCtrl[i, j].GetComponent<SeaControler>();
+                fg.fogOn();
+                aiGridCtrl[i, j].fogOn();
 
                 userzero.z++;
                 aizero.z++;
@@ -94,6 +97,8 @@ public class GameControler : MonoBehaviour {
             //get size - set life
             //userLife += ships[i].shipID / 10;
             userLife = PlayerPrefs.GetInt("userLife");
+            //save userLife when start
+            startUserLife = userLife;
             //set occpied value
             if (ships[i].shipID % 10 == 1)
             {
@@ -175,16 +180,6 @@ public class GameControler : MonoBehaviour {
 
     }
 
-    public void show()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            for (int j = 0; j < 10; j++)
-            {
-                Debug.Log(i + "," + j + ":" + aiMap[i, j]);
-            }
-        }
-    }
 
     void location(Ship ship)
     {
@@ -536,13 +531,47 @@ public class GameControler : MonoBehaviour {
                 break;
             case 2: //user win
                 //게임이 끝나면 골드 획득
+                //ceck rest occupied - calculate gold
+                saveGold();
+
+                SceneManager.LoadScene("FinishGame");
                 break;
             case 3: //ai win
+                //game over message
+                //go to title
+                SceneManager.LoadScene("FinishGame");
                 break;
             default:
                 break;
         }
-	}
+    }
+
+    
+    void saveGold()
+    {
+        int gold = calculGold();
+        PlayerPrefs.SetInt("gold", gold);
+    }
+
+    //check rest occupied -for  calculate gold
+    int calculGold()
+    {
+        //total grid : 100 - (occupied when start - currect occupied)
+        int gold = 100 - (startUserLife - userLife);
+        int bonus = 100;
+
+        //gold bonus ship
+        // +50%
+        for (int i = 0; i < 5; i++) {
+            if (ships[i].shipID%10 == 3)
+            {
+                bonus += 50;
+            }
+        }
+
+        gold = gold * (bonus / 100);
+        return gold;
+    }
 
     /*
      * 유저 격자의 x, y 좌표의 Transform을 반환한다.
@@ -658,7 +687,7 @@ public class GameControler : MonoBehaviour {
     public void checkShipHitted(Vector3 position)
     {
         int hitted = 5;
-        //find whitch ship is hitted
+        //find which ship is hitted
         for (int i = 5; i < 10; i++)
         {
             if (shipObjs[i].transform.position == position)
@@ -741,6 +770,7 @@ public class GameControler : MonoBehaviour {
                 {
                     for (chk = 0; chk < size; chk++)
                     {
+                        print("all ai grid fog off");
                         aiGridCtrl[gridX + chk, gridY].fogOff();
                     }
                 }
