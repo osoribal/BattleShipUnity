@@ -63,23 +63,6 @@ public class Bullet : MonoBehaviour {
                 //Debug.Log("tile hit");
                 //check occpied
                 sea = other.GetComponent<SeaControler>();
-                //ai shot
-                //if (sea.transform.position.x > 0)
-                //{
-                //    if (hit == true)    //hit user ship
-                //    {
-                //        sea.fireOn();
-                //        //attack again - no change turn
-                //        AttackAgain();
-                //    }
-                //    else
-                //    {
-                //        //change turn
-                //        ChangeTurn();
-                //    }
-                //}
-                //else
-                //{   //user shot
                     //get occupied value
                 int isOcc = getOccFromMap(sea.transform.position.x, sea.transform.position.z);
                 //print(isOcc);
