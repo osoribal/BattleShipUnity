@@ -6,6 +6,7 @@ public class GameControler : MonoBehaviour {
     public bool firstHit;
     public int turn;
     public GameObject tilePrefab;
+    UserManager userManager;
     
     //public GameObject[,] userGrid = new GameObject[10, 10];
     //public GameObject[,] aiGrid = new GameObject[10, 10];
@@ -22,6 +23,10 @@ public class GameControler : MonoBehaviour {
     private const int WEST = 3;
     private const int SOUTH = 2;
     private const int NORTH = 0;
+
+    //result
+    int getGold;
+    string winner;
 
     /*
      * 
@@ -67,8 +72,6 @@ public class GameControler : MonoBehaviour {
                 aiGridCtrl[i, j] = ((GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity)).GetComponent<SeaControler>();
 
                 //ai 격자 전체에 안개 씌우기
-                SeaControler fg = aiGridCtrl[i, j].GetComponent<SeaControler>();
-                fg.fogOn();
                 aiGridCtrl[i, j].fogOn();
 
                 userzero.z++;
@@ -118,11 +121,11 @@ public class GameControler : MonoBehaviour {
         }
 
         //select ai ships
-        shipID[5] = 33;
-        shipID[6] = 21;
-        shipID[7] = 31;
-        shipID[8] = 41;
-        shipID[9] = 51;
+        shipID[5] = 13;
+        shipID[6] = 12;
+        shipID[7] = 12;
+        shipID[8] = 12;
+        shipID[9] = 12;
 
         //ships - initialize
         for (int s = 5; s < 10; s++)
@@ -532,13 +535,20 @@ public class GameControler : MonoBehaviour {
             case 2: //user win
                 //게임이 끝나면 골드 획득
                 //ceck rest occupied - calculate gold
-                saveGold();
-
+                getGold = saveGold();
+                winner = "user";
+                PlayerPrefs.SetInt("getGold", getGold);
+                PlayerPrefs.SetString("winner", winner);
+                print(".getGold " + getGold + " .winner" + winner);
                 SceneManager.LoadScene("FinishGame");
                 break;
             case 3: //ai win
                 //game over message
                 //go to title
+                winner = "ai";
+                PlayerPrefs.SetInt("getGold", 0);
+                PlayerPrefs.SetString("winner", winner);
+                print(".getGold " + getGold + " .winner" + winner);
                 SceneManager.LoadScene("FinishGame");
                 break;
             default:
@@ -547,10 +557,10 @@ public class GameControler : MonoBehaviour {
     }
 
     
-    void saveGold()
+    int saveGold()
     {
         int gold = calculGold();
-        PlayerPrefs.SetInt("gold", gold);
+        return gold;
     }
 
     //check rest occupied -for  calculate gold
@@ -558,14 +568,16 @@ public class GameControler : MonoBehaviour {
     {
         //total grid : 100 - (occupied when start - currect occupied)
         int gold = 100 - (startUserLife - userLife);
+        print("gold = 100 - " + startUserLife  + " - " + userLife + " : " + gold);
         int bonus = 100;
 
         //gold bonus ship
         // +50%
         for (int i = 0; i < 5; i++) {
-            if (ships[i].shipID%10 == 3)
+            if (ships[i].shipID%10 == 4)
             {
-                bonus += 50;
+                print("bonus");
+                bonus = bonus + 100;
             }
         }
 
