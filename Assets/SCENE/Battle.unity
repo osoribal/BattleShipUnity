@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstHit: 0
   turn: 0
-  tilePrefab: {fileID: 114916, guid: 838b68325509bff4280ff360c93f720c, type: 2}
+  tilePrefab: {fileID: 177728, guid: 838b68325509bff4280ff360c93f720c, type: 2}
   shipPrefabs:
   - {fileID: 113816, guid: 58460a4d1ebf526439cd2721942827b9, type: 2}
   - {fileID: 141584, guid: 5ca3b99fb1d7a4f429de3d2564dcd704, type: 2}
