@@ -94,7 +94,7 @@ public class Bullet : MonoBehaviour {
                     decOccAtMap(sea.transform.position.x, sea.transform.position.z);
 
                     //fire on
-                    sea.fireOn(getOccFromMap(sea.transform.position.x, sea.transform.position.z));
+                    sea.fireOn();
 
                     //check all parts of ship is hitted
                     //only for aigrid
