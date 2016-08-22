@@ -67,8 +67,6 @@ public class GameControler : MonoBehaviour {
                 aiGridCtrl[i, j] = ((GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity)).GetComponent<SeaControler>();
 
                 //ai 격자 전체에 안개 씌우기
-                SeaControler fg = aiGridCtrl[i, j].GetComponent<SeaControler>();
-                fg.fogOn();
                 aiGridCtrl[i, j].fogOn();
 
                 userzero.z++;
