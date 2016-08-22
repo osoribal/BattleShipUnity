@@ -6,6 +6,7 @@ public class GameControler : MonoBehaviour {
     public bool firstHit;
     public int turn;
     public GameObject tilePrefab;
+    UserManager userManager;
     
     //public GameObject[,] userGrid = new GameObject[10, 10];
     //public GameObject[,] aiGrid = new GameObject[10, 10];
@@ -22,6 +23,11 @@ public class GameControler : MonoBehaviour {
     private const int WEST = 3;
     private const int SOUTH = 2;
     private const int NORTH = 0;
+
+    //result
+    int getGold;
+    string winner;
+
     /*
      * 
      * 배 열 대의 정보 저장 필요... gameobject?
@@ -35,7 +41,9 @@ public class GameControler : MonoBehaviour {
 
     //life
     public int userLife;
+    public int startUserLife;
     public int aiLife;
+    
     
     //occupied map
     public static int[,] userMap = new int[10, 10];
@@ -64,9 +72,7 @@ public class GameControler : MonoBehaviour {
                 aiGridCtrl[i, j] = ((GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity)).GetComponent<SeaControler>();
 
                 //ai 격자 전체에 안개 씌우기
-                //SeaControler fg = aiGridCtrl[i, j].GetComponent<SeaControler>();
-                //fg.fogOn();
-                //aiGridCtrl[i, j].fogOn();
+                aiGridCtrl[i, j].fogOn();
 
                 userzero.z++;
                 aizero.z++;
@@ -94,15 +100,10 @@ public class GameControler : MonoBehaviour {
             //get size - set life
             //userLife += ships[i].shipID / 10;
             userLife = PlayerPrefs.GetInt("userLife");
+            //save userLife when start
+            startUserLife = userLife;
             //set occpied value
-            if (ships[i].shipID % 10 == 1)
-            {
-                ships[i].occ = 2;   //두 번 맞는 애
-            }
-            else
-            {
-                ships[i].occ = 1;
-            }
+            ships[i].occ = 1;
             //set position
             ships[i].x = userShip.x;
             ships[i].y = userShip.y;
@@ -113,11 +114,11 @@ public class GameControler : MonoBehaviour {
         }
 
         //select ai ships
-        shipID[5] = 33;
-        shipID[6] = 21;
-        shipID[7] = 31;
-        shipID[8] = 41;
-        shipID[9] = 51;
+        shipID[5] = 13;
+        shipID[6] = 12;
+        shipID[7] = 12;
+        shipID[8] = 12;
+        shipID[9] = 12;
 
         //ships - initialize
         for (int s = 5; s < 10; s++)
@@ -126,24 +127,9 @@ public class GameControler : MonoBehaviour {
             //set id
             ships[s].shipID = shipID[s];
             //get size - set life
-            if (ships[s].shipID % 10 == 1)
-            {
-                aiLife += (ships[s].shipID / 10);
-                aiLife += (ships[s].shipID / 10);
-            }
-            else
-            {
-                aiLife += (ships[s].shipID / 10);
-            }
+            aiLife += (ships[s].shipID / 10);
             //set occpied value
-            if (ships[s].shipID % 10 == 1)
-            {
-                ships[s].occ = 2;   //두 번 맞는 애
-            }
-            else
-            {
-                ships[s].occ = 1;
-            }
+            ships[s].occ = 1;
             //select random ai ships location
             location(ships[s]);
         }
@@ -175,16 +161,6 @@ public class GameControler : MonoBehaviour {
 
     }
 
-    public void show()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            for (int j = 0; j < 10; j++)
-            {
-                Debug.Log(i + "," + j + ":" + aiMap[i, j]);
-            }
-        }
-    }
 
     void location(Ship ship)
     {
@@ -536,13 +512,56 @@ public class GameControler : MonoBehaviour {
                 break;
             case 2: //user win
                 //게임이 끝나면 골드 획득
+                //ceck rest occupied - calculate gold
+                getGold = saveGold();
+                winner = "user";
+                PlayerPrefs.SetInt("getGold", getGold);
+                PlayerPrefs.SetString("winner", winner);
+                print(".getGold " + getGold + " .winner" + winner);
+                SceneManager.LoadScene("FinishGame");
                 break;
             case 3: //ai win
+                //game over message
+                //go to title
+                winner = "ai";
+                PlayerPrefs.SetInt("getGold", 0);
+                PlayerPrefs.SetString("winner", winner);
+                print(".getGold " + getGold + " .winner" + winner);
+                SceneManager.LoadScene("FinishGame");
                 break;
             default:
                 break;
         }
-	}
+    }
+
+    
+    int saveGold()
+    {
+        int gold = calculGold();
+        return gold;
+    }
+
+    //check rest occupied -for  calculate gold
+    int calculGold()
+    {
+        //total grid : 100 - (occupied when start - currect occupied)
+        int gold = 100 - (startUserLife - userLife);
+        print("gold = 100 - " + startUserLife  + " - " + userLife + " : " + gold);
+        int bonus = 100;
+
+        //gold bonus ship
+        // +50%
+        for (int i = 0; i < 5; i++) {
+            if (ships[i].shipID%10 == 4)
+            {
+                print("bonus");
+                bonus = bonus + 100;
+            }
+        }
+
+        gold = gold * (bonus / 100);
+        return gold;
+    }
 
     /*
      * 유저 격자의 x, y 좌표의 Transform을 반환한다.
@@ -658,7 +677,7 @@ public class GameControler : MonoBehaviour {
     public void checkShipHitted(Vector3 position)
     {
         int hitted = 5;
-        //find whitch ship is hitted
+        //find which ship is hitted
         for (int i = 5; i < 10; i++)
         {
             if (shipObjs[i].transform.position == position)
@@ -741,6 +760,7 @@ public class GameControler : MonoBehaviour {
                 {
                     for (chk = 0; chk < size; chk++)
                     {
+                        print("all ai grid fog off");
                         aiGridCtrl[gridX + chk, gridY].fogOff();
                     }
                 }

@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlaceShipCtrl : MonoBehaviour {
     int[,] occupied = new int[10, 10];
     GameObject[] ships = new GameObject[5];
     public GameObject tilePrefab;
     public GameObject[] shipPrefab; //배의 프리팹 5종 저장
+    public Button rotButton;
 
     //direction info
     private const int EAST = 1;
@@ -93,10 +95,12 @@ public class PlaceShipCtrl : MonoBehaviour {
                 if (rayHit.transform.gameObject.tag == "Ship")
                 {
                     //잉여 회전 버튼 제거
-                    for (int i = 0; i < 5; i++)
-                    {
-                        ships[i].GetComponent<Ship>().cancle();
-                    }
+                    //for (int i = 0; i < 5; i++)
+                    //{
+                    //    ships[i].GetComponent<Ship>().cancle();
+                    //}
+                    rotButton.onClick.RemoveAllListeners();
+                    rotButton.onClick.AddListener(() => rayHit.transform.gameObject.GetComponent<Ship>().rotate());
                     //배의 위치 이동 및 회전을 담당하는 코루틴 호출
                     StartCoroutine(rayHit.transform.gameObject.GetComponent<Ship>().move());
                 }

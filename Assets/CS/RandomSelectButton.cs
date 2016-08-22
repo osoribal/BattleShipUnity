@@ -74,6 +74,7 @@ public class RandomSelectButton : MonoBehaviour {
         scale.z *= 30;
 
         ship.transform.localScale = scale;
+        
 
     }
 

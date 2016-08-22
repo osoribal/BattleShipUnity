@@ -14,9 +14,6 @@ public class ElemCtrl : MonoBehaviour {
         str = "ship length : " + info.shipNum / 10;
         switch (info.shipNum % 10)
         {
-            case 1:
-                str = str + "\nskill : 칸 당 hp 2";
-                break;
             case 2:
                 str = str + "\nskill : 대응 좌표점 같이 폭발";
                 break;
@@ -25,6 +22,9 @@ public class ElemCtrl : MonoBehaviour {
                 break;
             case 4:
                 str = str + "\nskill : 보상 up";
+                break;
+            default:
+                str = str + "\nno skill";
                 break;
         }
         this.GetComponentInChildren<Text>().text = str + "\nunselected";
@@ -56,16 +56,8 @@ public class ElemCtrl : MonoBehaviour {
             unSelected();
             selectCtrl.selectedShipArr[index] = 0;
             selectCtrl.selectedShipCount += -1;
-            //두 번 맞아야 죽는 애인지 검사
-            if (info.shipNum % 10 == 1)
-            {
-                selectCtrl.userLife += -(info.shipNum / 10);
-                selectCtrl.userLife += -(info.shipNum / 10);
-            }
-            else
-            {
-                selectCtrl.userLife += -(info.shipNum / 10);
-            }
+            selectCtrl.userLife += -(info.shipNum / 10);
+            
         }
         else
         {
@@ -82,16 +74,8 @@ public class ElemCtrl : MonoBehaviour {
                 {
                     selected(i);
                     selectCtrl.selectedShipArr[i] = info.shipNum;
-                    //두 번 맞아야 죽는 애인지 검사
-                    if (info.shipNum % 10 == 1)
-                    {
-                        selectCtrl.userLife += (info.shipNum / 10);
-                        selectCtrl.userLife += (info.shipNum / 10);
-                    }
-                    else
-                    {
-                        selectCtrl.userLife += (info.shipNum / 10);
-                    }
+                    selectCtrl.userLife += (info.shipNum / 10);
+                    
                     return;
                 }
             }
