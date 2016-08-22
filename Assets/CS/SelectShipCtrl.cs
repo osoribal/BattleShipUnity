@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class SelectShipCtrl : MonoBehaviour {
     public GameObject content;
     public GameObject elemPrefab;
+    public Sprite shipImage;
     public int userLife; //최소 10칸 최대 20칸
     public int selectedShipCount;    //배 선택 시 선택된 배의 개수
     public int[] selectedShipArr;   //선택된 배의 고유번호 저장
@@ -46,6 +47,8 @@ public class SelectShipCtrl : MonoBehaviour {
             {
                 //오브젝트 생성
                 GameObject elem = Instantiate(elemPrefab) as GameObject;
+                //스냅샷 
+                elem.GetComponentsInChildren<Image>()[1].overrideSprite = shipImage;
                 //배의 정보를 항목에 전달
                 elem.GetComponent<ElemCtrl>().info = UserManager.list[i];
                 elem.GetComponent<ElemCtrl>().selectCtrl = this;
