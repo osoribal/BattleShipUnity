@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ListCtrl : MonoBehaviour {
     public GameObject content;
     public GameObject elemPrefab;
+    public Sprite shipImage;
     List<ShipInfo> list = UserManager.list;
 
     void Update()
@@ -24,6 +25,8 @@ public class ListCtrl : MonoBehaviour {
         for (int i = 0; i < list.Count; i++)
         {
             GameObject elem = (GameObject)Instantiate(elemPrefab) as GameObject;
+            //스냅샷 
+            elem.GetComponentsInChildren<Image>()[1].overrideSprite = shipImage;
             //배의 정보를 string으로 만들기
             string str = "ship length : " + list[i].shipNum / 10
                 + "\ncount : " + list[i].count;
