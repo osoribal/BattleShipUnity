@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea06d4afdfe04ee4f9fd9cf441ebdc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefab: {fileID: 114916, guid: 838b68325509bff4280ff360c93f720c, type: 2}
+  tilePrefab: {fileID: 177728, guid: 838b68325509bff4280ff360c93f720c, type: 2}
   shipPrefab:
   - {fileID: 113816, guid: 58460a4d1ebf526439cd2721942827b9, type: 2}
   - {fileID: 141584, guid: 5ca3b99fb1d7a4f429de3d2564dcd704, type: 2}
@@ -909,8 +909,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5.000003, y: 0}
-  m_SizeDelta: {x: 204, y: 326}
+  m_AnchoredPosition: {x: 5.000003, y: -1.5}
+  m_SizeDelta: {x: 240, y: 380}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1857947219
 MonoBehaviour:
