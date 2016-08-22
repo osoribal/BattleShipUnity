@@ -15,8 +15,8 @@ public class Ship : MonoBehaviour
     public int x, y;        //배 머리 위치
     public int direction;   //배 방향
     public PlaceShipCtrl placeCtrl;
-    public GameObject rotateButPrefab;
-    GameObject butCanvas;
+    //public GameObject rotateButPrefab;
+    //GameObject butCanvas;
     public int occ;  //occupied number
     /*
      * switch 문 2개 구현 : prefab, 특수능력
@@ -109,18 +109,18 @@ public class Ship : MonoBehaviour
         //set occupied
         placeCtrl.setOccupied(shipID / 10, direction, x, y, 1);
 
-        //Rotate 버튼 생성
-        butCanvas = (GameObject)Instantiate(rotateButPrefab,
-            new Vector3(transform.position.x, 1, transform.position.z),
-            Quaternion.AngleAxis(90.0f, new Vector3(1, 0, 0)));
-        //리스너 장착
-        Button[] buts = butCanvas.GetComponentsInChildren<Button>();
-        buts[0].onClick.AddListener(() => rotate());
-        buts[1].onClick.AddListener(() => cancle());
+        ////Rotate 버튼 생성
+        //butCanvas = (GameObject)Instantiate(rotateButPrefab,
+        //    new Vector3(transform.position.x, 1, transform.position.z),
+        //    Quaternion.AngleAxis(90.0f, new Vector3(1, 0, 0)));
+        ////리스너 장착
+        //Button[] buts = butCanvas.GetComponentsInChildren<Button>();
+        //buts[0].onClick.AddListener(() => rotate());
+        //buts[1].onClick.AddListener(() => cancle());
     }
 
     //rotate 버튼 리스너
-    void rotate()
+    public void rotate()
     {
         //reset occupied
         placeCtrl.setOccupied(shipID / 10, direction, x, y, 0);
@@ -145,10 +145,10 @@ public class Ship : MonoBehaviour
 
     }
 
-    public void cancle()
-    {
-        Destroy(butCanvas);
-    }
+    //public void cancle()
+    //{
+    //    Destroy(butCanvas);
+    //}
 
     void OnTriggerEnter(Collider other)
     {

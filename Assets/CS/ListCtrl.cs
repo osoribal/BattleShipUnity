@@ -29,9 +29,6 @@ public class ListCtrl : MonoBehaviour {
                 + "\ncount : " + list[i].count;
             switch(list[i].shipNum % 10)
             {
-                case 1:
-                    str = str + "\nskill : 칸 당 hp 2";
-                    break;
                 case 2:
                     str = str + "\nskill : 대응 좌표점 같이 폭발";
                     break;
@@ -40,6 +37,9 @@ public class ListCtrl : MonoBehaviour {
                     break;
                 case 4:
                     str = str + "\nskill : 보상 up";
+                    break;
+                default:
+                    str = str + "\nno skill";
                     break;
             }
             elem.GetComponentInChildren<Text>().text = str;
