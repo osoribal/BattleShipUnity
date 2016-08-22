@@ -3,8 +3,6 @@ using System.Collections;
 
 public class UserControler : MonoBehaviour {
     int turn;
-    Vector3 beforePosition;
-    Quaternion beforeLookAt;
     GameControler gc;
     public GameObject bulletPrefab;
     public GameObject arrowPrefab;  //맞을 지점을 표시할 프리팹
@@ -19,24 +17,11 @@ public class UserControler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (gc.turn == 0)
+        if (gc.turn == 0 && Input.GetButtonDown("Fire1"))
         {
-            //카메라 정보 저장
-            beforePosition = Camera.main.transform.position;
-            beforeLookAt = Camera.main.transform.rotation;
-
-            //카메라 시점 이동
-            //Camera.main.transform.position = new Vector3(11, 10, 0);
-            //Camera.main.transform.LookAt(new Vector3(-11, -5, 0));
-
             gc.turn = -1;   //block
-            
-        }
-
-        //aim
-        if (gc.turn == -1 && Input.GetButtonDown("Fire1"))
-        {
             StartCoroutine("shot");
+
         }
     }
     
@@ -99,10 +84,6 @@ public class UserControler : MonoBehaviour {
                 changeTurn();
             }
         }
-
-        //카메라 원위치
-        Camera.main.transform.position = beforePosition;
-        Camera.main.transform.rotation = beforeLookAt;
 
     }
 
