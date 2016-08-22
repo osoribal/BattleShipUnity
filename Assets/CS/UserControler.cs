@@ -38,8 +38,9 @@ public class UserControler : MonoBehaviour {
             //맞을 지점의 좌표
             Vector3 position = new Vector3((int)curPosition.x, 2.0f, (int)curPosition.z);
             //ai 격자 내에만 가능하도록 범위 제한
-            if ( position.x >= -11 && position.x < -1 && position.z >= -5 && position.z < 5)
+            if ( position.x > -11 && position.x <= -1 && position.z >= -5 && position.z < 5)
             {
+                position.x -= 1;    //arrow가 손가락에 가려지지 않도록
                 if(arrow != null)
                 {
                     //기존 지점의 오브젝트 삭제
