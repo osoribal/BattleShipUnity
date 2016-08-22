@@ -103,14 +103,7 @@ public class GameControler : MonoBehaviour {
             //save userLife when start
             startUserLife = userLife;
             //set occpied value
-            if (ships[i].shipID % 10 == 1)
-            {
-                ships[i].occ = 2;   //두 번 맞는 애
-            }
-            else
-            {
-                ships[i].occ = 1;
-            }
+            ships[i].occ = 1;
             //set position
             ships[i].x = userShip.x;
             ships[i].y = userShip.y;
@@ -134,24 +127,9 @@ public class GameControler : MonoBehaviour {
             //set id
             ships[s].shipID = shipID[s];
             //get size - set life
-            if (ships[s].shipID % 10 == 1)
-            {
-                aiLife += (ships[s].shipID / 10);
-                aiLife += (ships[s].shipID / 10);
-            }
-            else
-            {
-                aiLife += (ships[s].shipID / 10);
-            }
+            aiLife += (ships[s].shipID / 10);
             //set occpied value
-            if (ships[s].shipID % 10 == 1)
-            {
-                ships[s].occ = 2;   //두 번 맞는 애
-            }
-            else
-            {
-                ships[s].occ = 1;
-            }
+            ships[s].occ = 1;
             //select random ai ships location
             location(ships[s]);
         }
