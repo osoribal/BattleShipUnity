@@ -15,7 +15,7 @@ public class ElemCtrl : MonoBehaviour {
         switch (info.shipNum % 10)
         {
             case 2:
-                str = str + "\nskill : 대응 좌표점 같이 폭발";
+                str = str + "\nskill : 대응 좌표점\n\t 같이 폭발";
                 break;
             case 3:
                 str = str + "\nskill : 두 발 쏘기";
