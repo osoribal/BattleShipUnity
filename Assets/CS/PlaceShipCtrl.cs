@@ -9,6 +9,7 @@ public class PlaceShipCtrl : MonoBehaviour {
     public GameObject tilePrefab;
     public GameObject[] shipPrefab; //배의 프리팹 5종 저장
     public Button rotButton;
+    public GameObject DialogPrefab;
 
     //direction info
     private const int EAST = 1;

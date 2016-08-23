@@ -27,8 +27,7 @@ public class GameControler : MonoBehaviour {
     //result
     int getGold;
     string winner;
-
-
+    
     /*
      * 
      * 배 열 대의 정보 저장 필요... gameobject?
@@ -504,13 +503,13 @@ public class GameControler : MonoBehaviour {
             //Escape button codes
             SceneManager.LoadScene("Title");
         }
-
+        
         switch (turn)
         {
             case 0: //user turn
                 break;
             case 1: //ai turn
-               // turn = 0;
+                // turn = 0;
                 break;
             case 2: //user win
                 //게임이 끝나면 골드 획득
