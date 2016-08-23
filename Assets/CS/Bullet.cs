@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour {
         hit = false;
 
         //shoot sound at init
-        source.PlayOneShot(shootSound, 0.2F);
+        source.PlayOneShot(shootSound, 1F);
     }
 
     // Update is called once per frame

@@ -39,11 +39,16 @@ public class AIControler : MonoBehaviour {
         if (gc.turn == AI_TURN)
         {
             gc.turn = AI_BLOCK;    //block turn
-            selectTargetPoint();
-            shot(prevX, prevY);
+            int time = Random.Range(1,3);
+            Invoke("shooting", time);
         }
 	}
 
+    void shooting()
+    {
+        selectTargetPoint();
+        shot(prevX, prevY);
+    }
     void selectTargetPoint()
     {
         //target point x y - in user grid
@@ -68,8 +73,10 @@ public class AIControler : MonoBehaviour {
         prevY = userGridY;
     }
 
+
     public void shot(int Gx, int Gy)
     {
+        
         //Gx, Gy -> real x z
         //Gx : 0 -> 1
         //Gy : 0 -> -5

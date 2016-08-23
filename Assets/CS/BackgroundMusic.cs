@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class BackgroundMusic : MonoBehaviour {
+    public static BackgroundMusic instance;
     private AudioSource source;
     public AudioClip back;
 
@@ -13,6 +14,16 @@ public class BackgroundMusic : MonoBehaviour {
 
     void Awake()
     {
+        if (instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+
         source = GetComponent<AudioSource>();
     }
 
