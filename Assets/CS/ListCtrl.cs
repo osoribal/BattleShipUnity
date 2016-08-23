@@ -28,8 +28,8 @@ public class ListCtrl : MonoBehaviour {
             //스냅샷 
             elem.GetComponentsInChildren<Image>()[1].overrideSprite = shipImage[list[i].shipNum / 10 - 1];
             //배의 정보를 string으로 만들기
-            string str = "ship length : " + list[i].shipNum / 10
-                + "\ncount : " + list[i].count;
+            string str = "배 길이 : " + list[i].shipNum / 10
+                + "\n보유 수 : " + list[i].count;
             switch(list[i].shipNum % 10)
             {
                 case 2:
