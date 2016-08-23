@@ -26,7 +26,7 @@ public class UserControler : MonoBehaviour {
             {
                 DialogCtrl dialog = Instantiate(DialogPrefab).GetComponent<DialogCtrl>();
                 dialog.setLifetime(1.0f);
-                dialog.setText("당신의 턴 입니다.");
+                dialog.setText("유저 턴 입니다.");
                 showDialog = false;
             }
 

@@ -152,7 +152,7 @@ public class Ship : MonoBehaviour
         {
             DialogCtrl dialog = Instantiate(placeCtrl.DialogPrefab).GetComponent<DialogCtrl>();
             dialog.setLifetime(2.0f);
-            dialog.setText("격자 밖을 벗어날 수 있어 회전할 수 없습니다.");
+            dialog.setText("격자 밖으로 벗어날 수 있어\n회전할 수 없습니다.");
         }
         //set occupied
         placeCtrl.setOccupied(shipID / 10, direction, x, y, 1);

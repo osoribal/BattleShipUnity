@@ -9,6 +9,9 @@ public class DialogCtrl : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		textui.resizeTextForBestFit = false;
+		textui.fontSize = 50;
+		textui.fontStyle = FontStyle.Normal;
         startTime = Time.time;
     }
 	

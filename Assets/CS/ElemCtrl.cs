@@ -70,7 +70,7 @@ public class ElemCtrl : MonoBehaviour {
             {
                 DialogCtrl dialog = Instantiate(selectCtrl.DialogPrefab).GetComponent<DialogCtrl>();
                 dialog.setLifetime(2.0f);
-                dialog.setText("선택된 배의 개수는 5 개여야 합니다.");
+                dialog.setText("선택한 배의 개수는\n5개여야 합니다.");
                 return;
             }
             //배가 선택되어 있지 않으므로 선택
