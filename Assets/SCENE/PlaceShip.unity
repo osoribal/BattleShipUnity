@@ -829,11 +829,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 177728, guid: 838b68325509bff4280ff360c93f720c, type: 2}
   shipPrefab:
-  - {fileID: 113816, guid: 58460a4d1ebf526439cd2721942827b9, type: 2}
-  - {fileID: 141584, guid: 5ca3b99fb1d7a4f429de3d2564dcd704, type: 2}
-  - {fileID: 170982, guid: 25c4b833f9f6a224d90ebc8064a2c1f1, type: 2}
-  - {fileID: 172170, guid: 74f66ebae3c491f4c999353c5177b5e8, type: 2}
-  - {fileID: 160290, guid: 65bee189d20f7bb47ac3b84c0b7fac8e, type: 2}
+  - {fileID: 164876, guid: d2dbaeb68f6e445f09c82284336ad30c, type: 2}
+  - {fileID: 163824, guid: 36cce048fc7bd46e28ebf8ec2dc7f8ac, type: 2}
+  - {fileID: 136992, guid: 41298861e73144815822385d5fe770cf, type: 2}
+  - {fileID: 107712, guid: b59d183169aee4faaa857acc143d3658, type: 2}
+  - {fileID: 150758, guid: 35b4e9249dad54a1db0d508da01a7853, type: 2}
   rotButton: {fileID: 1846529571}
 --- !u!114 &1857947215
 MonoBehaviour:
