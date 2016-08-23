@@ -41,15 +41,15 @@ public class UserManager : MonoBehaviour {
         path = Application.persistentDataPath + "/userdata.dat";
 
         //test data
-        //Save(new ShipInfo(12));
-        //Save(new ShipInfo(21));
-        //Save(new ShipInfo(13));
-        //Save(new ShipInfo(31));
-        //Save(new ShipInfo(14));
-        //Save(new ShipInfo(41));
-        //Save(new ShipInfo(51));
-        //Save(new ShipInfo(41));
-        //Save(new ShipInfo(51));
+        Save(new ShipInfo(12));
+        Save(new ShipInfo(21));
+        Save(new ShipInfo(13));
+        Save(new ShipInfo(31));
+        Save(new ShipInfo(14));
+        Save(new ShipInfo(41));
+        Save(new ShipInfo(51));
+        Save(new ShipInfo(41));
+        Save(new ShipInfo(51));
 
         //데이터 불러오기
         this.Load();
