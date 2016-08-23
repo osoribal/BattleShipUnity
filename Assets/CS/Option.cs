@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Option : MonoBehaviour {
 
@@ -9,20 +10,39 @@ public class Option : MonoBehaviour {
     const string EFFECT = "Effect";
     const string BACKGROUND = "Back";
 
+    const string ON = "on";
+    const string OFF = "off";
+
     //option state
     string effect;
     string back;
 
-	// back button, go to titleScene
-	public void OkayBtnListener(){
+    //toggle button
+    public Toggle togEffect;
+    public Toggle togBack;
+
+    // back button, go to titleScene
+    public void OkayBtnListener(){
 		SceneManager.LoadScene ("Title");
 	}
 
     // Use this for initialization
     void Start () {
-        opInfo = UserManager.opInfo;
-        Debug.Log(opInfo.effect + " " + opInfo.back);
-	}
+        togBack.isOn = true;
+        togEffect.isOn = true;
+
+        //init toggle buttons
+        if (PlayerPrefs.GetString(BACKGROUND) == ON)
+        { togBack.isOn = true; }
+        else
+        { togBack.isOn = false; }
+
+        if (PlayerPrefs.GetString(EFFECT) == ON)
+        { togEffect.isOn = true;  }
+        else
+        { togEffect.isOn = false; }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -39,15 +59,33 @@ public class Option : MonoBehaviour {
     {
         //effect on
         if (newValue == true) {
-           
-            UserManager.opInfo.effect = "on";
-            Debug.Log(opInfo.effect + " true" + opInfo.back);
+            UserManager.opInfo.effect = ON;
+            Debug.Log(opInfo.effect + " true" );
         }
         //effect off
         if (newValue == false) {
-            
-            UserManager.opInfo.effect = "off";
-            Debug.Log(opInfo.effect + " false" + opInfo.back);
+            UserManager.opInfo.effect = OFF;
+            Debug.Log(opInfo.effect + " false" );
+        }
+    }
+
+    //background
+    public void Background_Toggle_Changed(bool newValue)
+    {
+        //background on
+        if (newValue == true)
+        {
+            UserManager.opInfo.back = ON;
+            Debug.Log(opInfo.back + " true" );
+            PlayerPrefs.SetString(BACKGROUND, ON);
+        }
+        //background off
+        if (newValue == false)
+        {
+
+            UserManager.opInfo.back = OFF;
+            Debug.Log(opInfo.back + " false" );
+            PlayerPrefs.SetString(BACKGROUND, OFF);
         }
     }
 }

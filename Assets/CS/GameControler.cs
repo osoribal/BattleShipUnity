@@ -28,6 +28,7 @@ public class GameControler : MonoBehaviour {
     int getGold;
     string winner;
 
+
     /*
      * 
      * 배 열 대의 정보 저장 필요... gameobject?
@@ -48,7 +49,8 @@ public class GameControler : MonoBehaviour {
     //occupied map
     public static int[,] userMap = new int[10, 10];
     public static int[,] aiMap = new int[10, 10];
-    
+
+
 
     // Use this for initialization
     void Start () {
