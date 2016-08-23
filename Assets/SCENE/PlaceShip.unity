@@ -656,8 +656,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -829,11 +829,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 177728, guid: 838b68325509bff4280ff360c93f720c, type: 2}
   shipPrefab:
-  - {fileID: 113816, guid: 58460a4d1ebf526439cd2721942827b9, type: 2}
-  - {fileID: 141584, guid: 5ca3b99fb1d7a4f429de3d2564dcd704, type: 2}
-  - {fileID: 170982, guid: 25c4b833f9f6a224d90ebc8064a2c1f1, type: 2}
-  - {fileID: 172170, guid: 74f66ebae3c491f4c999353c5177b5e8, type: 2}
-  - {fileID: 160290, guid: 65bee189d20f7bb47ac3b84c0b7fac8e, type: 2}
+  - {fileID: 164876, guid: d2dbaeb68f6e445f09c82284336ad30c, type: 2}
+  - {fileID: 163824, guid: 36cce048fc7bd46e28ebf8ec2dc7f8ac, type: 2}
+  - {fileID: 136992, guid: 41298861e73144815822385d5fe770cf, type: 2}
+  - {fileID: 107712, guid: b59d183169aee4faaa857acc143d3658, type: 2}
+  - {fileID: 150758, guid: 35b4e9249dad54a1db0d508da01a7853, type: 2}
   rotButton: {fileID: 1846529571}
 --- !u!114 &1857947215
 MonoBehaviour:
@@ -909,7 +909,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5.000003, y: -1.5}
+  m_AnchoredPosition: {x: 5.000003, y: -0.1}
   m_SizeDelta: {x: 240, y: 380}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1857947219
@@ -931,7 +931,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: ed5872716a310e0488bcbacbb0a23f00, type: 3}
+  m_Texture: {fileID: 2800000, guid: 443c53bdc4e4655499a8e75d7d9835cf, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
