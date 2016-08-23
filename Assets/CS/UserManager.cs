@@ -40,7 +40,7 @@ public class UserManager : MonoBehaviour {
         path = Application.persistentDataPath + "/userdata.dat";
 
         //test data
-        Save(new ShipInfo(11));
+        Save(new ShipInfo(12));
         Save(new ShipInfo(21));
         Save(new ShipInfo(13));
         Save(new ShipInfo(31));
