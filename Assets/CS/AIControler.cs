@@ -3,7 +3,8 @@ using System.Collections;
 
 public class AIControler : MonoBehaviour {
     int turn;
-    bool firstHit;
+    bool firstHit;  //두 번 발사하는 배의 경우 몇 번째 발사인지 기록
+    public GameObject DialogPrefab;
 
     //shot bullet
     public GameControler gc;
@@ -26,6 +27,7 @@ public class AIControler : MonoBehaviour {
         gc = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         firstHit = true;
 
+
         //prev point init
         prevX = -1;
         prevY = -1;
@@ -38,12 +40,20 @@ public class AIControler : MonoBehaviour {
 	void Update () {
         if (gc.turn == AI_TURN)
         {
+            DialogCtrl dialog = Instantiate(DialogPrefab).GetComponent<DialogCtrl>();
+            dialog.setLifetime(1.0f);
+            dialog.setText("AI turn");
             gc.turn = AI_BLOCK;    //block turn
-            selectTargetPoint();
-            shot(prevX, prevY);
+            int time = Random.Range(1,3);
+            Invoke("shooting", time);
         }
 	}
 
+    void shooting()
+    {
+        selectTargetPoint();
+        shot(prevX, prevY);
+    }
     void selectTargetPoint()
     {
         //target point x y - in user grid
@@ -68,21 +78,16 @@ public class AIControler : MonoBehaviour {
         prevY = userGridY;
     }
 
+
     public void shot(int Gx, int Gy)
     {
+        
         //Gx, Gy -> real x z
         //Gx : 0 -> 1
         //Gy : 0 -> -5
         float realX = Gx + 1;
         float realZ = Gy - 5;
-
-        //카메라 정보 저장
-        Vector3 beforePosition = camera.transform.position;
-        Quaternion beforeLookAt = camera.transform.rotation;
-
-        //카메라 시점 이동
-        //camera.transform.position = new Vector3(2, 2, 0);
-        //camera.transform.LookAt(new Vector3(-50, 1, 0));
+        
 
         //탄환 생성
         GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(-11, 1, 0), Quaternion.identity);
@@ -123,10 +128,7 @@ public class AIControler : MonoBehaviour {
             bc.turnChange = true;
             changeTurn();
         }
-
-        //카메라 원위치
-        camera.transform.position = beforePosition;
-        camera.transform.rotation = beforeLookAt;
+        
                     
      
     }
