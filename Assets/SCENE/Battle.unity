@@ -2170,7 +2170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 102334, guid: 992ba4307fd000841a5cfc19f4ee5ce1, type: 2}
-  arrowPrefab: {fileID: 182016, guid: 51fa9f0584225af4eb19ae5dfa9e3310, type: 2}
+  arrowPrefab: {fileID: 156754, guid: b51e5601aa4366b4e849f384cef8b625, type: 2}
 --- !u!4 &2125744754
 Transform:
   m_ObjectHideFlags: 0
