@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour {
 
     public Vector3 from;
     public Vector3 to;
+    public float value; //총알의 속도를 조절하는 변수
     private float startTime;
     public GameControler gameController;    //여기가 아니라 start에서 초기화해야 한다.
     SeaControler sea;
@@ -36,7 +37,7 @@ public class Bullet : MonoBehaviour {
             center -= new Vector3(0, 2, 0);
             Vector3 riseRelCenter = from - center;
             Vector3 setRelCenter = to - center;
-            float fracComplete = (Time.time - startTime);
+            float fracComplete = (Time.time - startTime)/value;
             transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
             transform.position += center;
         }

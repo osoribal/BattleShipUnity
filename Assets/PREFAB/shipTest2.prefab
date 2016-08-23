@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 411870}
   - 33: {fileID: 3318514}
-  - 136: {fileID: 13676916}
   - 23: {fileID: 2365442}
   m_Layer: 0
   m_Name: Cylinder
@@ -27,7 +26,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 470978}
   - 33: {fileID: 3340804}
-  - 135: {fileID: 13560494}
   - 23: {fileID: 2310894}
   m_Layer: 0
   m_Name: Sphere
@@ -64,7 +62,7 @@ Transform:
   m_LocalRotation: {x: -0.5770865, y: 0.6834718, z: -0.28297535, w: -0.34606725}
   m_LocalPosition: {x: -0.687, y: 0.348, z: 0.026}
   m_LocalScale: {x: 0.2, y: 0.5, z: 0.2}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 51.834797, y: -166.29019, z: -73.6652}
   m_Children: []
   m_Father: {fileID: 470978}
   m_RootOrder: 0
@@ -89,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 163824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 2, y: 0.5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -224,31 +222,6 @@ MonoBehaviour:
   direction: 0
   placeCtrl: {fileID: 0}
   occ: 0
---- !u!135 &13560494
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 152682}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &13676916
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111626}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

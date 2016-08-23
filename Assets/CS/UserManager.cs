@@ -23,6 +23,7 @@ public class UserManager : MonoBehaviour {
     //씬이 변경될 때 UserManager가 유일하도록 유지
     void Awake()
     {
+        path = Application.persistentDataPath + "/userdata.dat";
         if (control == null)
         {
             DontDestroyOnLoad(gameObject);

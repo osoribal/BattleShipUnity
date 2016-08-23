@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fogPrefab: {fileID: 120242, guid: c5ce68d6c07a5494cb3785cb35bd6d99, type: 2}
-  firePrefab: {fileID: 192156, guid: e5a5690c437e09746a06d0dd32fdf3cf, type: 2}
+  firePrefab: {fileID: 112592, guid: e5a5690c437e09746a06d0dd32fdf3cf, type: 2}
   occpied: 0
 --- !u!1001 &100100000
 Prefab:
