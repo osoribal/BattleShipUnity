@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CS\AIControler.cs" />
+    <Compile Include="Assets\CS\BackgroundMusic.cs" />
+    <Compile Include="Assets\CS\BombSound.cs" />
     <Compile Include="Assets\CS\Bullet.cs" />
     <Compile Include="Assets\CS\ElemCtrl.cs" />
     <Compile Include="Assets\CS\FinishGame.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Assets\CS\TitleController.cs" />
     <Compile Include="Assets\CS\UserControler.cs" />
     <Compile Include="Assets\CS\UserManager.cs" />
+    <Compile Include="Assets\CS\WaterSound.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

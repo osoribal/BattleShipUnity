@@ -20,12 +20,27 @@ public class Bullet : MonoBehaviour {
     public const int USER_BLOCK = -1;
     public const int AI_BLOCK = -2;
 
+    //audio
+    private AudioSource source;
+    //shoot sound - bullet shoot start
+    public AudioClip shootSound;
+
+
+
+    //sound awake
+    void Awake()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
     // Use this for initialization
     void Start () {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         startTime = Time.time;
         hit = false;
-                             // gameController.show();
+
+        //shoot sound at init
+        source.PlayOneShot(shootSound, 0.2F);
     }
 
     // Update is called once per frame
@@ -42,6 +57,7 @@ public class Bullet : MonoBehaviour {
         }
 
     }
+
 
     //destroy bullet
     void OnTriggerEnter(Collider other)
@@ -60,6 +76,7 @@ public class Bullet : MonoBehaviour {
                 hitPosition = other.gameObject.transform.position;
                 break;
             case "Tile":
+                
                 //Debug.Log("tile hit");
                 //check occpied
                 sea = other.GetComponent<SeaControler>();
@@ -73,6 +90,8 @@ public class Bullet : MonoBehaviour {
                     {
                         //remove fog
                         sea.fogOff();
+                        //water sound
+                        
                     }
 
                     //두 발 쏘는 특수능력 처리
