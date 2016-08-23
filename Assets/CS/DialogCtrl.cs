@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class DialogCtrl : MonoBehaviour {
+    public Text textui;
     private float startTime;
     private float lifeTime;
 
@@ -20,7 +21,7 @@ public class DialogCtrl : MonoBehaviour {
 
     public void setText(string str)
     {
-        GetComponentInChildren<Text>().text = str;
+        textui.text = str;
     }
 
     public void setLifetime(float f)
