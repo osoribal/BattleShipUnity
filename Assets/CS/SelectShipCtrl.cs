@@ -9,18 +9,28 @@ using UnityEngine.UI;
 public class SelectShipCtrl : MonoBehaviour {
     public GameObject content;
     public GameObject elemPrefab;
+    public GameObject DialogPrefab;
     public Sprite[] shipImage;
     public int userLife; //최소 10칸 최대 20칸
     public int selectedShipCount;    //배 선택 시 선택된 배의 개수
     public int[] selectedShipArr;   //선택된 배의 고유번호 저장
-    
+
     public void OnNextClicked()
     {
         if (selectedShipCount != 5)
+        {
+            DialogCtrl dialog = Instantiate(DialogPrefab).GetComponent<DialogCtrl>();
+            dialog.setLifetime(2.0f);
+            dialog.setText("선택된 배의 개수는 5 개여야 합니다.");
             return;
-        if (userLife < 10  || userLife > 20)
+        }
+        if (userLife < 10 || userLife > 20)
+        {
+            DialogCtrl dialog = Instantiate(DialogPrefab).GetComponent<DialogCtrl>();
+            dialog.setLifetime(2.0f);
+            dialog.setText("선택된 배의 총 칸 수는 10 칸 이상 20 칸 이하여야 합니다.");
             return;
-
+        }
         PlayerPrefs.SetInt("userLife", userLife);
         
         for (int i = 0; i < 5; i++)

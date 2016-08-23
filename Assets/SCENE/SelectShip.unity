@@ -722,7 +722,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1445529327}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1431,6 +1431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 389696631}
   elemPrefab: {fileID: 142298, guid: 9d7e4f6b125df48448c46ce393b59b27, type: 2}
+  DialogPrefab: {fileID: 127004, guid: 9ba3922bfdebd5c41a8cfe3b3eab21a4, type: 2}
   shipImage:
   - {fileID: 21300000, guid: d61dde87a791fda4ebc913db969c8f63, type: 3}
   - {fileID: 21300000, guid: 884a56a9298a46246b5539a0dd55da95, type: 3}
