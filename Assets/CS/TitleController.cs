@@ -11,7 +11,7 @@ public class TitleController : MonoBehaviour {
     {
         //보유골드 표시
         //title 씬에서는 골드의 변동이 없기 때문에 Start 에서만 txt를 지정해준다
-        txt.text = "gold : " + PlayerPrefs.GetInt("gold");
+        txt.text = "Gold : " + PlayerPrefs.GetInt("gold");
     }
 
     public void OnStartButtonClicked()

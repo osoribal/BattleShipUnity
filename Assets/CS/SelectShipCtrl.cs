@@ -78,7 +78,7 @@ public class SelectShipCtrl : MonoBehaviour {
             SceneManager.LoadScene("Title");
         }
         this.GetComponentsInChildren<Text>()[1].text = 
-            "배 수 : " + selectedShipCount + " / 5\n" +
-            "칸 수 : " + userLife + " 칸";
+            "배 : " + selectedShipCount + " / 5\n" +
+            "칸 : " + userLife + " 칸";
     }
 }

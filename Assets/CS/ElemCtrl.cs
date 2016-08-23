@@ -11,23 +11,25 @@ public class ElemCtrl : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        str = "ship length : " + info.shipNum / 10;
-        switch (info.shipNum % 10)
-        {
-            case 2:
-                str = str + "\nskill : 대응 좌표점\n\t 같이 폭발";
-                break;
-            case 3:
-                str = str + "\nskill : 두 발 쏘기";
-                break;
-            case 4:
-                str = str + "\nskill : 보상 up";
-                break;
-            default:
-                str = str + "\nno skill";
-                break;
-        }
-        this.GetComponentInChildren<Text>().text = str + "\nunselected";
+		str = "배 길이 : " + info.shipNum / 10;
+		this.GetComponentInChildren<Text> ().alignByGeometry = true;
+		switch (info.shipNum % 10) {
+		case 2:
+			str = str + "\nskill : 대응 좌표점\n\t 같이 폭발";
+			this.GetComponentInChildren<Text> ().alignByGeometry = false;
+			break;
+		case 3:
+			str = str + "\n   skill : 두 발 쏘기\n";
+			break;
+		case 4:
+			str = str + "\n       skill : 보상 up\n";
+			break;
+		default:
+			str = str + "\n           skill : None\n";
+			break;
+		}
+		this.GetComponentInChildren<Text>().text = str;
+		this.GetComponentInChildren<Image> ().color = Color.black;
         isSelected = false;
         this.gameObject.GetComponent<Button>().onClick.AddListener(() => elemOnClick());
     }
@@ -35,7 +37,8 @@ public class ElemCtrl : MonoBehaviour {
     //이 배가 선택 되었을 때 
     void selected(int i)
     {
-        this.GetComponentInChildren<Text>().text = str + "\nselected";
+        //this.GetComponentInChildren<Text>().text = str + "\nselected";
+		this.GetComponentInChildren<Image> ().color = Color.white;
         isSelected = true;
         index = i;
     }
@@ -43,7 +46,8 @@ public class ElemCtrl : MonoBehaviour {
     //이 배가 선택 해제 될 때
     void unSelected()
     {
-        this.GetComponentInChildren<Text>().text = str + "\nunselected";
+        //this.GetComponentInChildren<Text>().text = str + "\nunselected";
+		this.GetComponentInChildren<Image> ().color = Color.black;
         isSelected = false;
     }
 
