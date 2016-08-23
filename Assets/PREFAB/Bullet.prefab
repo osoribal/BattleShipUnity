@@ -92,7 +92,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1be968b275cae427fad81ddf67c0bb8f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -172,7 +172,6 @@ MonoBehaviour:
   value: 1.5
   gameController: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 1be968b275cae427fad81ddf67c0bb8f, type: 3}
-  waterSound: {fileID: 8300000, guid: b43bbef9732c34ccb8667c41d060d86d, type: 3}
 --- !u!135 &13564212
 SphereCollider:
   m_ObjectHideFlags: 1

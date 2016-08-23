@@ -48,16 +48,14 @@ public class FinishGame : MonoBehaviour {
     {
         //load main title page
         SceneManager.LoadScene("Title");
+
     }
 
     public void onClickGoRandom()
     {
         //load random select ship page
-        //Gold > 1000 : active
-        if (gold >= 1000)
-        { SceneManager.LoadScene("RandomSelect"); }
-        else
-        { }
+       SceneManager.LoadScene("RandomSelect");
+
         
     }
 }
