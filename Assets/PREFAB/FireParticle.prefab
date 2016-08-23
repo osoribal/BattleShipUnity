@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &192156
+--- !u!1 &112592
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 422852}
-  - 198: {fileID: 19853814}
-  - 199: {fileID: 19975486}
+  - 4: {fileID: 489802}
+  - 198: {fileID: 19810784}
+  - 199: {fileID: 19902316}
   m_Layer: 0
   m_Name: FireParticle
   m_TagString: Fire
@@ -17,25 +17,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &422852
+--- !u!4 &489802
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192156}
+  m_GameObject: {fileID: 112592}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 1, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: -89.980194, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!198 &19853814
+--- !u!198 &19810784
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192156}
+  m_GameObject: {fileID: 112592}
   serializedVersion: 2
   lengthInSec: 5
   startDelay:
@@ -389,14 +389,14 @@ ParticleSystem:
       minMaxState: 0
     randomizeRotationDirection: 0
     gravityModifier: 0
-    maxNumParticles: 100
+    maxNumParticles: 10
     rotation3D: 0
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 14
-    radius: 1
-    angle: 25
+    type: 4
+    radius: 0.5
+    angle: 5
     length: 5
     boxX: 1
     boxY: 1
@@ -410,13 +410,13 @@ ParticleSystem:
     m_MeshNormalOffset: 0
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
-    randomDirection: 0
+    randomDirection: 1
   EmissionModule:
     enabled: 1
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 10
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -471,14 +471,14 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
-          inSlope: 1
-          outSlope: 1
+          value: 0.27027023
+          inSlope: 0.7297298
+          outSlope: 0.7297298
           tangentMode: 10
         - time: 1
           value: 1
-          inSlope: 1
-          outSlope: 1
+          inSlope: 0.7297298
+          outSlope: 0.7297298
           tangentMode: 10
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1529,12 +1529,12 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
---- !u!199 &19975486
+--- !u!199 &19902316
 ParticleSystemRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192156}
+  m_GameObject: {fileID: 112592}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1558,7 +1558,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -1579,5 +1579,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 192156}
+  m_RootGameObject: {fileID: 112592}
   m_IsPrefabParent: 1
