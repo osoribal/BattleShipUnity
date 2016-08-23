@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 416774}
   - 33: {fileID: 3310056}
-  - 136: {fileID: 13642936}
   - 23: {fileID: 2395714}
   m_Layer: 0
   m_Name: Cylinder
@@ -46,7 +45,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 486190}
   - 33: {fileID: 3345260}
-  - 65: {fileID: 6526942}
   - 23: {fileID: 2335624}
   m_Layer: 0
   m_Name: Cube
@@ -64,7 +62,7 @@ Transform:
   m_LocalRotation: {x: -0.5770865, y: 0.6834718, z: -0.28297535, w: -0.34606725}
   m_LocalPosition: {x: -1.5, y: 0.39, z: 0.05}
   m_LocalScale: {x: 0.3, y: 1, z: 0.3}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 51.834797, y: -166.29019, z: -73.6652}
   m_Children: []
   m_Father: {fileID: 486190}
   m_RootOrder: 0
@@ -89,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.26, y: 0, z: -0.03}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.3, z: 0.5}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -205,18 +203,6 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6526942
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177664}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11489804
@@ -236,19 +222,6 @@ MonoBehaviour:
   direction: 0
   placeCtrl: {fileID: 0}
   occ: 0
---- !u!136 &13642936
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157104}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
