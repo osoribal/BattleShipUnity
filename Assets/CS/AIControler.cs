@@ -42,9 +42,9 @@ public class AIControler : MonoBehaviour {
         {
             DialogCtrl dialog = Instantiate(DialogPrefab).GetComponent<DialogCtrl>();
             dialog.setLifetime(1.0f);
-            dialog.setText("AI turn");
+            dialog.setText("AI 턴 입니다.");
             gc.turn = AI_BLOCK;    //block turn
-            int time = Random.Range(1,3);
+			int time = Random.Range(2, 3);
             Invoke("shooting", time);
         }
 	}

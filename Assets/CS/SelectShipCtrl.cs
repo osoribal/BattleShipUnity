@@ -21,14 +21,14 @@ public class SelectShipCtrl : MonoBehaviour {
         {
             DialogCtrl dialog = Instantiate(DialogPrefab).GetComponent<DialogCtrl>();
             dialog.setLifetime(2.0f);
-            dialog.setText("선택된 배의 개수는 5 개여야 합니다.");
+            dialog.setText("선택한 배의 개수는 5개여야 합니다.");
             return;
         }
         if (userLife < 10 || userLife > 20)
         {
             DialogCtrl dialog = Instantiate(DialogPrefab).GetComponent<DialogCtrl>();
             dialog.setLifetime(2.0f);
-            dialog.setText("선택된 배의 총 칸 수는 10 칸 이상 20 칸 이하여야 합니다.");
+            dialog.setText("선택한 배의 총 칸 수는\n10칸 이상 20칸 이하여야 합니다.");
             return;
         }
         PlayerPrefs.SetInt("userLife", userLife);
