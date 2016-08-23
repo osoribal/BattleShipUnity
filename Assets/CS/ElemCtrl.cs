@@ -64,6 +64,9 @@ public class ElemCtrl : MonoBehaviour {
             //배 선택 개수 제한
             if (selectCtrl.selectedShipCount == 5)
             {
+                DialogCtrl dialog = Instantiate(selectCtrl.DialogPrefab).GetComponent<DialogCtrl>();
+                dialog.setLifetime(2.0f);
+                dialog.setText("선택된 배의 개수는 5 개여야 합니다.");
                 return;
             }
             //배가 선택되어 있지 않으므로 선택
