@@ -91,14 +91,11 @@ public class PlaceShipCtrl : MonoBehaviour {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out rayHit, rayLength))
             {
+                print("touch");
                 //배를 터치했다면
                 if (rayHit.transform.gameObject.tag == "Ship")
                 {
-                    //잉여 회전 버튼 제거
-                    //for (int i = 0; i < 5; i++)
-                    //{
-                    //    ships[i].GetComponent<Ship>().cancle();
-                    //}
+                    print("touch ship");
                     rotButton.onClick.RemoveAllListeners();
                     rotButton.onClick.AddListener(() => rayHit.transform.gameObject.GetComponent<Ship>().rotate());
                     //배의 위치 이동 및 회전을 담당하는 코루틴 호출
