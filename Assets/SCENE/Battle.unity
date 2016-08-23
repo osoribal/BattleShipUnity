@@ -1052,10 +1052,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e1696c1c7ad7114d840daa90e1ca268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DialogPrefab: {fileID: 127004, guid: 9ba3922bfdebd5c41a8cfe3b3eab21a4, type: 2}
   gc: {fileID: 1189339794}
   camera: {fileID: 1699762683}
   bulletPrefab: {fileID: 102334, guid: 992ba4307fd000841a5cfc19f4ee5ce1, type: 2}
-  arrowPrefab: {fileID: 182016, guid: 51fa9f0584225af4eb19ae5dfa9e3310, type: 2}
+  arrowPrefab: {fileID: 156754, guid: b51e5601aa4366b4e849f384cef8b625, type: 2}
 --- !u!4 &728480217
 Transform:
   m_ObjectHideFlags: 0
@@ -2171,6 +2172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 102334, guid: 992ba4307fd000841a5cfc19f4ee5ce1, type: 2}
   arrowPrefab: {fileID: 156754, guid: b51e5601aa4366b4e849f384cef8b625, type: 2}
+  DialogPrefab: {fileID: 127004, guid: 9ba3922bfdebd5c41a8cfe3b3eab21a4, type: 2}
 --- !u!4 &2125744754
 Transform:
   m_ObjectHideFlags: 0
