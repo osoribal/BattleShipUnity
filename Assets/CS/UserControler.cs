@@ -6,23 +6,38 @@ public class UserControler : MonoBehaviour {
     GameControler gc;
     public GameObject bulletPrefab;
     public GameObject arrowPrefab;  //맞을 지점을 표시할 프리팹
+    public GameObject DialogPrefab;
     bool firstHit;
+    bool showDialog;
 
     // Use this for initialization
     void Start () {
         turn = 0;
         gc = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         firstHit = true;
+        showDialog = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (gc.turn == 0 && Input.GetButtonDown("Fire1"))
+        if (gc.turn == 0)
         {
-            gc.turn = -1;   //block
-            StartCoroutine("shot");
+            if (showDialog == true)
+            {
+                DialogCtrl dialog = Instantiate(DialogPrefab).GetComponent<DialogCtrl>();
+                dialog.setLifetime(1.0f);
+                dialog.setText("당신의 턴 입니다.");
+                showDialog = false;
+            }
 
+            if (Input.GetButtonDown("Fire1"))
+            {
+                gc.turn = -1;   //block
+                showDialog = true;
+                StartCoroutine("shot");
+            }
         }
+        
     }
     
     public IEnumerator shot()

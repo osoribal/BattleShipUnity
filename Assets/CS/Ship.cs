@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Ship : MonoBehaviour
 {
+    
+
     //direction info
     private const int EAST = 1;
     private const int WEST = 3;
@@ -138,7 +140,19 @@ public class Ship : MonoBehaviour
                 //배의 위치 변경
                 transform.position = placeCtrl.place(shipID / 10, direction, x, y);
             }
+            else
+            {
+                DialogCtrl dialog = Instantiate(placeCtrl.DialogPrefab).GetComponent<DialogCtrl>();
+                dialog.setLifetime(2.0f);
+                dialog.setText("다른 배가 있어 회전할 수 없습니다.");
+            }
 
+        }
+        else
+        {
+            DialogCtrl dialog = Instantiate(placeCtrl.DialogPrefab).GetComponent<DialogCtrl>();
+            dialog.setLifetime(2.0f);
+            dialog.setText("격자 밖을 벗어날 수 있어 회전할 수 없습니다.");
         }
         //set occupied
         placeCtrl.setOccupied(shipID / 10, direction, x, y, 1);

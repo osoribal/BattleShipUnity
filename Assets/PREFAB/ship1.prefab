@@ -93,7 +93,6 @@ MonoBehaviour:
   y: 0
   direction: 0
   placeCtrl: {fileID: 0}
-  rotateButPrefab: {fileID: 105424, guid: 07b3e1625e709704fb3e08fb45bf1fa2, type: 2}
   occ: 0
 --- !u!1001 &100100000
 Prefab:
