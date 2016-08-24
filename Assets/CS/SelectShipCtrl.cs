@@ -60,8 +60,8 @@ public class SelectShipCtrl : MonoBehaviour {
                 //스냅샷 
                 elem.GetComponentsInChildren<Image>()[1].overrideSprite = shipImage[UserManager.list[i].shipNum / 10 - 1];
                 //배의 정보를 항목에 전달
-                elem.GetComponent<ElemCtrl>().info = UserManager.list[i];
-                elem.GetComponent<ElemCtrl>().selectCtrl = this;
+                elem.GetComponent<SelectElemCtrl>().info = UserManager.list[i];
+                elem.GetComponent<SelectElemCtrl>().selectCtrl = this;
                 //리스트에 추가
                 elem.transform.SetParent(content.transform, false);
             }

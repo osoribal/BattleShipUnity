@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ListCtrl : MonoBehaviour {
+public class ListShipCtrl : MonoBehaviour {
     public GameObject content;
     public GameObject elemPrefab;
     public Sprite[] shipImage;
@@ -33,21 +33,22 @@ public class ListCtrl : MonoBehaviour {
             switch(list[i].shipNum % 10)
             {
                 case 2:
-                    str = str + "\nskill : 대응 좌표\n\t 같이 폭발";
+                    str = str + "\nskill : 대응 좌표점\n\t 같이 폭발";
+                    this.GetComponentInChildren<Text>().alignByGeometry = false;
                     break;
                 case 3:
-                    str = str + "\nskill : 두 발 쏘기";
+                    str = str + "\n   skill : 두 발 쏘기\n";
                     break;
                 case 4:
-                    str = str + "\nskill : 보상 up";
+                    str = str + "\n       skill : 보상 up\n";
                     break;
                 default:
-                    str = str + "\nno skill";
+                    str = str + "\n           skill : None\n";
                     break;
             }
             elem.GetComponentInChildren<Text>().text = str;
             //필요없는 ElemCtrl 삭제
-            Destroy(elem.GetComponent<ElemCtrl>());
+            //Destroy(elem.GetComponent<ElemCtrl>());
             //배치
             elem.transform.SetParent(content.transform, false);
         }
