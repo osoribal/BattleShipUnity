@@ -56,28 +56,27 @@ public class ListShipCtrl : MonoBehaviour {
             //스냅샷 
             elems[i].GetComponentsInChildren<Image>()[1].overrideSprite = shipImage[UserManager.list[i].shipNum / 10 - 1];
             //배의 정보를 string으로 만들기
-            string str = "배 길이 : " + UserManager.list[i].shipNum / 10
-                + "\n보유 수 : " + UserManager.list[i].count;
-            switch (UserManager.list[i].shipNum % 10)
-            {
-                case 2:
-                    str = str + "\nskill : 대응 좌표\n같이 폭발";
-                    //this.GetComponentInChildren<Text>().alignByGeometry = false;
-                    break;
-                case 3:
-                    str = str + "\nskill : 두 발 쏘기\n";
-                    break;
-                case 4:
-                    str = str + "\nskill : 보상 up\n";
-                    break;
-                default:
-                    str = str + "\nskill : None\n";
-                    break;
-            }
-            elems[i].GetComponentInChildren<Text>().text = str;
-            //리스너 장착
-            int buf = UserManager.list[i].shipNum;
-            elems[i].GetComponentsInChildren<Button>()[1].onClick.AddListener(() => removeElem(buf));
+
+			string str = "배 길이 : " + UserManager.list[i].shipNum / 10
+				+ "\n보유 수 : " + UserManager.list[i].count;
+			elems[i].GetComponentInChildren<Text>().alignByGeometry = true;
+			switch (UserManager.list[i].shipNum % 10) {
+			case 2:
+				str = str + "\nskill : 동귀어진";
+				break;
+			case 3:
+				str = str + "\nskill : 두 발 쏘기";
+				break;
+			case 4:
+				str = str + "\nskill : 보상 up";
+				break;
+			default:
+				str = str + "\nskill : None";
+				break;
+			}
+			elems[i].GetComponentInChildren<Text>().text = str;
+			int buf = UserManager.list[i].shipNum;
+			elems[i].GetComponentsInChildren<Button>()[1].onClick.AddListener(() => removeElem(buf));
             //배치
             elems[i].transform.SetParent(content.transform, false);
         }

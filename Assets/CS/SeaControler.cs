@@ -8,11 +8,11 @@ public class SeaControler : MonoBehaviour {
     GameObject fire;
     
     public int occpied; //현재 타일에 배가 있는지 검사할 때 이용
-    GameControler gameController;   //여기가 아니라 start에서 초기화해야 한다.
+    //GameControler gameController;   //여기가 아니라 start에서 초기화해야 한다.
 
     void Start()
     {
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
+        //gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         occpied = 0;
     }
 
