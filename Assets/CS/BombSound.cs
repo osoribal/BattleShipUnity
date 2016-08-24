@@ -19,6 +19,7 @@ public class BombSound : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll)
     {
+        print("bomb sound : " + PlayerPrefs.GetString(EFFECT));
         if (PlayerPrefs.GetString(EFFECT) == ON)
         {   
             //bomb sound

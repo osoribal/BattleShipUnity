@@ -57,6 +57,7 @@ public class RandomSelectButton : MonoBehaviour {
         }
         else {
             //alert message - you can't buy a ship.
+            Destroy(ship);
             alertCantBuy();
         }
     }
