@@ -9,7 +9,7 @@ using System.IO;
 
 //save and load datas
 public class UserManager : MonoBehaviour {
-    string path;
+    static string path;
     public static UserManager control;
     public static List<ShipInfo> list = new List<ShipInfo>();   //보유중인 배 list
 
@@ -98,7 +98,7 @@ public class UserManager : MonoBehaviour {
     
     //골드 획득/사용 시 호출
     //파라미터 : 골드 획득/사용 시 변동 값
-    public void updateGold(int g)
+    public static void updateGold(int g)
     {
         
         int gold = PlayerPrefs.GetInt("gold");
@@ -107,6 +107,26 @@ public class UserManager : MonoBehaviour {
         PlayerPrefs.SetInt("gold", gold);   //gold 값 파일로 저장
         print("gold : " + gold);
         //다른 씬에서는 PlayerPrefs.GetInt("gold")를 통해 gold 값을 불러올 수 있다.
+    }
+
+    //배를 삭제하는 함수
+    public static void removeShip(int shipNum)
+    {
+        ShipInfo findResult = list.Find(x => x.shipNum.Equals(shipNum));
+        
+        findResult.count--;
+        if (findResult.count == 0)
+        {
+            list.Remove(findResult);
+        }
+
+
+        //파일로 저장
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(path);
+
+        bf.Serialize(file, list);
+        file.Close();
     }
 
     //새로운 배를 저장하는 함수

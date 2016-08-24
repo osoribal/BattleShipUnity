@@ -8,7 +8,8 @@ public class ListShipCtrl : MonoBehaviour {
     public GameObject content;
     public GameObject elemPrefab;
     public Sprite[] shipImage;
-    List<ShipInfo> list = UserManager.list;
+    public GameObject DialogPrefab;
+    GameObject[] elems;
 
     void Update()
     {
@@ -21,37 +22,64 @@ public class ListShipCtrl : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //화면에 배들을 버튼으로 출력
-        for (int i = 0; i < list.Count; i++)
+        listElems();
+    }
+
+    void removeElem(int shipNum)
+    {
+        UserManager.removeShip(shipNum);
+        listElems();
+
+        DialogCtrl dialog = Instantiate(DialogPrefab).GetComponent<DialogCtrl>();
+        dialog.setLifetime(1.0f);
+        dialog.setText("배가 판매되었습니다.\n + 100 Gold\n");
+        UserManager.updateGold(100);
+    }
+
+    void initElems()
+    {
+        if (elems != null)
         {
-            GameObject elem = (GameObject)Instantiate(elemPrefab) as GameObject;
-            //스냅샷 
-            elem.GetComponentsInChildren<Image>()[1].overrideSprite = shipImage[list[i].shipNum / 10 - 1];
-            //배의 정보를 string으로 만들기
-            string str = "배 길이 : " + list[i].shipNum / 10
-                + "\n보유 수 : " + list[i].count;
-			elem.GetComponentInChildren<Text> ().alignByGeometry = true;
-			switch (list[i].shipNum % 10) {
-			case 2:
-				str = str + "\nskill : 대응 좌표점\n\t 같이 폭발";
-				elem.GetComponentInChildren<Text> ().alignByGeometry = false;
-				break;
-			case 3:
-				str = str + "\n   skill : 두 발 쏘기\n";
-				break;
-			case 4:
-				str = str + "\n       skill : 보상 up\n";
-				break;
-			default:
-				str = str + "\n           skill : None\n";
-				break;
-			}
-            elem.GetComponentInChildren<Text>().text = str;
-            //필요없는 ElemCtrl 삭제
-            //Destroy(elem.GetComponent<ElemCtrl>());
-            //배치
-            elem.transform.SetParent(content.transform, false);
+            for (int i = 0; i < elems.Length; i++)
+                Destroy(elems[i]);
         }
+        elems = new GameObject[UserManager.list.Count];
     }
     
+    void listElems()
+    {
+        initElems();
+        //화면에 배들을 버튼으로 출력
+        for (int i = 0; i < UserManager.list.Count; i++)
+        {
+            elems[i] = (GameObject)Instantiate(elemPrefab) as GameObject;
+            //스냅샷 
+            elems[i].GetComponentsInChildren<Image>()[1].overrideSprite = shipImage[UserManager.list[i].shipNum / 10 - 1];
+            //배의 정보를 string으로 만들기
+
+			string str = "배 길이 : " + UserManager.list[i].shipNum / 10
+				+ "\n보유 수 : " + UserManager.list[i].count;
+			elems[i].GetComponentInChildren<Text>().alignByGeometry = true;
+			switch (UserManager.list[i].shipNum % 10) {
+			case 2:
+				str = str + "\nskill : 동귀어진";
+				elems[i].GetComponentInChildren<Text>().alignByGeometry = true;
+				break;
+			case 3:
+				str = str + "\nskill : 두 발 쏘기\n";
+				break;
+			case 4:
+				str = str + "\nskill : 보상 up\n";
+				break;
+			default:
+				str = str + "\nskill : None\n";
+				break;
+			}
+			elems[i].GetComponentInChildren<Text>().text = str;
+			int buf = UserManager.list[i].shipNum;
+			elems[i].GetComponentsInChildren<Button>()[1].onClick.AddListener(() => removeElem(buf));
+            //배치
+            elems[i].transform.SetParent(content.transform, false);
+        }
+    }
 }
