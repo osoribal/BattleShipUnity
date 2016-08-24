@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BackgroundMusic : MonoBehaviour {
     public static BackgroundMusic instance;
-    private AudioSource source;
+    private static AudioSource source;
     public AudioClip back;
 
     //option string
@@ -36,8 +36,8 @@ public class BackgroundMusic : MonoBehaviour {
         }
 	}
 
-    public void musicOn() { source.Play(); }
-    public void musicOff() { source.Stop();  }
+    public static void musicOn() { source.Play(); }
+    public static void musicOff() { source.Stop();  }
 	// Update is called once per frame
 	void Update () {
     }

@@ -78,12 +78,14 @@ public class Option : MonoBehaviour {
         {
             UserManager.opInfo.back = ON;
             PlayerPrefs.SetString(BACKGROUND, ON);
+			BackgroundMusic.musicOn ();
         }
         //background off
         if (newValue == false)
         {
             UserManager.opInfo.back = OFF;
             PlayerPrefs.SetString(BACKGROUND, OFF);
+			BackgroundMusic.musicOff ();
         }
     }
 }
