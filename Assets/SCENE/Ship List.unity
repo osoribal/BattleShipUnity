@@ -682,6 +682,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8e802412d920aca49bdb3d9fb23caed6, type: 3}
   - {fileID: 21300000, guid: a4b7f256a7bd8ba4fb6b0e8e97306b48, type: 3}
   - {fileID: 21300000, guid: dc999bc9280b20d44b3421d0a90ce3de, type: 3}
+  DialogPrefab: {fileID: 127004, guid: 9ba3922bfdebd5c41a8cfe3b3eab21a4, type: 2}
 --- !u!114 &1492498205
 MonoBehaviour:
   m_ObjectHideFlags: 0

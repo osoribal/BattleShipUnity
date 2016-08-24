@@ -50,7 +50,7 @@ public class RandomSelectButton : MonoBehaviour {
 
             //gold decrease save
             //PlayerPrefs.SetInt("gold", gold);
-            userManager.updateGold(-1000);
+            UserManager.updateGold(-1000);
             //get current money - update state
             gold = PlayerPrefs.GetInt("gold");
             alertSelectResult();
