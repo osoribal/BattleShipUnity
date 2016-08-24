@@ -2,6 +2,10 @@
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
+    const string EFFECT = "Effect";
+    const string ON = "on";
+    const string OFF = "off";
+
     public bool turnChange; //발사 후 턴을 바꿀 지 다시 쏠지 결정하는 변수
 
     public Vector3 from;
@@ -9,9 +13,11 @@ public class Bullet : MonoBehaviour {
     public float value; //총알의 속도를 조절하는 변수
     private float startTime;
     public GameControler gameController;    //여기가 아니라 start에서 초기화해야 한다.
+    
     SeaControler sea;
     bool hit;   //배를 맞췄는지 여부를 저장하는 변수
     Vector3 hitPosition; //맞은 배의 좌표
+    Vector3 aimPosition; //number 2 option - aim position
     //turn
     public const int USER_TURN = 0;
     public const int AI_TURN = 1;
@@ -26,6 +32,8 @@ public class Bullet : MonoBehaviour {
     //shoot sound - bullet shoot start
     public AudioClip shootSound;
 
+    
+
 
 
     //sound awake
@@ -37,11 +45,15 @@ public class Bullet : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
+        
         startTime = Time.time;
         hit = false;
 
-        //shoot sound at init
-        source.PlayOneShot(shootSound, 1F);
+        if (PlayerPrefs.GetString(EFFECT) == ON)
+        {         //shoot sound at init
+            source.PlayOneShot(shootSound, 1F);
+        }
+
     }
 
     // Update is called once per frame
@@ -63,6 +75,8 @@ public class Bullet : MonoBehaviour {
     //destroy bullet
     void OnTriggerEnter(Collider other)
     {
+
+
         //gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         switch (other.gameObject.tag)
         {
@@ -75,6 +89,13 @@ public class Bullet : MonoBehaviour {
                 //ship hit
                 hit = true;
                 hitPosition = other.gameObject.transform.position;
+                //bomb with enemy at same point
+                int num = gameController.getHittedShipNumber(hitPosition);
+                print("num : " + num);
+                if (num%10 == 2) {
+                    bombWithShip(hitPosition);
+                 }
+                
                 break;
             case "Tile":
                 
@@ -91,7 +112,6 @@ public class Bullet : MonoBehaviour {
                     {
                         //remove fog
                         sea.fogOff();
-                        //water sound
                         
                     }
 
@@ -178,6 +198,32 @@ public class Bullet : MonoBehaviour {
             case AI_BLOCK:
                 gameController.turn = USER_TURN;
                 break;
+        }
+    }
+
+    void bombWithShip(Vector3 position) {
+        //hitted ship - user
+        //change to ai grid
+        if (position.x > 0) {
+            print("user hitted");
+            aimPosition.x = position.x - 12;
+            aimPosition.y = position.y;
+            aimPosition.z = position.z;
+            //shoot
+            gameController.shoot(new Vector3(2, 1, 0), aimPosition);
+        }
+
+        //hitted ship - ai
+        //change to user grid
+        if (position.x < 0)
+        {
+            print("ai hitted");
+            aimPosition.x = position.x + 12;
+            aimPosition.y = position.y;
+            aimPosition.z = position.z;
+
+            //shoot
+            gameController.shoot(new Vector3(-12, 2, 0), aimPosition);
         }
     }
 

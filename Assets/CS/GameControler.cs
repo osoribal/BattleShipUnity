@@ -7,7 +7,8 @@ public class GameControler : MonoBehaviour {
     public int turn;
     public GameObject tilePrefab;
     UserManager userManager;
-    
+    public GameObject bulletPrefab;
+
     //public GameObject[,] userGrid = new GameObject[10, 10];
     //public GameObject[,] aiGrid = new GameObject[10, 10];
     public SeaControler[,] userGridCtrl = new SeaControler[10, 10];
@@ -115,11 +116,19 @@ public class GameControler : MonoBehaviour {
         }
 
         //select ai ships
-        shipID[5] = 13;
-        shipID[6] = 12;
-        shipID[7] = 12;
-        shipID[8] = 12;
-        shipID[9] = 12;
+        //same as 0 1 2
+        shipID[5] = ships[0].shipID;
+        shipID[6] = ships[1].shipID;
+        shipID[7] = ships[2].shipID;
+        //same size with 3 4
+        int size1 = ships[3].shipID/10;
+        int size2 = ships[4].shipID/10;
+        //random option
+        int op1 = Random.Range(0, 5);
+        int op2 = Random.Range(0, 5);
+        //make ship number
+        shipID[8] = (size1 * 10) + op1;
+        shipID[9] = (size2 * 10) + op2;
 
         //ships - initialize
         for (int s = 5; s < 10; s++)
@@ -317,6 +326,7 @@ public class GameControler : MonoBehaviour {
 
         //locate at x, 0, z
         shipObjs[shipCount++] = (GameObject)Instantiate(shipPrefabs[size-1], pos, Quaternion.Euler(rot));
+        
     }
 
     void createUserShip(Ship ship)
@@ -674,6 +684,27 @@ public class GameControler : MonoBehaviour {
         aiMap[x, y]--;
     }
 
+    //check who is hitted
+    public int getHittedShipNumber(Vector3 position)
+    {
+        int hitted = 5;
+        //find which ship is hitted
+        for (int i = 5; i < 10; i++)
+        {
+            if (shipObjs[i].transform.position == position)
+            {
+                hitted = i;
+                break;
+            }
+        }
+
+        int gridX = ships[hitted].x;
+        int gridY = ships[hitted].y;
+
+        int num = ships[hitted].shipID;
+        return num;
+    }
+
     //check all parts of ship is hitted
     public void checkShipHitted(Vector3 position)
     {
@@ -787,5 +818,17 @@ public class GameControler : MonoBehaviour {
                 }
                 break;
         }
+    }
+
+    //shoot bullet at option number 2
+    public void shoot(Vector3 from, Vector3 to)
+    {
+        //탄환 생성
+        GameObject bullet = (GameObject)Instantiate(bulletPrefab, from, Quaternion.identity);
+        //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
+        Bullet bc = bullet.GetComponent<Bullet>();
+        bc.from = from;
+        bc.to = to;
+        bc.turnChange = false;
     }
 }

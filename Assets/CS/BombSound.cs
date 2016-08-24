@@ -3,7 +3,9 @@ using System.Collections;
 
 public class BombSound : MonoBehaviour {
 
-
+    const string EFFECT = "Effect";
+    const string ON = "on";
+    const string OFF = "off";
     //bom sound - bomb with ship
     public AudioClip bombSound;
     private AudioSource bombSource;
@@ -17,8 +19,12 @@ public class BombSound : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll)
     {
-        //bomb sound
-        bombSource.PlayOneShot(bombSound, 1F);
+        if (PlayerPrefs.GetString(EFFECT) == ON)
+        {   
+            //bomb sound
+            bombSource.PlayOneShot(bombSound, 1F);
+        }
+
     }
 
     // Use this for initialization

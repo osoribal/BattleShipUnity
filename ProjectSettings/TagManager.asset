@@ -13,6 +13,7 @@ TagManager:
   - UserManager
   - Fire
   - Throw
+  - AI
   layers:
   - Default
   - TransparentFX

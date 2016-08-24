@@ -63,16 +63,15 @@ public class ListShipCtrl : MonoBehaviour {
 			switch (UserManager.list[i].shipNum % 10) {
 			case 2:
 				str = str + "\nskill : 동귀어진";
-				elems[i].GetComponentInChildren<Text>().alignByGeometry = true;
 				break;
 			case 3:
-				str = str + "\nskill : 두 발 쏘기\n";
+				str = str + "\nskill : 두 발 쏘기";
 				break;
 			case 4:
-				str = str + "\nskill : 보상 up\n";
+				str = str + "\nskill : 보상 up";
 				break;
 			default:
-				str = str + "\nskill : None\n";
+				str = str + "\nskill : None";
 				break;
 			}
 			elems[i].GetComponentInChildren<Text>().text = str;
