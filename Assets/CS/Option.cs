@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Option : MonoBehaviour {
 
     OptionInfo opInfo = new OptionInfo(); //option information
+    
     //option string
     const string EFFECT = "Effect";
     const string BACKGROUND = "Back";
@@ -60,12 +61,12 @@ public class Option : MonoBehaviour {
         //effect on
         if (newValue == true) {
             UserManager.opInfo.effect = ON;
-            Debug.Log(opInfo.effect + " true" );
+            PlayerPrefs.SetString(EFFECT, ON);
         }
         //effect off
         if (newValue == false) {
             UserManager.opInfo.effect = OFF;
-            Debug.Log(opInfo.effect + " false" );
+            PlayerPrefs.SetString(EFFECT, OFF);
         }
     }
 
@@ -76,15 +77,12 @@ public class Option : MonoBehaviour {
         if (newValue == true)
         {
             UserManager.opInfo.back = ON;
-            Debug.Log(opInfo.back + " true" );
             PlayerPrefs.SetString(BACKGROUND, ON);
         }
         //background off
         if (newValue == false)
         {
-
             UserManager.opInfo.back = OFF;
-            Debug.Log(opInfo.back + " false" );
             PlayerPrefs.SetString(BACKGROUND, OFF);
         }
     }

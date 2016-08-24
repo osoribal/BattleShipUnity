@@ -32,12 +32,13 @@ public class BackgroundMusic : MonoBehaviour {
         string onOff = PlayerPrefs.GetString(BACKGROUND);
         print("back : " + onOff);
         if (onOff == ON) {
-            source.Play();
+            musicOn();
         }
 	}
-	
+
+    public void musicOn() { source.Play(); }
+    public void musicOff() { source.Stop();  }
 	// Update is called once per frame
 	void Update () {
-	
-	}
+    }
 }
