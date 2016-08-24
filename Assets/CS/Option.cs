@@ -82,7 +82,8 @@ public class Option : MonoBehaviour {
         {
             UserManager.opInfo.back = ON;
             PlayerPrefs.SetString(BACKGROUND, ON);
-            //music.musicOn();
+
+			BackgroundMusic.musicOn ();
             music.trigger = true;
         }
         //background off
@@ -90,6 +91,8 @@ public class Option : MonoBehaviour {
         {
             UserManager.opInfo.back = OFF;
             PlayerPrefs.SetString(BACKGROUND, OFF);
+
+			BackgroundMusic.musicOff ();
             // music.musicOff();
             music.trigger = true;
         }
