@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ElemCtrl : MonoBehaviour {
+public class SelectElemCtrl : MonoBehaviour {
     public ShipInfo info;   //배의 정보
     public SelectShipCtrl selectCtrl;
     bool isSelected; //이 버튼이 선택되었는지 여부 저장
