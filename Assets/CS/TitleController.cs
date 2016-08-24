@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TitleController : MonoBehaviour {
     //골드 보유 ui
     public Text txt;
+    public Canvas help;
     
     void Start()
     {
@@ -33,6 +34,11 @@ public class TitleController : MonoBehaviour {
 	{
 		SceneManager.LoadScene("Option");
 	}
+
+    public void OnHelpClicked()
+    {
+        Instantiate(help);
+    }
 
     void Update()
     {
