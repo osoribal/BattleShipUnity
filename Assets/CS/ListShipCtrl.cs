@@ -30,22 +30,22 @@ public class ListShipCtrl : MonoBehaviour {
             //배의 정보를 string으로 만들기
             string str = "배 길이 : " + list[i].shipNum / 10
                 + "\n보유 수 : " + list[i].count;
-            switch(list[i].shipNum % 10)
-            {
-                case 2:
-                    str = str + "\nskill : 대응 좌표점\n\t 같이 폭발";
-                    this.GetComponentInChildren<Text>().alignByGeometry = false;
-                    break;
-                case 3:
-                    str = str + "\n   skill : 두 발 쏘기\n";
-                    break;
-                case 4:
-                    str = str + "\n       skill : 보상 up\n";
-                    break;
-                default:
-                    str = str + "\n           skill : None\n";
-                    break;
-            }
+			elem.GetComponentInChildren<Text> ().alignByGeometry = true;
+			switch (list[i].shipNum % 10) {
+			case 2:
+				str = str + "\nskill : 대응 좌표점\n\t 같이 폭발";
+				elem.GetComponentInChildren<Text> ().alignByGeometry = false;
+				break;
+			case 3:
+				str = str + "\n   skill : 두 발 쏘기\n";
+				break;
+			case 4:
+				str = str + "\n       skill : 보상 up\n";
+				break;
+			default:
+				str = str + "\n           skill : None\n";
+				break;
+			}
             elem.GetComponentInChildren<Text>().text = str;
             //필요없는 ElemCtrl 삭제
             //Destroy(elem.GetComponent<ElemCtrl>());
