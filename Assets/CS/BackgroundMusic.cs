@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BackgroundMusic : MonoBehaviour {
     public static BackgroundMusic instance;
-    private AudioSource source;
+    private static AudioSource source;
     public AudioClip back;
 
     //option string
@@ -11,6 +11,9 @@ public class BackgroundMusic : MonoBehaviour {
     const string BACKGROUND = "Back";
     const string ON = "on";
     const string OFF = "off";
+
+    public string state;
+    public bool trigger;
 
     void Awake()
     {
@@ -25,20 +28,31 @@ public class BackgroundMusic : MonoBehaviour {
         }
 
         source = GetComponent<AudioSource>();
+        print("awake");
     }
 
 	// Use this for initialization
 	void Start () {
-        string onOff = PlayerPrefs.GetString(BACKGROUND);
-        print("back : " + onOff);
-        if (onOff == ON) {
+        state = PlayerPrefs.GetString(BACKGROUND);
+        trigger = false;
+        print("back : " + state);
+        if (state == OFF)
+        {
+            musicOff();
+        }
+        else {
             musicOn();
         }
 	}
 
-    public void musicOn() { source.Play(); }
-    public void musicOff() { source.Stop();  }
+    public static void musicOn() { source.Play(); }
+    public static void musicOff() { source.Stop(); }
+
 	// Update is called once per frame
 	void Update () {
     }
+
+    
+
+    
 }

@@ -49,6 +49,7 @@ public class Bullet : MonoBehaviour {
         startTime = Time.time;
         hit = false;
 
+        print("shoot sound : " + PlayerPrefs.GetString(EFFECT));
         if (PlayerPrefs.GetString(EFFECT) == ON)
         {         //shoot sound at init
             source.PlayOneShot(shootSound, 1F);

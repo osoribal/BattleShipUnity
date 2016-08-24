@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Option : MonoBehaviour {
 
     OptionInfo opInfo = new OptionInfo(); //option information
+    BackgroundMusic music;
     
     //option string
     const string EFFECT = "Effect";
@@ -38,6 +39,7 @@ public class Option : MonoBehaviour {
         else
         { togBack.isOn = false; }
 
+        print("option effect sound : " + PlayerPrefs.GetString(EFFECT));
         if (PlayerPrefs.GetString(EFFECT) == ON)
         { togEffect.isOn = true;  }
         else
@@ -62,11 +64,13 @@ public class Option : MonoBehaviour {
         if (newValue == true) {
             UserManager.opInfo.effect = ON;
             PlayerPrefs.SetString(EFFECT, ON);
+            print("saved effect sound on : " + PlayerPrefs.GetString(EFFECT));
         }
         //effect off
         if (newValue == false) {
             UserManager.opInfo.effect = OFF;
             PlayerPrefs.SetString(EFFECT, OFF);
+            print("saved effect sound off: " + PlayerPrefs.GetString(EFFECT));
         }
     }
 
@@ -78,12 +82,16 @@ public class Option : MonoBehaviour {
         {
             UserManager.opInfo.back = ON;
             PlayerPrefs.SetString(BACKGROUND, ON);
+            //music.musicOn();
+            music.trigger = true;
         }
         //background off
         if (newValue == false)
         {
             UserManager.opInfo.back = OFF;
             PlayerPrefs.SetString(BACKGROUND, OFF);
+            // music.musicOff();
+            music.trigger = true;
         }
     }
 }
