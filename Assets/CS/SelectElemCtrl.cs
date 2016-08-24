@@ -15,8 +15,7 @@ public class SelectElemCtrl : MonoBehaviour {
 		this.GetComponentInChildren<Text> ().alignByGeometry = true;
 		switch (info.shipNum % 10) {
 		case 2:
-			str = str + "\nskill : 대응 좌표점\n\t 같이 폭발";
-			this.GetComponentInChildren<Text> ().alignByGeometry = false;
+			str = str + "\n    skill : 동귀어진\n";
 			break;
 		case 3:
 			str = str + "\n   skill : 두 발 쏘기\n";
