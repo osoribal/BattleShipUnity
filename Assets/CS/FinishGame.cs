@@ -32,7 +32,7 @@ public class FinishGame : MonoBehaviour {
         //get current money
         gold = PlayerPrefs.GetInt("getGold");
         gold_text.text = gold + " 골드 획득!";
-        userManager.updateGold(gold);
+        UserManager.updateGold(gold);
 
         //pref init
         PlayerPrefs.SetInt("getGold", 0);
