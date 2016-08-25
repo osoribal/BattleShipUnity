@@ -71,7 +71,7 @@ public class ListShipCtrl : MonoBehaviour {
 				str = str + "\nskill : 보상 up";
 				break;
 			default:
-				str = str + "\nskill : None";
+				str = str + "\nskill : 없음";
 				break;
 			}
 			elems[i].GetComponentInChildren<Text>().text = str;

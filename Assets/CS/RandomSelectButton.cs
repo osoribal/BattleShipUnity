@@ -76,7 +76,7 @@ public class RandomSelectButton : MonoBehaviour {
                 option = "없음";
                 break;
         }
-        textMessage.text = "특수능력 :" + option + " / 크기 : " + size;
+        textMessage.text = "특수능력 :" + option + " \n크기 : " + size;
     }
 
     void alertCantBuy() {

@@ -24,7 +24,7 @@ public class SelectElemCtrl : MonoBehaviour {
 			str = str + "\n       skill : 보상 up\n";
 			break;
 		default:
-			str = str + "\n           skill : None\n";
+			str = str + "\n           skill : 없음\n";
 			break;
 		}
 		this.GetComponentInChildren<Text>().text = str;
