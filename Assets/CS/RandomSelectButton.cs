@@ -13,10 +13,6 @@ public class RandomSelectButton : MonoBehaviour {
     public Text textResult;
     public Text textMessage;
 
-
-    //user manager
-    public UserManager userManager;
-
     //user gold info
     int gold;
     int index;
@@ -26,11 +22,8 @@ public class RandomSelectButton : MonoBehaviour {
 
     void Start() {
         //get current money
-        
-        PlayerPrefs.SetInt("gold", 10000);
         gold = PlayerPrefs.GetInt("gold");
         textGold.text = "보유 골드 : " + gold + "G";
-        print("보유 골드 : " + gold + "G");
 
         //text result, message init to space
         textResult.text = " ";
@@ -127,7 +120,7 @@ public class RandomSelectButton : MonoBehaviour {
 		newShipInfo = new ShipInfo(shipNum);
 
         //save the new ship
-        userManager.Save(newShipInfo);
+        UserManager.Save(newShipInfo);
 
         return prefab;
     }

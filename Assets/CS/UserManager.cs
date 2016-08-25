@@ -20,6 +20,22 @@ public class UserManager : MonoBehaviour {
     public const string BACKGROUND = "Back";
 
 
+    //첫 앱 실행 시 골드 1000, 배 다섯 대
+    void firstLaunch()
+    {
+        if (PlayerPrefs.GetInt("firstLaunch") == 0)
+        {
+            PlayerPrefs.SetInt("gold", 1000);
+            Save(new ShipInfo(11));
+            Save(new ShipInfo(21));
+            Save(new ShipInfo(31));
+            Save(new ShipInfo(41));
+            Save(new ShipInfo(51));
+            PlayerPrefs.SetInt("firstLaunch", 1);
+        }
+    }
+
+
     //씬이 변경될 때 UserManager가 유일하도록 유지
     void Awake()
     {
@@ -38,58 +54,10 @@ public class UserManager : MonoBehaviour {
 
     void Start()
     {
-        path = Application.persistentDataPath + "/userdata.dat";
-
-        //test data
-        Save(new ShipInfo(12));
-        Save(new ShipInfo(21));
-        Save(new ShipInfo(13));
-        Save(new ShipInfo(31));
-        Save(new ShipInfo(14));
-        Save(new ShipInfo(41));
-        Save(new ShipInfo(51));
-        Save(new ShipInfo(41));
-        Save(new ShipInfo(51));
+        firstLaunch();
 
         //데이터 불러오기
         this.Load();
-
-        //PlayerPrefs 초기화
-        //PlayerPrefs.DeleteAll();
-
-
-        //userShips 초기화
-        userShips = new ShipInfo[5];
-        for (int i = 0; i < 5; i++)
-        {
-            userShips[i] = new ShipInfo(0);
-        }
-
-        //shipInfo test data
-        userShips[0] = new ShipInfo(11);
-        userShips[0].x = 0;
-        userShips[0].y = 0;
-        userShips[0].direction = 2;
-
-        userShips[1] = new ShipInfo(22);
-        userShips[1].x = 0;
-        userShips[1].y = 1;
-        userShips[1].direction = 2;
-
-        userShips[2] = new ShipInfo(33);
-        userShips[2].x = 0;
-        userShips[2].y = 2;
-        userShips[2].direction = 2;
-
-        userShips[3] = new ShipInfo(44);
-        userShips[3].x = 0;
-        userShips[3].y = 3;
-        userShips[3].direction = 2;
-
-        userShips[4] = new ShipInfo(55);
-        userShips[4].x = 0;
-        userShips[4].y = 4;
-        userShips[4].direction = 2;
 
         //option
         opInfo.effect = "on";
@@ -103,9 +71,7 @@ public class UserManager : MonoBehaviour {
         
         int gold = PlayerPrefs.GetInt("gold");
         gold += g;
-        print("gold : " + gold + " g: " + g);
         PlayerPrefs.SetInt("gold", gold);   //gold 값 파일로 저장
-        print("gold : " + gold);
         //다른 씬에서는 PlayerPrefs.GetInt("gold")를 통해 gold 값을 불러올 수 있다.
     }
 
@@ -120,7 +86,6 @@ public class UserManager : MonoBehaviour {
             list.Remove(findResult);
         }
 
-
         //파일로 저장
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(path);
@@ -130,7 +95,7 @@ public class UserManager : MonoBehaviour {
     }
 
     //새로운 배를 저장하는 함수
-    public void Save(ShipInfo data)
+    public static void Save(ShipInfo data)
     {
         //보유중인 배인지 Find 함수를 통해 알아낸다.
         ShipInfo findResult = list.Find(x => x.shipNum.Equals(data.shipNum));

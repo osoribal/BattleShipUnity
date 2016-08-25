@@ -281,13 +281,7 @@ public class AIControler : MonoBehaviour {
         //탄환 코드에 변수값 전달 -> 탄환 스스로 발사
         Bullet bc = bullet.GetComponent<Bullet>();
         bc.from = new Vector3(-12, 2, 0);
-        //bullet target transform
-        //var newTrans = new GameObject().transform;
-        //Vector3 targetVec = new Vector3(realX, 0, realZ);
-        //Debug.Log("input : " + Gx + " " + Gy + " real : " + realX + " " + realZ);
-        //newTrans.position = targetVec;
         bc.to = new Vector3(realX, 0, realZ);
-        //print(realX + " " + realZ);
 
         print(gc.ships[turn].shipID);
         //두 발 쏘는 특수기능 처리
@@ -296,13 +290,11 @@ public class AIControler : MonoBehaviour {
             //두 발 중 첫 발
             if (firstHit == true)   
             {
-                print("firstHit");
                 firstHit = false;
                 bc.turnChange = false;
             }
             else
             {
-                print("secondHit");
                 //두 발 중 두번째 발
                 firstHit = true;
                 bc.turnChange = true;

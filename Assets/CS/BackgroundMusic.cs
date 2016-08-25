@@ -28,14 +28,12 @@ public class BackgroundMusic : MonoBehaviour {
         }
 
         source = GetComponent<AudioSource>();
-        print("awake");
     }
 
 	// Use this for initialization
 	void Start () {
         state = PlayerPrefs.GetString(BACKGROUND);
         trigger = false;
-        print("back : " + state);
         if (state == OFF)
         {
             musicOff();
@@ -47,8 +45,5 @@ public class BackgroundMusic : MonoBehaviour {
 
     public static void musicOn() { source.Play(); }
     public static void musicOff() { source.Stop(); }
-
-	// Update is called once per frame
-	void Update () {
-    }
+    
 }

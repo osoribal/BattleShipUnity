@@ -3,14 +3,10 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class GameControler : MonoBehaviour {
-    public bool firstHit;
     public int turn;
     public GameObject tilePrefab;
-    UserManager userManager;
     public GameObject bulletPrefab;
-
-    //public GameObject[,] userGrid = new GameObject[10, 10];
-    //public GameObject[,] aiGrid = new GameObject[10, 10];
+    
     public SeaControler[,] userGridCtrl = new SeaControler[10, 10];
     public SeaControler[,] aiGridCtrl = new SeaControler[10, 10];
     
@@ -58,7 +54,6 @@ public class GameControler : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        firstHit = true;
         shipCount = 0;
         turn = 0;
         userLife = 0;
@@ -73,9 +68,6 @@ public class GameControler : MonoBehaviour {
         {
             for (int j = 0; j < 10; j++)
             {
-                //userGrid[i, j] = (GameObject)Instantiate(tilePrefab, userzero, Quaternion.identity);
-                //aiGrid[i, j] = (GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity);
-
                 userGridCtrl[i, j] = ((GameObject)Instantiate(tilePrefab, userzero, Quaternion.identity)).GetComponent<SeaControler>();
                 aiGridCtrl[i, j] = ((GameObject)Instantiate(tilePrefab, aizero, Quaternion.identity)).GetComponent<SeaControler>();
 
@@ -149,32 +141,7 @@ public class GameControler : MonoBehaviour {
             //select random ai ships location
             location(ships[s]);
         }
-
-        //set map
-        //for (int i = 0; i < 10; i++) {
-        //    for (int j = 0; j < 10; j++) {
-        //        if (getAIOcc(i, j) == 1)
-        //        {
-        //            aiMap[i, j] = 1;
-        //        }
-        //        else
-        //        {
-        //            aiMap[i, j] = 0;
-        //        }
-
-        //        if (getUserOcc(i, j) == 1)
-        //        {
-        //            userMap[i, j] = 1;
-        //        }
-        //        else
-        //        {
-        //            userMap[i, j] = 0;
-        //        }
-        //    }
-        //}
-
-
-
+        
     }
 
 
@@ -534,7 +501,6 @@ public class GameControler : MonoBehaviour {
                 winner = "user";
                 PlayerPrefs.SetInt("getGold", getGold);
                 PlayerPrefs.SetString("winner", winner);
-                print(".getGold " + getGold + " .winner" + winner);
                 SceneManager.LoadScene("FinishGame");
                 break;
             case 3: //ai win
@@ -543,7 +509,6 @@ public class GameControler : MonoBehaviour {
                 winner = "ai";
                 PlayerPrefs.SetInt("getGold", 0);
                 PlayerPrefs.SetString("winner", winner);
-                print(".getGold " + getGold + " .winner" + winner);
                 SceneManager.LoadScene("FinishGame");
                 break;
             default:
@@ -602,83 +567,26 @@ public class GameControler : MonoBehaviour {
     //return occupied of ai grid
     public int getAIOcc(int x, int y)
     {
-        //SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
-        //return aiGridCtrl[x, y].getOcc();
-        //return sea.getOcc();
         return aiMap[x, y];
     }
 
     //return occupied of user grid
     public int getUserOcc(int x, int y)
     {
-        //SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
-        //return userGridCtrl[x, y].getOcc();
-        //return sea.getOcc();
         return userMap[x, y];
     }
 
     //setting occupied of ai grid
     public void setAIOcc(int x, int y, int occ)
     {
-        //SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
-        //Debug.Log("set : " + x + "," + y);
-        //sea.setOcc(occ);
-        //aiGridCtrl[x, y].setOcc(occ);
         aiMap[x, y] = occ;
     }
 
     public void setUserOcc(int x, int y, int occ)
     {
-        //SeaControler sea = aiGrid[x, y].GetComponent<SeaControler>();
-        //Debug.Log("set : " + x + "," + y);
-        //sea.setOcc(occ);
-        //userGridCtrl[x, y].setOcc(occ);
         userMap[x, y] = occ;
     }
-
-    //get occupied value from each map
-    //public int getOccFromMap(float x, float y)
-    //{
-    //    int gridX, gridY;
-    //    //change to grid x y
-    //    if (x > 0)//user grid
-    //    {
-    //        /*
-    //         * x : 1~10
-    //         * z : -5~4
-    //         */
-    //        gridX = (int)x - 1;
-    //        gridY = (int)y + 5;
-    //        Debug.Log("USER, getOccFromMap : " + gridX + " " + gridY + " " + userMap[gridX, gridY]);
-    //        return userMap[gridX, gridY];
-
-    //    }
-    //    else //ai grid
-    //    {
-    //        /*
-    //         * x : -11~-2
-    //         * z : -5~4
-    //         */
-    //        gridX = (int)x + 11;
-    //        gridY = (int)y + 5;
-    //        Debug.Log("aI, getOccFromMap : " + gridX + " " + gridY + " " + aiMap[gridX, gridY]);
-    //        return aiMap[gridX, gridY];
-
-    //    }
-    //}
-
-
-    //public int getOccFromUserMap(int x, int y)
-    //{
-    //    //Debug.Log(x + " real " + y + " " + userMap[x, y]);
-    //    return userMap[x, y] ;
-    //}
-
-    //public int getOccFromAIMap(int x, int y)
-    //{
-    //    return aiMap[x, y];
-    //}
-
+    
     public void decUserOcc(int x, int y)
     {
         userMap[x, y]--;
@@ -724,17 +632,10 @@ public class GameControler : MonoBehaviour {
                 break;
             }
         }
-        //print(shipObjs[hitted].transform.position);
         
         int gridX = ships[hitted].x;
         int gridY = ships[hitted].y;
-
-        //print(gridX + " " + gridY);
-
-        //gridX = (int)shipObjs[hitted].transform.position.x + 11;
-        //gridY = (int)shipObjs[hitted].transform.position.z + 5;
-
-        //print(gridX + " " + gridY);
+        
 
         //check all parts
         //if all parts is hitted, remove fogs
