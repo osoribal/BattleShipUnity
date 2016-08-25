@@ -95,7 +95,7 @@ public class UserManager : MonoBehaviour {
     }
 
     //새로운 배를 저장하는 함수
-    public static void Save(ShipInfo data)
+    public void Save(ShipInfo data)
     {
         //보유중인 배인지 Find 함수를 통해 알아낸다.
         ShipInfo findResult = list.Find(x => x.shipNum.Equals(data.shipNum));

@@ -13,6 +13,8 @@ public class RandomSelectButton : MonoBehaviour {
     public Text textResult;
     public Text textMessage;
 
+    public UserManager userManager;
+
     //user gold info
     int gold;
     int index;
@@ -120,7 +122,7 @@ public class RandomSelectButton : MonoBehaviour {
 		newShipInfo = new ShipInfo(shipNum);
 
         //save the new ship
-        UserManager.Save(newShipInfo);
+        userManager.Save(newShipInfo);
 
         return prefab;
     }

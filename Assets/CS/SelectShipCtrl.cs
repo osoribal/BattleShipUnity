@@ -35,7 +35,7 @@ public class SelectShipCtrl : MonoBehaviour {
         
         for (int i = 0; i < 5; i++)
         {
-            UserManager.userShips[i].shipNum = selectedShipArr[i];
+            UserManager.userShips[i] = new ShipInfo(selectedShipArr[i]);
         }
         
         SceneManager.LoadScene("PlaceShip");
