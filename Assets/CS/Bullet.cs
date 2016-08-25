@@ -32,10 +32,6 @@ public class Bullet : MonoBehaviour {
     private AudioSource source;
     //shoot sound - bullet shoot start
     public AudioClip shootSound;
-<<<<<<< HEAD
-=======
-    
->>>>>>> origin/master
 
     //sound awake
     void Awake()
@@ -49,11 +45,7 @@ public class Bullet : MonoBehaviour {
         
         startTime = Time.time;
         hit = false;
-<<<<<<< HEAD
-        print("shoot sound : " + PlayerPrefs.GetString(EFFECT));
-=======
-        
->>>>>>> origin/master
+
         if (PlayerPrefs.GetString(EFFECT) == ON)
         {         //shoot sound at init
             source.PlayOneShot(shootSound, 1F);
@@ -80,10 +72,6 @@ public class Bullet : MonoBehaviour {
     //destroy bullet
     void OnTriggerEnter(Collider other)
     {
-<<<<<<< HEAD
-        //gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
-=======
->>>>>>> origin/master
         switch (other.gameObject.tag)
         {
             case "Arrow":
