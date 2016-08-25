@@ -28,7 +28,11 @@ public class GameControler : MonoBehaviour {
     //result
     int getGold;
     string winner;
-    
+
+    //ai strategy
+    Vector3 AITarget;
+    public int contnueAttack;  //is ai continue?;
+
     /*
      * 
      * 배 열 대의 정보 저장 필요... gameobject?
@@ -59,6 +63,8 @@ public class GameControler : MonoBehaviour {
         turn = 0;
         userLife = 0;
         aiLife = 0;
+        contnueAttack = 0;
+        AITarget = new Vector3(0, 0, 0);
         
         //격자 생성
         Vector3 userzero = new Vector3(1, 0, -5);
