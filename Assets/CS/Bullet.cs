@@ -32,10 +32,6 @@ public class Bullet : MonoBehaviour {
     //shoot sound - bullet shoot start
     public AudioClip shootSound;
 
-    
-
-
-
     //sound awake
     void Awake()
     {
@@ -48,7 +44,6 @@ public class Bullet : MonoBehaviour {
         
         startTime = Time.time;
         hit = false;
-
         print("shoot sound : " + PlayerPrefs.GetString(EFFECT));
         if (PlayerPrefs.GetString(EFFECT) == ON)
         {         //shoot sound at init
@@ -76,8 +71,6 @@ public class Bullet : MonoBehaviour {
     //destroy bullet
     void OnTriggerEnter(Collider other)
     {
-
-
         //gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         switch (other.gameObject.tag)
         {
@@ -87,25 +80,19 @@ public class Bullet : MonoBehaviour {
                 to.y = 0f;
                 break;
             case "Ship":
-                //ship hit
-                hit = true;
                 hitPosition = other.gameObject.transform.position;
                 //bomb with enemy at same point
                 int num = gameController.getHittedShipNumber(hitPosition);
-                print("num : " + num);
                 if (num%10 == 2) {
                     bombWithShip(hitPosition);
                  }
                 
                 break;
             case "Tile":
-                
-                //Debug.Log("tile hit");
                 //check occpied
                 sea = other.GetComponent<SeaControler>();
-                    //get occupied value
+                //get occupied value
                 int isOcc = getOccFromMap(sea.transform.position.x, sea.transform.position.z);
-                //print(isOcc);
                 if (isOcc == 0)
                 {
                     //no hit 
@@ -113,7 +100,7 @@ public class Bullet : MonoBehaviour {
                     {
                         //remove fog
                         sea.fogOff();
-                        
+                        gameController.contnueAttack = 0;
                     }
 
                     //두 발 쏘는 특수능력 처리
@@ -136,6 +123,9 @@ public class Bullet : MonoBehaviour {
 
                     //fire on
                     sea.fireOn();
+
+                    //plus ai continue attack number
+                    gameController.contnueAttack++;
 
                     //check all parts of ship is hitted
                     //only for aigrid
