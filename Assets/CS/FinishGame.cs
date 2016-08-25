@@ -39,10 +39,6 @@ public class FinishGame : MonoBehaviour {
         PlayerPrefs.SetString("winner", "");
     }
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void onClickGoMain()
     {

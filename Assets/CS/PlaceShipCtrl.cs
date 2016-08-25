@@ -103,8 +103,7 @@ public class PlaceShipCtrl : MonoBehaviour {
             }
             
         }
-
-        /**** touch event : http://mrhook.co.kr/208 *****/
+        
     }
 
     //x, y에 배 머리가 오도록 배치할 좌표 반환
