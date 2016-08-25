@@ -101,7 +101,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 7bae57fa826523542b8a83e8b160a7c7, type: 3}
   - {fileID: 2800000, guid: 18205ed26bc424b45ab29de6dca4874b, type: 3}
   - {fileID: 2800000, guid: 81389840eccdf7f478f778cf729a647f, type: 3}
-  - {fileID: 2800000, guid: e6e4a5b5005e0af4b8a7b5fd91aa8f30, type: 3}
+  - {fileID: 2800000, guid: 5f233349aff63ed45ad7b3bb8f7b4791, type: 3}
   - {fileID: 2800000, guid: 448d540a4f2c1fa4882676707efc62c3, type: 3}
 --- !u!222 &22266154
 CanvasRenderer:
