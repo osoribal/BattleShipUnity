@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour {
     bool hit;   //배를 맞췄는지 여부를 저장하는 변수
     Vector3 hitPosition; //맞은 배의 좌표
     Vector3 aimPosition; //number 2 option - aim position
+
     //turn
     public const int USER_TURN = 0;
     public const int AI_TURN = 1;
@@ -31,10 +32,7 @@ public class Bullet : MonoBehaviour {
     private AudioSource source;
     //shoot sound - bullet shoot start
     public AudioClip shootSound;
-
     
-
-
 
     //sound awake
     void Awake()
@@ -48,8 +46,7 @@ public class Bullet : MonoBehaviour {
         
         startTime = Time.time;
         hit = false;
-
-        print("shoot sound : " + PlayerPrefs.GetString(EFFECT));
+        
         if (PlayerPrefs.GetString(EFFECT) == ON)
         {         //shoot sound at init
             source.PlayOneShot(shootSound, 1F);
@@ -76,13 +73,9 @@ public class Bullet : MonoBehaviour {
     //destroy bullet
     void OnTriggerEnter(Collider other)
     {
-
-
-        //gameController = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
         switch (other.gameObject.tag)
         {
             case "Arrow":
-                //Debug.Log("arrow hit");
                 Destroy(other.gameObject);
                 to.y = 0f;
                 break;
@@ -92,20 +85,15 @@ public class Bullet : MonoBehaviour {
                 hitPosition = other.gameObject.transform.position;
                 //bomb with enemy at same point
                 int num = gameController.getHittedShipNumber(hitPosition);
-                print("num : " + num);
                 if (num%10 == 2) {
                     bombWithShip(hitPosition);
                  }
                 
                 break;
             case "Tile":
-                
-                //Debug.Log("tile hit");
                 //check occpied
-                sea = other.GetComponent<SeaControler>();
-                    //get occupied value
+                sea = other.GetComponent<SeaControler>();   //get occupied value
                 int isOcc = getOccFromMap(sea.transform.position.x, sea.transform.position.z);
-                //print(isOcc);
                 if (isOcc == 0)
                 {
                     //no hit 
@@ -119,7 +107,6 @@ public class Bullet : MonoBehaviour {
                     //두 발 쏘는 특수능력 처리
                     if (turnChange == false)
                     {
-                        print("attack again");
                         AttackAgain();
                     }
                     else
@@ -154,7 +141,6 @@ public class Bullet : MonoBehaviour {
                             //check life is 0
                             if (gameController.GetAILife() == 0)
                             {
-                                Debug.Log("user win");
                                 gameController.turn = USER_WIN;
                             }
                             break;
@@ -164,7 +150,6 @@ public class Bullet : MonoBehaviour {
                             //check life is 0
                             if (gameController.GetUserLife() == 0)
                             {
-                                Debug.Log("ai win");
                                 gameController.turn = AI_WIN;
                             }
                             break;
@@ -182,8 +167,6 @@ public class Bullet : MonoBehaviour {
 
     void destroyBullet()
     {
-        print("destroyed");
-        //destroy bullet game object
         Destroy(this.gameObject);
     }
 
@@ -206,7 +189,6 @@ public class Bullet : MonoBehaviour {
         //hitted ship - user
         //change to ai grid
         if (position.x > 0) {
-            print("user hitted");
             aimPosition.x = position.x - 12;
             aimPosition.y = position.y;
             aimPosition.z = position.z;
@@ -218,7 +200,6 @@ public class Bullet : MonoBehaviour {
         //change to user grid
         if (position.x < 0)
         {
-            print("ai hitted");
             aimPosition.x = position.x + 12;
             aimPosition.y = position.y;
             aimPosition.z = position.z;

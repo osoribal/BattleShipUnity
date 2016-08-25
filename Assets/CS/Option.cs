@@ -64,13 +64,11 @@ public class Option : MonoBehaviour {
         if (newValue == true) {
             UserManager.opInfo.effect = ON;
             PlayerPrefs.SetString(EFFECT, ON);
-            print("saved effect sound on : " + PlayerPrefs.GetString(EFFECT));
         }
         //effect off
         if (newValue == false) {
             UserManager.opInfo.effect = OFF;
             PlayerPrefs.SetString(EFFECT, OFF);
-            print("saved effect sound off: " + PlayerPrefs.GetString(EFFECT));
         }
     }
 

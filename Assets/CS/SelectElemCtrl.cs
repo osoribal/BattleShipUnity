@@ -36,7 +36,6 @@ public class SelectElemCtrl : MonoBehaviour {
     //이 배가 선택 되었을 때 
     void selected(int i)
     {
-        //this.GetComponentInChildren<Text>().text = str + "\nselected";
 		this.GetComponentInChildren<Image> ().color = Color.white;
         isSelected = true;
         index = i;
@@ -45,7 +44,6 @@ public class SelectElemCtrl : MonoBehaviour {
     //이 배가 선택 해제 될 때
     void unSelected()
     {
-        //this.GetComponentInChildren<Text>().text = str + "\nunselected";
 		this.GetComponentInChildren<Image> ().color = Color.black;
         isSelected = false;
     }
