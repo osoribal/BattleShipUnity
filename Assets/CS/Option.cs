@@ -80,19 +80,14 @@ public class Option : MonoBehaviour {
         {
             UserManager.opInfo.back = ON;
             PlayerPrefs.SetString(BACKGROUND, ON);
-
-			BackgroundMusic.musicOn ();
-            music.trigger = true;
+            BackgroundMusic.musicOn();
         }
         //background off
         if (newValue == false)
         {
             UserManager.opInfo.back = OFF;
             PlayerPrefs.SetString(BACKGROUND, OFF);
-
-			BackgroundMusic.musicOff ();
-            // music.musicOff();
-            music.trigger = true;
+            BackgroundMusic.musicOff();
         }
     }
 }

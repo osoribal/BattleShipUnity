@@ -79,6 +79,7 @@ public class Bullet : MonoBehaviour {
                 to.y = 0f;
                 break;
             case "Ship":
+                hit = true;
                 hitPosition = other.gameObject.transform.position;
                 //bomb with enemy at same point
                 int num = gameController.getHittedShipNumber(hitPosition);
@@ -95,11 +96,12 @@ public class Bullet : MonoBehaviour {
                 if (isOcc == 0)
                 {
                     //no hit 
+
+                    gameController.contnueAttack = 0;
                     if (hit == false)
                     {
                         //remove fog
                         sea.fogOff();
-                        gameController.contnueAttack = 0;
                     }
 
                     //두 발 쏘는 특수능력 처리
