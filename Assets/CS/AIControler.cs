@@ -66,7 +66,9 @@ public class AIControler : MonoBehaviour {
 
     void shooting()
     {
-        selectTargetPoint();
+        do { selectTargetPoint();
+        } while (shootingGrid[curX, curY] == 1);
+        
         shot(curX, curY);
         //save shooting
         shootingGrid[curX, curY] = 1;
@@ -74,6 +76,7 @@ public class AIControler : MonoBehaviour {
 
     void selectTargetPoint()
     {
+        print("select tartget point");
         //target point x y - in user grid
         int userGridX, userGridY;
         int userRot;
@@ -82,9 +85,9 @@ public class AIControler : MonoBehaviour {
         hit = gc.contnueAttack;
         print("hit : " + hit);
         //init
-        userGridX = 0;
-        userGridY = 0;
-        userRot = 0;
+        userGridX = prevX;
+        userGridY = prevY;
+        userRot = prevR;
 
         if (prevR == -1 && hit == 0)
         {
@@ -98,7 +101,10 @@ public class AIControler : MonoBehaviour {
         else if (prevR != -1 && hit == 0)
         {
             selectRandomPoint();
-            print("first prevR != -1 && hit == 0 : " + userGridX + " " + userGridY);
+            print("first prevR != -1 && hit == 0 : " + curX + " " + curY);
+            userGridX = curX;
+            userGridY = curY;
+            userRot = curR;
         }
         else if (hit == 1) {
             print("1hit");
@@ -247,6 +253,7 @@ public class AIControler : MonoBehaviour {
 
     //select random point
     void selectRandomPoint() {
+        print("select random point");
         //target point x y - in user grid
         int userGridX, userGridY;
         int userRot;
@@ -258,7 +265,7 @@ public class AIControler : MonoBehaviour {
             userGridX = Random.Range(0, 10);
             userGridY = Random.Range(0, 10);
             userRot = Random.Range(0, 4);
-        } while (shootingGrid[prevX, prevY] != 0);
+        } while (shootingGrid[userGridX, userGridY] != 0);
 
         curX = userGridX;
         curY = userGridY;

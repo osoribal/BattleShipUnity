@@ -18,6 +18,7 @@ public class UserManager : MonoBehaviour {
     //option string
     public const string EFFECT = "Effect";
     public const string BACKGROUND = "Back";
+    const string ON = "on";
 
 
     //첫 앱 실행 시 골드 1000, 배 다섯 대
@@ -33,6 +34,10 @@ public class UserManager : MonoBehaviour {
             Save(new ShipInfo(51));
             PlayerPrefs.SetInt("firstLaunch", 1);
         }
+
+        //option all on
+        PlayerPrefs.SetString(EFFECT, ON);
+        PlayerPrefs.SetString(BACKGROUND, ON);
     }
 
 
