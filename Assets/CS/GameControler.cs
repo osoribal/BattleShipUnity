@@ -141,6 +141,12 @@ public class GameControler : MonoBehaviour {
             //select random ai ships location
             location(ships[s]);
         }
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                print(i + "," + j + " : " + aiMap[i, j]);
+            }
+        }
         
     }
 
