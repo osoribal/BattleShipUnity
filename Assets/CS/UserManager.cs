@@ -49,6 +49,7 @@ public class UserManager : MonoBehaviour {
         {
             DontDestroyOnLoad(gameObject);
             control = this;
+            firstLaunch();
         }
         else if (control != null)
         {
@@ -59,8 +60,6 @@ public class UserManager : MonoBehaviour {
 
     void Start()
     {
-        firstLaunch();
-
         //데이터 불러오기
         this.Load();
 
